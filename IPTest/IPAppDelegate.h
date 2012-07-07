@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPViewController.h"
 
 @interface IPAppDelegate : UIResponder <UIApplicationDelegate>
 

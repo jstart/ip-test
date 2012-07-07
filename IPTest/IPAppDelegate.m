@@ -7,6 +7,10 @@
 //
 
 #import "IPAppDelegate.h"
+#import "IPWelcomeViewController.h"
+#import <Parse/Parse.h>
+#import "DCIntrospect.h"
+#import <CityGrid/CityGrid.h>
 
 @implementation IPAppDelegate
 
@@ -15,9 +19,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+  [Parse setApplicationId:@"Sw86jP5zMknD2Gp52hXMUH6cLoBq5YpzIR5SYWlW"
+                clientKey:@"XaM7srV5NdkbOEWXjXzFvFjXLD7w2YzAimdo0m27"];
+  [CityGrid setPublisher:@"test"];
+	[CityGrid setPlacement:@"ios-example"];
+	[CityGrid setDebug:YES];
+  [_window makeKeyAndVisible];  
+  // always call after makeKeyAndDisplay.
+#if TARGET_IPHONE_SIMULATOR
+  [[DCIntrospect sharedIntrospector] start];
+#endif
     return YES;
 }
-							
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
   // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
