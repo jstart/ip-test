@@ -16,7 +16,7 @@
 
 @synthesize pageObject;
 @synthesize createHeaderTableViewCell;
-@synthesize segmentedControl;
+@synthesize segmentedControl, gridViewController;
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -41,7 +41,9 @@
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = YES;
     self.objectsPerPage = 25;
-      
+    self.gridViewController = [[IPGridViewController alloc] initWithNibName:@"IPGridViewController" bundle:[NSBundle mainBundle]]; 
+    self.gridViewController.view.hidden = YES;
+    [[self view] addSubview:self.gridViewController.view];
     [self.navigationItem setTitleView:self.segmentedControl];
     //HAX
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -107,6 +109,11 @@
   [query orderByDescending:@"createdAt"];
   
   return query;
+}
+
+- (void)objectsDidLoad:(NSError *)error{
+  [super objectsDidLoad:error];
+  [self.gridViewController updatedResultObjects:[self.objects mutableCopy]];
 }
 
 #pragma mark - Table view data source
@@ -201,6 +208,12 @@
   UISegmentedControl * segControl = (UISegmentedControl *) sender;
   switch (segControl.selectedSegmentIndex) {
     case 0:
+      [self.gridViewController.view setHidden:YES];
+      [self.gridViewController.view setUserInteractionEnabled:NO];
+      for (UIView * view in [self.gridViewController.view subviews]) {
+        view.hidden = YES;
+        view.userInteractionEnabled = NO;
+      }
       [self.tableView setHidden:NO];
       [self.tableView setUserInteractionEnabled:YES];
 
@@ -208,7 +221,14 @@
     case 1:
       [self.tableView setHidden:YES];
       [self.tableView setUserInteractionEnabled:NO];
-
+      [self.gridViewController.view setHidden:NO];
+      [self.gridViewController.view setHidden:YES];
+      for (UIView * view in [self.gridViewController.view subviews]) {
+        view.hidden = NO;
+        view.userInteractionEnabled = YES;
+        [self.tableView bringSubviewToFront:view];
+      }
+      [self.tableView bringSubviewToFront:self.gridViewController.view];
       break;
       
     default:

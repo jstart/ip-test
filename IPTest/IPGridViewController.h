@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "iCarousel.h"
 
-@interface IPGridViewController : UIViewController
+@interface IPGridViewController : UIViewController <iCarouselDataSource, iCarouselDelegate>
+@property (strong, nonatomic) IBOutlet iCarousel *carousel;
+@property (strong, nonatomic) NSMutableArray * objects;
+
+-(void)updatedResultObjects:(NSMutableArray*)newObjects;
 
 @end
