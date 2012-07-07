@@ -7,9 +7,10 @@
 //
 
 #import "IPMyPagesViewController.h"
-#import "IPListViewController.h"
+#import "IPSegmentContainerViewController.h"
 #import "IPViewController.h"
 #import "IPCreatePageViewController.h"
+
 
 @interface IPMyPagesViewController ()
 
@@ -88,33 +89,34 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//  [UIView beginAnimations:nil context:nil];
-//  [UIView animateWithDuration:0.2f animations:^(void){
-//    CGRect frame = self.view.frame;
-//    frame.origin.y = - 480;
-//    self.view.frame = frame;
-//  }completion:^(BOOL finished){
-//    CGRect frame = self.view.frame;
-//    frame.origin.y = 0;
-//    self.view.frame = frame;
-//    IPListViewController * vc = [[IPListViewController alloc] initWithNibName:@"IPListViewController" bundle:[NSBundle mainBundle]];
-//    UINavigationController * rootVC = (UINavigationController*)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
-//    [rootVC.topViewController.navigationController pushViewController:vc animated:NO];
-//  }];
-  UINavigationController * rootVC = (UINavigationController*)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
-  IPListViewController * vc = [[IPListViewController alloc] initWithNibName:@"IPListViewController" bundle:[NSBundle mainBundle]];
-  PFObject * object = [self.objects objectAtIndex:indexPath.row];
-  [vc setPageObject:object];
+    //  [UIView beginAnimations:nil context:nil];
+    //  [UIView animateWithDuration:0.2f animations:^(void){
+    //    CGRect frame = self.view.frame;
+    //    frame.origin.y = - 480;
+    //    self.view.frame = frame;
+    //  }completion:^(BOOL finished){
+    //    CGRect frame = self.view.frame;
+    //    frame.origin.y = 0;
+    //    self.view.frame = frame;
+    //    IPListViewController * vc = [[IPListViewController alloc] initWithNibName:@"IPListViewController" bundle:[NSBundle mainBundle]];
+    //    UINavigationController * rootVC = (UINavigationController*)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    //    [rootVC.topViewController.navigationController pushViewController:vc animated:NO];
+    //  }];
+    UINavigationController * rootVC = (UINavigationController*)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    IPSegmentContainerViewController * vc = [[IPSegmentContainerViewController alloc] initWithNibName:@"IPSegmentContainerViewController" bundle:[NSBundle mainBundle]];
+    PFObject * object = [self.objects objectAtIndex:indexPath.row];
+    [vc setPageObject:object];
 
-  CATransition *transition = [CATransition animation];
-  transition.duration = 0.4f;
-  transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-  transition.type = kCATransitionPush;
-  transition.subtype = kCATransitionFromTop;
-  transition.delegate = self;
-  [rootVC.topViewController.navigationController.view.layer addAnimation:transition forKey:nil];
-  self.navigationController.navigationBarHidden = NO;
-  [rootVC.topViewController.navigationController pushViewController:vc animated:NO];
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.4f;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromTop;
+    transition.delegate = self;
+    [rootVC.topViewController.navigationController.view.layer addAnimation:transition forKey:nil];
+    self.navigationController.navigationBarHidden = NO;
+    [rootVC.topViewController.navigationController pushViewController:vc animated:NO];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (IBAction)createButtonPressed:(id)sender {

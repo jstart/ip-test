@@ -15,10 +15,10 @@
 @implementation IPListViewController
 
 @synthesize pageObject;
+@synthesize delegate;
 @synthesize createHeaderTableViewCell;
-@synthesize segmentedControl, gridViewController;
 
--(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self != nil) {
   }
@@ -35,21 +35,20 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    NSLog(@"");
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    
+}
+
 - (void)viewDidLoad
 {
     self.className = @"Item";
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = YES;
     self.objectsPerPage = 25;
-    self.gridViewController = [[IPGridViewController alloc] initWithNibName:@"IPGridViewController" bundle:[NSBundle mainBundle]]; 
-    self.gridViewController.view.hidden = YES;
-    [[self view] addSubview:self.gridViewController.view];
-    [self.navigationItem setTitleView:self.segmentedControl];
-    //HAX
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    UIBarButtonItem *spacerButton = [[UIBarButtonItem alloc] 
-                                   initWithCustomView:view];
-    self.navigationItem.rightBarButtonItem = spacerButton;  
 
     [super viewDidLoad];
   
@@ -61,18 +60,12 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self.navigationItem setHidesBackButton:YES];
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"back"
-                                                                 style:UIBarButtonItemStyleBordered
-                                                                target:self
-                                                                action:@selector(customBackAction:)];
-    self.navigationItem.leftBarButtonItem = backButton;
+
 }
 
 - (void)viewDidUnload
 {
-  [self setCreateHeaderTableViewCell:nil];
-  [self setSegmentedControl:nil];
+    [self setCreateHeaderTableViewCell:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -84,36 +77,20 @@
 }
 
 -(void)customBackAction:(id)sender{
-  CATransition *transition = [CATransition animation];
-  transition.duration = 0.4f;
-  transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-  transition.type = kCATransitionPush;
-  transition.subtype = kCATransitionFromBottom;
-  transition.delegate = self;
-  [self.navigationController.view.layer addAnimation:transition forKey:nil];
-  self.navigationController.navigationBarHidden = NO;
-  [self.navigationController popToRootViewControllerAnimated:NO];
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.4f;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromBottom;
+    transition.delegate = self;
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+    self.navigationController.navigationBarHidden = NO;
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
-- (PFQuery *)queryForTable{
-  PFQuery *query = [PFQuery queryWithClassName:self.className];
-  [query whereKey:@"Parent_Page" equalTo:pageObject];
-  
-  // If no objects are loaded in memory, we look to the cache 
-  // first to fill the table and then subsequently do a query
-  // against the network.
-  if ([self.objects count] == 0) {
-    query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-  }
-  
-  [query orderByDescending:@"createdAt"];
-  
-  return query;
-}
-
-- (void)objectsDidLoad:(NSError *)error{
-  [super objectsDidLoad:error];
-  [self.gridViewController updatedResultObjects:[self.objects mutableCopy]];
+-(void)updatedResultObjects:(NSMutableArray*)newObjects{
+  self.objects = newObjects;
+  [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -194,6 +171,11 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    if (delegate != nil) {
+        [self.delegate didSelectRowAtIndexPath:indexPath];
+     }else{
+         NSLog(@"No Delegate for List View");
+     }
 }
 
 - (IBAction)addItemButton:(id)sender {
@@ -202,38 +184,6 @@
   UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:addListItemVC];
 
   [self presentModalViewController:navigationController animated:YES];
-}
-
-- (IBAction)changeSegment:(id)sender {
-  UISegmentedControl * segControl = (UISegmentedControl *) sender;
-  switch (segControl.selectedSegmentIndex) {
-    case 0:
-      [self.gridViewController.view setHidden:YES];
-      [self.gridViewController.view setUserInteractionEnabled:NO];
-      for (UIView * view in [self.gridViewController.view subviews]) {
-        view.hidden = YES;
-        view.userInteractionEnabled = NO;
-      }
-      [self.tableView setHidden:NO];
-      [self.tableView setUserInteractionEnabled:YES];
-
-      break;
-    case 1:
-      [self.tableView setHidden:YES];
-      [self.tableView setUserInteractionEnabled:NO];
-      [self.gridViewController.view setHidden:NO];
-      [self.gridViewController.view setHidden:YES];
-      for (UIView * view in [self.gridViewController.view subviews]) {
-        view.hidden = NO;
-        view.userInteractionEnabled = YES;
-        [self.tableView bringSubviewToFront:view];
-      }
-      [self.tableView bringSubviewToFront:self.gridViewController.view];
-      break;
-      
-    default:
-      break;
-  }
 }
 
 @end

@@ -9,16 +9,19 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "IPAddListItemViewController.h"
-#import "IPGridViewController.h"
+
+@protocol IPListViewDelegate <NSObject>
+
+-(void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
 
 @interface IPListViewController : PFQueryTableViewController
 
 @property (nonatomic, strong) PFObject * pageObject;
 @property (strong, nonatomic) IBOutlet UITableViewCell *createHeaderTableViewCell;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (strong, nonatomic) IBOutlet IPGridViewController * gridViewController;
+@property (strong, nonatomic) id <IPListViewDelegate> delegate;
 
 - (IBAction)addItemButton:(id)sender;
-- (IBAction)changeSegment:(id)sender;
-
+- (void)updatedResultObjects:(NSMutableArray*)newObjects;
 @end

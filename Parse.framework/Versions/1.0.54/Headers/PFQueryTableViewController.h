@@ -97,7 +97,7 @@
 /*! @name Accessing Results */
 
 /// The array of PFObjects that is the UITableView data source
-@property (nonatomic, retain, readonly) NSArray *objects;
+@property (nonatomic, retain, readwrite) NSArray *objects;
 
 /*!
  Returns an object at a particular indexPath. The default impementation returns
