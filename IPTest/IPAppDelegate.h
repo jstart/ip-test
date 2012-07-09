@@ -12,5 +12,8 @@
 @interface IPAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIImageView * iv;
+
+-(void)displaySplash;
 
 @end

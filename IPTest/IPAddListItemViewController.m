@@ -84,7 +84,11 @@
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     // Configure the cell...
-    cell.textLabel.text = ((CGPlacesSearchLocation *)[placesArray objectAtIndex:indexPath.row]).name;
+    if ([placesArray count] >= indexPath.row) {
+        cell.textLabel.text = ((CGPlacesSearchLocation *)[placesArray objectAtIndex:indexPath.row]).name;
+    }else {
+        cell.textLabel.text = @"No Results";
+    }
     return cell;
 }
 

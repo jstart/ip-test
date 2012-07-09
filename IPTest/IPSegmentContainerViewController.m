@@ -46,8 +46,8 @@
                                    initWithCustomView:view];
   self.navigationItem.rightBarButtonItem = spacerButton;
   [self.navigationItem setHidesBackButton:YES];
-  UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"back"
-                                 style:UIBarButtonItemStyleBordered
+  UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                 style:UIBarButtonSystemItemDone
                                  target:self
                                  action:@selector(customBackAction:)];
   self.navigationItem.leftBarButtonItem = backButton;

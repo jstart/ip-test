@@ -96,19 +96,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  //  [UIView beginAnimations:nil context:nil];
-  //  [UIView animateWithDuration:0.2f animations:^(void){
-  //    CGRect frame = self.view.frame;
-  //    frame.origin.y = - 480;
-  //    self.view.frame = frame;
-  //  }completion:^(BOOL finished){
-  //    CGRect frame = self.view.frame;
-  //    frame.origin.y = 0;
-  //    self.view.frame = frame;
-  //    IPListViewController * vc = [[IPListViewController alloc] initWithNibName:@"IPListViewController" bundle:[NSBundle mainBundle]];
-  //    UINavigationController * rootVC = (UINavigationController*)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
-  //    [rootVC.topViewController.navigationController pushViewController:vc animated:NO];
-  //  }];
   UINavigationController * rootVC = (UINavigationController*)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
   IPSegmentContainerViewController * vc = [[IPSegmentContainerViewController alloc] initWithNibName:@"IPSegmentContainerViewController" bundle:[NSBundle mainBundle]];
   PFObject * object = [self.objects objectAtIndex:indexPath.row];

@@ -1,0 +1,12 @@
+{
+"Owner": {
+"__op": "AddRelation",
+"objects": [
+{
+"__type": "Relation",
+"className": "User",
+"objectId": "BetD690tqN"
+}
+]
+}
+}

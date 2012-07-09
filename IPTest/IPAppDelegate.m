@@ -14,7 +14,7 @@
 
 @implementation IPAppDelegate
 
-@synthesize window = _window;
+@synthesize window = _window, iv;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -34,7 +34,22 @@
 #if TARGET_IPHONE_SIMULATOR
   [[DCIntrospect sharedIntrospector] start];
 #endif
+    [self displaySplash];
     return YES;
+}
+
+-(void)displaySplash{
+    iv = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Default.png"]];
+    [self.window addSubview:iv];
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1.0];
+    iv.alpha = 0.0;
+    [UIView setAnimationDidStopSelector:@selector(removeSplash)];
+    [UIView commitAnimations]; 
+}
+
+-(void)removeSplash{
+    [iv removeFromSuperview];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

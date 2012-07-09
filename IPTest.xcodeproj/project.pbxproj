@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD1557FD15AB8E8C00C38A78 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FD1557FB15AB8E8C00C38A78 /* Default.png */; };
+		FD1557FE15AB8E8C00C38A78 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD1557FC15AB8E8C00C38A78 /* Default@2x.png */; };
 		FD2032EF15A7AC2600FB5FF1 /* IPNotificationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2032ED15A7AC2600FB5FF1 /* IPNotificationListViewController.m */; };
 		FD2032F015A7AC2600FB5FF1 /* IPNotificationListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD2032EE15A7AC2600FB5FF1 /* IPNotificationListViewController.xib */; };
 		FD28433215A3B8BE0079D6D5 /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = FD28433115A3B8BE0079D6D5 /* bookmark.png */; };
@@ -144,6 +146,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FD1557FB15AB8E8C00C38A78 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		FD1557FC15AB8E8C00C38A78 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		FD2032EC15A7AC2600FB5FF1 /* IPNotificationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPNotificationListViewController.h; sourceTree = "<group>"; };
 		FD2032ED15A7AC2600FB5FF1 /* IPNotificationListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPNotificationListViewController.m; sourceTree = "<group>"; };
 		FD2032EE15A7AC2600FB5FF1 /* IPNotificationListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPNotificationListViewController.xib; sourceTree = "<group>"; };
@@ -358,6 +362,8 @@
 				FD6DE2CF15A7D94600376A42 /* list_icon@2x.png */,
 				FD6DE2C815A7D94000376A42 /* grid_icon.png */,
 				FD6DE2C915A7D94000376A42 /* grid_icon@2x.png */,
+				FD1557FB15AB8E8C00C38A78 /* Default.png */,
+				FD1557FC15AB8E8C00C38A78 /* Default@2x.png */,
 				FD28433115A3B8BE0079D6D5 /* bookmark.png */,
 				FD28433515A3C0010079D6D5 /* bookmark@2x.png */,
 				FDAEE61315A3AA6800D05E9C /* Button.png */,
@@ -657,6 +663,8 @@
 				FD6DE2ED15A8203700376A42 /* IPGridViewTemplate.xib in Resources */,
 				FDCAFA1115AAD22C00AC3D9E /* README.txt in Resources */,
 				FDCAFA1315AAD22C00AC3D9E /* release_notes.txt in Resources */,
+				FD1557FD15AB8E8C00C38A78 /* Default.png in Resources */,
+				FD1557FE15AB8E8C00C38A78 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

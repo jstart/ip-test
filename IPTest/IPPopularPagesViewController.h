@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface IPPopularPagesViewController : UITableViewController
+@interface IPPopularPagesViewController : PFQueryTableViewController
 
 @end

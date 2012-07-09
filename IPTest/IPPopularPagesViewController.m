@@ -7,6 +7,7 @@
 //
 
 #import "IPPopularPagesViewController.h"
+#import "IPSegmentContainerViewController.h"
 @interface IPPopularPagesViewController ()
 
 @end
@@ -18,7 +19,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-      self.title = @"Popular";
+        self.title = @"Popular";
+        self.className = @"Page";
+        self.pullToRefreshEnabled = YES;
+        self.paginationEnabled = YES;
+        self.objectsPerPage = 25;
     }
     return self;
 }
@@ -46,24 +51,58 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-  return 1;
+- (PFQuery *)queryForTable {
+    PFQuery * query = nil;
+            
+    query = [PFQuery queryWithClassName:self.className];
+    
+    [query whereKey:@"isPopular" equalTo:[NSNumber numberWithBool:YES]];
+    
+    
+    // If no objects are loaded in memory, we look to the cache
+    // first to fill the table and then subsequently do a query
+    // against the network.
+    if ([self.objects count] == 0) {
+        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    }
+    
+    [query orderByDescending:@"createdAt"];
+    return query;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//  return 1;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    return 5;
+//}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object{
   UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
   }
-  cell.textLabel.text = @"Hi";
+  cell.textLabel.text = [object objectForKey:@"Title"];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   return cell;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-  return 5;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UINavigationController * rootVC = (UINavigationController*)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    IPSegmentContainerViewController * vc = [[IPSegmentContainerViewController alloc] initWithNibName:@"IPSegmentContainerViewController" bundle:[NSBundle mainBundle]];
+    PFObject * object = [self.objects objectAtIndex:indexPath.row];
+    [vc setPageObject:object];
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.4f;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromTop;
+    transition.delegate = self;
+    [rootVC.topViewController.navigationController.view.layer addAnimation:transition forKey:nil];
+    self.navigationController.navigationBarHidden = NO;
+    [rootVC.topViewController.navigationController pushViewController:vc animated:NO];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

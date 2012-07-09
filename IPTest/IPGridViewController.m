@@ -29,10 +29,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.objects = [[NSMutableArray alloc] init];
-    carousel.type = iCarouselTypeTimeMachine;
+    carousel.type = iCarouselTypeRotary;
     carousel.bounces = NO;
     [carousel setVertical:YES];
     [carousel setIgnorePerpendicularSwipes:YES];
+    [carousel setCenterItemWhenSelected:YES];
 }
 
 - (void)viewDidUnload
@@ -93,16 +94,73 @@
     //you'll get weird issues with carousel item content appearing
     //in the wrong place in the carousel
     nameLabel.text = [[self.objects objectAtIndex:index] objectForKey:@"Title"];
-
-    view.backgroundColor = [UIColor whiteColor];
+    
+//    CGFloat yourDesiredWidth = view.frame.size.width * .8f;
+//    CGFloat yourDesiredHeight = view.frame.size.height * .8f;
+//    
+//    CGAffineTransform scalingTransform;
+//    scalingTransform = CGAffineTransformMakeScale(yourDesiredWidth/view.bounds.size.width, yourDesiredHeight/view.bounds.size.height);
+//    view.transform = scalingTransform;
+    view.contentScaleFactor = 0.8f;
     return view;
 }
+
+- (CGFloat)carousel:(iCarousel *)_carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value
+{
+    switch (option)
+    {
+        case iCarouselOptionWrap:
+        {
+            return value;
+        }
+        case iCarouselOptionFadeMax:
+        {
+            if (carousel.type == iCarouselTypeCustom)
+            {
+                return 0.0f;
+            }
+            return value;
+        }
+        case iCarouselOptionArc:
+        {
+//            return 2 * M_PI * 50.0f;
+            return value;
+        }
+        case iCarouselOptionRadius:
+        {
+            return value * 0.9;
+//            return value;
+        }
+        case iCarouselOptionTilt:
+        {
+//            return tiltSlider.value;
+            return value;
+        }
+        case iCarouselOptionSpacing:
+        {
+//            return value * spacingSlider.value;
+            return value + 0.5;
+        }
+        case iCarouselOptionShowBackfaces:
+        {
+            return 0;
+        }
+        default:
+        {
+            return value;
+        }
+    }
+}
+
 
 - (BOOL)carousel:(iCarousel *)carousel shouldSelectItemAtIndex:(NSInteger)index{
     return YES;
 }
 
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
+    UIView * view = [self.carousel itemViewAtIndex:index];
+    view.contentScaleFactor = 1.0f;
+    
     if (delegate != nil) {
         [self.delegate didSelectRowAtIndex:index];
     }else{
