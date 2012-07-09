@@ -38,10 +38,7 @@
 				<reference key="NSWindow"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
-					<bytes key="NSWhite">MQA</bytes>
-					<object class="NSColorSpace" key="NSCustomColorSpace">
-						<int key="NSID">2</int>
-					</object>
+					<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -130,20 +127,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">IPGridViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="carousel">iCarousel</string>
-						<string key="carouselTemplateView">UIView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="carousel">
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">carousel</string>
+						<string key="NS.object.0">iCarousel</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">carousel</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
 							<string key="name">carousel</string>
 							<string key="candidateClassName">iCarousel</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="carouselTemplateView">
-							<string key="name">carouselTemplateView</string>
-							<string key="candidateClassName">UIView</string>
-						</object>
-					</dictionary>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/IPGridViewController.h</string>

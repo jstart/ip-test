@@ -21,15 +21,13 @@
 
 @implementation IPViewController
 @synthesize scrollView;
-@synthesize bookmarkNavigationController;
 @synthesize pageControl;
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
   [self.scrollView setPageControl:self.pageControl];
-  IPBookmarkViewController *bookmarkViewController = [[IPBookmarkViewController alloc] initWithNibName:@"IPBookmarkViewController" bundle:[NSBundle mainBundle]];
-  bookmarkNavigationController = [[UINavigationController alloc] initWithRootViewController:bookmarkViewController];
-  bookmarkViewController.delegate = self;
+
 //  [PFUser logOut];
   PFUser *currentUser = [PFUser currentUser];
   if (currentUser) {
@@ -41,29 +39,7 @@
 	}
 
     [super viewDidLoad];
-  UIImage * image = [UIImage imageNamed:@"bookmark.png"];
-  
-  UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-  [button setBackgroundImage:image forState:UIControlStateNormal];
-  [button setAdjustsImageWhenHighlighted:YES];
-  
-  button.frame= CGRectMake(0.0, 0.0, image.size.width, image.size.height);
-  
-  [button addTarget:self action:@selector(presentBookmarkViewController) forControlEvents:UIControlEventTouchUpInside];
-  
-  UIView *v=[[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, image.size.width, image.size.height) ];
-  
-  [v addSubview:button];
-  
-  UIBarButtonItem * bookmarkButton = [[UIBarButtonItem alloc] initWithCustomView:v];
-  [bookmarkButton setImageInsets:UIEdgeInsetsMake(-100, 0, 0, 0)];
-  CGRect frame = [[bookmarkButton customView] frame];
-  frame.origin.y = frame.origin.y - 10;
-  [bookmarkButton customView].frame = frame;
-  self.navigationItem.rightBarButtonItem = bookmarkButton;
-//  CGRect frame = self.pageControl.frame;
-//  frame.origin.y = frame.origin.y - 20;
-//  self.pageControl.frame = frame;
+
 	// Do any additional setup after loading the view, typically from a nib.
   [self.scrollView addPagedViewController:[[IPPopularPagesViewController alloc] initWithNibName:@"IPPopularPagesViewController" bundle:[NSBundle mainBundle]] animated:NO];
   [self.scrollView addPagedViewController:[[IPMyPagesViewController alloc] initWithNibName:@"IPMyPagesViewController" bundle:[NSBundle mainBundle]]animated:NO];
@@ -85,24 +61,24 @@
 - (void)presentBookmarkViewController;
 {
 	// Go to the welcome screen and have them log in or create an account.
-  if (bookmarkNavigationController == nil) {
+  if (super.bookmarkNavigationController == nil) {
     IPBookmarkViewController *bookmarkViewController = [[IPBookmarkViewController alloc] initWithNibName:@"IPBookmarkViewController" bundle:[NSBundle mainBundle]];
-    bookmarkNavigationController = [[UINavigationController alloc] initWithRootViewController:bookmarkViewController];
-    [bookmarkNavigationController setNavigationBarHidden:YES];
-    [bookmarkNavigationController setWantsFullScreenLayout:YES];
+    super.bookmarkNavigationController = [[UINavigationController alloc] initWithRootViewController:bookmarkViewController];
+    [super.bookmarkNavigationController setNavigationBarHidden:YES];
+    [super.bookmarkNavigationController setWantsFullScreenLayout:YES];
   }
   if ([[self.navigationItem.rightBarButtonItem customView] isHidden]) {
     
   }else{
 
-    [self.navigationController mh_presentSemiModalViewController:bookmarkNavigationController animated:YES];
-    [bookmarkNavigationController setNavigationBarHidden:YES];
+    [self.navigationController mh_presentSemiModalViewController:super.bookmarkNavigationController animated:YES];
+    [super.bookmarkNavigationController setNavigationBarHidden:YES];
     [self hideBookmark];
   }
 }
 
 -(void) bookmarkViewWasDismissed:(int)homePageIndex{
-  [self.navigationController mh_dismissSemiModalViewController:bookmarkNavigationController animated:YES];
+  [self.navigationController mh_dismissSemiModalViewController:super.bookmarkNavigationController animated:YES];
 
   [self showBookmark];
   if (homePageIndex >= 0 && homePageIndex < 3) {
@@ -133,9 +109,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-  if ([[self.navigationItem.rightBarButtonItem customView] isHidden]) {
-    [self showBookmark];
-  }
+    [super viewWillAppear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated{  

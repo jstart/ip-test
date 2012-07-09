@@ -31,6 +31,9 @@
     [super viewDidLoad];
     self.queue = [[NSOperationQueue alloc] init];
     self.placesArray = [[NSMutableArray alloc] init];
+    UIBarButtonItem * closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed)];
+    self.navigationItem.leftBarButtonItem = closeButton;
+    self.title = @"Add Item";
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -52,6 +55,10 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+-(void)cancelPressed{
+    [self.presentingViewController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source

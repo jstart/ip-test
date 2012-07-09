@@ -10,8 +10,9 @@
 #import "FireUIPagedScrollView.h"
 #import "IPListViewController.h"
 #import "IPGridViewController.h"
+#import "IPBookmarkBaseViewController.h"
 
-@interface IPSegmentContainerViewController : UIViewController <IPGridViewDelegate, IPListViewDelegate>{
+@interface IPSegmentContainerViewController : IPBookmarkBaseViewController <IPGridViewDelegate, IPListViewDelegate>{
   NSMutableArray * _objects;
 }
 @property (strong, nonatomic) IBOutlet FireUIPagedScrollView *scrollView;
@@ -20,5 +21,7 @@
 @property (strong, nonatomic) IPGridViewController * gridVC;
 @property (strong, nonatomic) PFObject * pageObject;
 @property (strong, nonatomic) NSMutableArray * objects;
+
+-(void)customBackActionNoAnimation:(int)homePageIndex;
 
 @end

@@ -13,14 +13,16 @@
 @protocol IPListViewDelegate <NSObject>
 
 -(void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+-(void)didPushCreateButton:(id)sender;
 
 @end
 
-@interface IPListViewController : PFQueryTableViewController
+@interface IPListViewController : UITableViewController
 
 @property (nonatomic, strong) PFObject * pageObject;
 @property (strong, nonatomic) IBOutlet UITableViewCell *createHeaderTableViewCell;
 @property (strong, nonatomic) id <IPListViewDelegate> delegate;
+@property (strong, nonatomic) NSMutableArray * objects;
 
 - (IBAction)addItemButton:(id)sender;
 - (void)updatedResultObjects:(NSMutableArray*)newObjects;

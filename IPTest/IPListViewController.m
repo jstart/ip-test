@@ -17,6 +17,7 @@
 @synthesize pageObject;
 @synthesize delegate;
 @synthesize createHeaderTableViewCell;
+@synthesize objects;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -45,10 +46,10 @@
 
 - (void)viewDidLoad
 {
-    self.className = @"Item";
-    self.pullToRefreshEnabled = YES;
-    self.paginationEnabled = YES;
-    self.objectsPerPage = 25;
+//    self.className = @"Item";
+//    self.pullToRefreshEnabled = YES;
+//    self.paginationEnabled = YES;
+//    self.objectsPerPage = 25;
 
     [super viewDidLoad];
   
@@ -95,19 +96,19 @@
 
 #pragma mark - Table view data source
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//    // Return the number of sections.
-//    return 1;
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//    // Return the number of rows in the section.
-//    return 5;
-//}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [objects count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -115,7 +116,7 @@
     if (cell == nil) {
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-
+    PFObject * object = [objects objectAtIndex:indexPath.row];
     cell.textLabel.text = [object objectForKey:@"Title"];
   
     return cell;
@@ -160,6 +161,11 @@
 }
 */
 
+//- (PFQuery *)queryForTable {
+//    PFQuery * query = nil;
+//    return query;
+//}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -179,11 +185,7 @@
 }
 
 - (IBAction)addItemButton:(id)sender {
-  IPAddListItemViewController * addListItemVC = [[IPAddListItemViewController alloc] initWithNibName:@"IPAddListItemViewController" bundle:[NSBundle mainBundle]];
-  [addListItemVC setPageObject:pageObject];
-  UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:addListItemVC];
-
-  [self presentModalViewController:navigationController animated:YES];
+    [self.delegate didPushCreateButton:sender];
 }
 
 @end

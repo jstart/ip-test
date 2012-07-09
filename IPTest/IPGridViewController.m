@@ -29,7 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.objects = [[NSMutableArray alloc] init];
-    carousel.type = iCarouselTypeLinear;
+    carousel.type = iCarouselTypeTimeMachine;
     carousel.bounces = NO;
     [carousel setVertical:YES];
     [carousel setIgnorePerpendicularSwipes:YES];
@@ -94,7 +94,7 @@
     //in the wrong place in the carousel
     nameLabel.text = [[self.objects objectAtIndex:index] objectForKey:@"Title"];
 
-    view.backgroundColor = [UIColor grayColor];
+    view.backgroundColor = [UIColor whiteColor];
     return view;
 }
 

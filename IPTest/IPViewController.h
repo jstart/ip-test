@@ -9,16 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "FireUIPagedScrollView.h"
 #import "IPBookmarkViewController.h"
+#import "IPBookmarkBaseViewController.h"
 
-@interface IPViewController : UIViewController <FireUIPagedScrollViewDelegate, IPBookmarkViewDelegate>
+@interface IPViewController : IPBookmarkBaseViewController <FireUIPagedScrollViewDelegate, IPBookmarkViewDelegate>
 @property (strong, nonatomic) IBOutlet FireUIPagedScrollView *scrollView;
 //@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
-@property (strong, nonatomic) UINavigationController* bookmarkNavigationController;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
-
--(void)presentWelcomeViewController;
--(void)presentBookmarkViewController;
--(void)hideBookmark;
--(void)showBookmark;
 
 @end

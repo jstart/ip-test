@@ -10,6 +10,7 @@
 #import "IPViewController.h"
 #import "UIViewController+MHSemiModal.h"
 #import "IPTestView.h"
+#import <Parse/Parse.h>
 
 @interface IPBookmarkViewController ()
 
@@ -64,6 +65,10 @@
 //    self.headerViewController.view.layer.borderWidth = 0.5f;
 //    self.headerViewController.view.layer.masksToBounds = YES;
     [self.bookmarkTableView setTableHeaderView:self.headerViewController.view];
+    
+    if ([PFUser currentUser]) {
+        self.headerViewController.usernameLabel.text = [[PFUser currentUser] objectForKey:@"username"];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{

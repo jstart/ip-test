@@ -123,6 +123,14 @@
 		FDC733E915A394F700687431 /* IPFollowingPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733E615A394F700687431 /* IPFollowingPagesViewController.m */; };
 		FDC733EA15A394F700687431 /* IPFollowingPagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC733E715A394F700687431 /* IPFollowingPagesViewController.xib */; };
 		FDC733EB15A394F700687431 /* IPFollowingPagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC733E715A394F700687431 /* IPFollowingPagesViewController.xib */; };
+		FDCAFA0F15AAD22C00AC3D9E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDCAFA0B15AAD22C00AC3D9E /* libTestFlight.a */; };
+		FDCAFA1015AAD22C00AC3D9E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDCAFA0B15AAD22C00AC3D9E /* libTestFlight.a */; };
+		FDCAFA1115AAD22C00AC3D9E /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDCAFA0C15AAD22C00AC3D9E /* README.txt */; };
+		FDCAFA1215AAD22C00AC3D9E /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDCAFA0C15AAD22C00AC3D9E /* README.txt */; };
+		FDCAFA1315AAD22C00AC3D9E /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDCAFA0D15AAD22C00AC3D9E /* release_notes.txt */; };
+		FDCAFA1415AAD22C00AC3D9E /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDCAFA0D15AAD22C00AC3D9E /* release_notes.txt */; };
+		FDCAFA1715AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDCAFA1615AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m */; };
+		FDCAFA1815AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDCAFA1615AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +249,12 @@
 		FDC733E515A394F700687431 /* IPFollowingPagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPFollowingPagesViewController.h; sourceTree = "<group>"; };
 		FDC733E615A394F700687431 /* IPFollowingPagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPFollowingPagesViewController.m; sourceTree = "<group>"; };
 		FDC733E715A394F700687431 /* IPFollowingPagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPFollowingPagesViewController.xib; sourceTree = "<group>"; };
+		FDCAFA0B15AAD22C00AC3D9E /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		FDCAFA0C15AAD22C00AC3D9E /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		FDCAFA0D15AAD22C00AC3D9E /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
+		FDCAFA0E15AAD22C00AC3D9E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		FDCAFA1515AAD3AB00AC3D9E /* IPBookmarkBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPBookmarkBaseViewController.h; sourceTree = "<group>"; };
+		FDCAFA1615AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPBookmarkBaseViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,6 +275,7 @@
 				FDC7338E15A3835000687431 /* CoreGraphics.framework in Frameworks */,
 				FDAEE5E615A3A60A00D05E9C /* Parse.framework in Frameworks */,
 				FD6DE2A815A7C0E500376A42 /* CityGrid.framework in Frameworks */,
+				FDCAFA0F15AAD22C00AC3D9E /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,6 +287,7 @@
 				FDC733AC15A3835000687431 /* UIKit.framework in Frameworks */,
 				FDC733AD15A3835000687431 /* Foundation.framework in Frameworks */,
 				FDAEE5E715A3A60A00D05E9C /* Parse.framework in Frameworks */,
+				FDCAFA1015AAD22C00AC3D9E /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +384,7 @@
 		FDC7337A15A3835000687431 = {
 			isa = PBXGroup;
 			children = (
+				FDCAFA0A15AAD22C00AC3D9E /* TestFlightSDK1.0 */,
 				FD6DE2DC15A7DB1D00376A42 /* iCarousel.h */,
 				FD6DE2DD15A7DB1D00376A42 /* iCarousel.m */,
 				FD6DE2A915A7C34900376A42 /* CoreLocation.framework */,
@@ -439,6 +456,8 @@
 				FDC7339E15A3835000687431 /* MainStoryboard_iPad.storyboard */,
 				FDC733A115A3835000687431 /* IPViewController.h */,
 				FDC733A215A3835000687431 /* IPViewController.m */,
+				FDCAFA1515AAD3AB00AC3D9E /* IPBookmarkBaseViewController.h */,
+				FDCAFA1615AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m */,
 				FDC733CD15A38FFC00687431 /* IPPageViewController.h */,
 				FDC733CE15A38FFC00687431 /* IPPageViewController.m */,
 				FDC733CF15A38FFC00687431 /* IPPageViewController.xib */,
@@ -523,6 +542,17 @@
 				FDC733E715A394F700687431 /* IPFollowingPagesViewController.xib */,
 			);
 			name = "Following Pages";
+			sourceTree = "<group>";
+		};
+		FDCAFA0A15AAD22C00AC3D9E /* TestFlightSDK1.0 */ = {
+			isa = PBXGroup;
+			children = (
+				FDCAFA0B15AAD22C00AC3D9E /* libTestFlight.a */,
+				FDCAFA0C15AAD22C00AC3D9E /* README.txt */,
+				FDCAFA0D15AAD22C00AC3D9E /* release_notes.txt */,
+				FDCAFA0E15AAD22C00AC3D9E /* TestFlight.h */,
+			);
+			path = TestFlightSDK1.0;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -625,6 +655,8 @@
 				FD6DE2DA15A7DAB500376A42 /* IPGridViewController.xib in Resources */,
 				FD6DE2EA15A8172100376A42 /* IPSegmentContainerViewController.xib in Resources */,
 				FD6DE2ED15A8203700376A42 /* IPGridViewTemplate.xib in Resources */,
+				FDCAFA1115AAD22C00AC3D9E /* README.txt in Resources */,
+				FDCAFA1315AAD22C00AC3D9E /* release_notes.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +687,8 @@
 				FD6DE2DB15A7DAB500376A42 /* IPGridViewController.xib in Resources */,
 				FD6DE2EB15A8172100376A42 /* IPSegmentContainerViewController.xib in Resources */,
 				FD6DE2EE15A8203700376A42 /* IPGridViewTemplate.xib in Resources */,
+				FDCAFA1215AAD22C00AC3D9E /* README.txt in Resources */,
+				FDCAFA1415AAD22C00AC3D9E /* release_notes.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,6 +742,7 @@
 				FD6DE2D815A7DAB500376A42 /* IPGridViewController.m in Sources */,
 				FD6DE2DE15A7DB1E00376A42 /* iCarousel.m in Sources */,
 				FD6DE2E815A8172100376A42 /* IPSegmentContainerViewController.m in Sources */,
+				FDCAFA1715AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,6 +770,7 @@
 				FD6DE2D915A7DAB500376A42 /* IPGridViewController.m in Sources */,
 				FD6DE2DF15A7DB1E00376A42 /* iCarousel.m in Sources */,
 				FD6DE2E915A8172100376A42 /* IPSegmentContainerViewController.m in Sources */,
+				FDCAFA1815AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,6 +870,8 @@
 		FDC733BC15A3835000687431 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -841,7 +879,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IPTest/IPTest-Prefix.pch";
 				INFOPLIST_FILE = "IPTest/IPTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.0\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -849,6 +893,8 @@
 		FDC733BD15A3835000687431 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -856,7 +902,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IPTest/IPTest-Prefix.pch";
 				INFOPLIST_FILE = "IPTest/IPTest-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.0\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -873,6 +925,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IPTest/IPTest-Prefix.pch";
 				INFOPLIST_FILE = "IPTestTests/IPTestTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.0\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
@@ -891,6 +947,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IPTest/IPTest-Prefix.pch";
 				INFOPLIST_FILE = "IPTestTests/IPTestTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TestFlightSDK1.0\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;

@@ -19,6 +19,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [TestFlight takeOff:@"30d92a896df4ab4b4873886ea58f8b06_NzE0NzIyMDEyLTAzLTE0IDEzOjQ0OjU4Ljk3MDAxOQ"];
+#define TESTING 1
+#ifdef TESTING
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+#endif
   [Parse setApplicationId:@"Sw86jP5zMknD2Gp52hXMUH6cLoBq5YpzIR5SYWlW"
                 clientKey:@"XaM7srV5NdkbOEWXjXzFvFjXLD7w2YzAimdo0m27"];
   [CityGrid setPublisher:@"test"];
