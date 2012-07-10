@@ -10,7 +10,7 @@
         <scene sceneID="fdi-uC-hjF">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Owk-Nb-ctO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController definesPresentationContext="YES" id="s8E-Yo-mmh" sceneMemberID="viewController">
+                <navigationController wantsFullScreenLayout="YES" definesPresentationContext="YES" id="s8E-Yo-mmh" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="NdI-Q3-EXy">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -25,7 +25,7 @@
         <scene sceneID="P5t-Lc-piZ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9OU-c0-paf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="IPViewController" title="Home" id="z2M-oB-ldX" customClass="IPViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IPViewController" title="Home" wantsFullScreenLayout="YES" id="z2M-oB-ldX" customClass="IPViewController" sceneMemberID="viewController">
                     <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="wic-l6-tav">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -69,7 +69,10 @@
                 <relationship kind="outlet" name="segmentedControl" candidateClass="UISegmentedControl"/>
             </relationships>
         </class>
-        <class className="IPViewController" superclassName="UIViewController">
+        <class className="IPBookmarkBaseViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IPBookmarkBaseViewController.h"/>
+        </class>
+        <class className="IPViewController" superclassName="IPBookmarkBaseViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/IPViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="pageControl" candidateClass="UIPageControl"/>

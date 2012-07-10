@@ -1,0 +1,48 @@
+{
+  "grouped": true,
+  "title": "Create Page",
+  "controllerName": "IPCreatePageViewController",
+  "sections": [
+    {
+      "title": "Page Name",
+      "bind": "title:sectionTitle",
+      "elements": [
+        {
+          "type": "QEntryElement",
+          "key": "pageName",
+          "title": "Name",
+          "bind": "textValue: pageName",
+          "placeholder": "Enter Name"
+        }
+      ]
+    },
+    {
+      "elements": [
+        {
+          "type": "QPickerElement",
+          "title": "List Type",
+          "key": "listType",
+          "value": "Collection",
+          "bind": "selectedIndexes:listType",
+          "items": [
+            [
+              "Collection",
+              "Rank",
+              "To Do"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "elements": [
+        {
+          "type": "QButtonElement",
+          "key": "submitButton",
+          "title": "Create Page",
+          "controllerAction": "createPage:"
+        }
+      ]
+    }
+  ]
+}

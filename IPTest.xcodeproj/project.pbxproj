@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		FD1557FD15AB8E8C00C38A78 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FD1557FB15AB8E8C00C38A78 /* Default.png */; };
 		FD1557FE15AB8E8C00C38A78 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD1557FC15AB8E8C00C38A78 /* Default@2x.png */; };
+		FD15589A15ACB25F00C38A78 /* libQuickDialog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD15589715ACB24200C38A78 /* libQuickDialog.a */; };
+		FD15589C15ACB26900C38A78 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD15589B15ACB26900C38A78 /* MapKit.framework */; };
+		FD1558B215ACBEC700C38A78 /* ip_form.json in Resources */ = {isa = PBXBuildFile; fileRef = FD1558B115ACBEC700C38A78 /* ip_form.json */; };
+		FD1558B615ACDC6000C38A78 /* IPInviteFriendToPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1558B415ACDC6000C38A78 /* IPInviteFriendToPageViewController.m */; };
+		FD1558B715ACDC6000C38A78 /* IPInviteFriendToPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD1558B515ACDC6000C38A78 /* IPInviteFriendToPageViewController.xib */; };
+		FD1558BA15ACDD1D00C38A78 /* IPInviteFriendToPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1558B415ACDC6000C38A78 /* IPInviteFriendToPageViewController.m */; };
+		FD1558BB15ACDD2000C38A78 /* IPInviteFriendToPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD1558B515ACDC6000C38A78 /* IPInviteFriendToPageViewController.xib */; };
 		FD2032EF15A7AC2600FB5FF1 /* IPNotificationListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2032ED15A7AC2600FB5FF1 /* IPNotificationListViewController.m */; };
 		FD2032F015A7AC2600FB5FF1 /* IPNotificationListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD2032EE15A7AC2600FB5FF1 /* IPNotificationListViewController.xib */; };
 		FD28433215A3B8BE0079D6D5 /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = FD28433115A3B8BE0079D6D5 /* bookmark.png */; };
@@ -132,6 +139,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		FD15589415ACB24200C38A78 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD15588B15ACB24200C38A78 /* QuickDialog.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D80B0E3313E052DF00FA85CA;
+			remoteInfo = QuickDialogExample;
+		};
+		FD15589615ACB24200C38A78 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD15588B15ACB24200C38A78 /* QuickDialog.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2C542393145ADEBD0026A152;
+			remoteInfo = QuickDialog;
+		};
+		FD15589815ACB25B00C38A78 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FD15588B15ACB24200C38A78 /* QuickDialog.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C542392145ADEBD0026A152;
+			remoteInfo = QuickDialog;
+		};
 		FDC733AE15A3835000687431 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FDC7337C15A3835000687431 /* Project object */;
@@ -144,6 +172,12 @@
 /* Begin PBXFileReference section */
 		FD1557FB15AB8E8C00C38A78 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		FD1557FC15AB8E8C00C38A78 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		FD15588B15ACB24200C38A78 /* QuickDialog.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = QuickDialog.xcodeproj; path = QuickDialog/QuickDialog.xcodeproj; sourceTree = "<group>"; };
+		FD15589B15ACB26900C38A78 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		FD1558B115ACBEC700C38A78 /* ip_form.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ip_form.json; sourceTree = "<group>"; };
+		FD1558B315ACDC6000C38A78 /* IPInviteFriendToPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPInviteFriendToPageViewController.h; sourceTree = "<group>"; };
+		FD1558B415ACDC6000C38A78 /* IPInviteFriendToPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPInviteFriendToPageViewController.m; sourceTree = "<group>"; };
+		FD1558B515ACDC6000C38A78 /* IPInviteFriendToPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPInviteFriendToPageViewController.xib; sourceTree = "<group>"; };
 		FD2032EC15A7AC2600FB5FF1 /* IPNotificationListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPNotificationListViewController.h; sourceTree = "<group>"; };
 		FD2032ED15A7AC2600FB5FF1 /* IPNotificationListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPNotificationListViewController.m; sourceTree = "<group>"; };
 		FD2032EE15A7AC2600FB5FF1 /* IPNotificationListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPNotificationListViewController.xib; sourceTree = "<group>"; };
@@ -260,6 +294,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD6DE2AA15A7C34900376A42 /* CoreLocation.framework in Frameworks */,
+				FD15589C15ACB26900C38A78 /* MapKit.framework in Frameworks */,
+				FD15589A15ACB25F00C38A78 /* libQuickDialog.a in Frameworks */,
 				FDAEE61015A3A97700D05E9C /* SystemConfiguration.framework in Frameworks */,
 				FDAEE60E15A3A96600D05E9C /* Security.framework in Frameworks */,
 				FDAEE60C15A3A96200D05E9C /* MobileCoreServices.framework in Frameworks */,
@@ -305,6 +341,38 @@
 				FDC3C1CD15A75FA200C44B57 /* IPBookmarkHeaderViewController.xib */,
 			);
 			name = Bookmark;
+			sourceTree = "<group>";
+		};
+		FD15588C15ACB24200C38A78 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FD15589515ACB24200C38A78 /* QuickDialogExample.app */,
+				FD15589715ACB24200C38A78 /* libQuickDialog.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FD1558B815ACDC6600C38A78 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				FDC3C1D815A7698E00C44B57 /* IPCreatePageViewController.h */,
+				FDC3C1D915A7698E00C44B57 /* IPCreatePageViewController.m */,
+				FDC3C1DA15A7698E00C44B57 /* IPCreatePageViewController.xib */,
+				FD1558B315ACDC6000C38A78 /* IPInviteFriendToPageViewController.h */,
+				FD1558B415ACDC6000C38A78 /* IPInviteFriendToPageViewController.m */,
+				FD1558B515ACDC6000C38A78 /* IPInviteFriendToPageViewController.xib */,
+			);
+			name = Page;
+			sourceTree = "<group>";
+		};
+		FD1558B915ACDC6C00C38A78 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				FD6DE26815A7BD5000376A42 /* IPAddListItemViewController.h */,
+				FD6DE26915A7BD5000376A42 /* IPAddListItemViewController.m */,
+				FD6DE26A15A7BD5000376A42 /* IPAddListItemViewController.xib */,
+			);
+			name = Item;
 			sourceTree = "<group>";
 		};
 		FD2032EA15A7AC0200FB5FF1 /* Notification List View */ = {
@@ -369,6 +437,7 @@
 		FDAEE61215A3AA6000D05E9C /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				FD1558B115ACBEC700C38A78 /* ip_form.json */,
 				FD6DE2CE15A7D94600376A42 /* list_icon.png */,
 				FD6DE2CF15A7D94600376A42 /* list_icon@2x.png */,
 				FD6DE2C815A7D94000376A42 /* grid_icon.png */,
@@ -388,12 +457,8 @@
 		FDC3C1D715A7696C00C44B57 /* Create Flow View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FDC3C1D815A7698E00C44B57 /* IPCreatePageViewController.h */,
-				FDC3C1D915A7698E00C44B57 /* IPCreatePageViewController.m */,
-				FDC3C1DA15A7698E00C44B57 /* IPCreatePageViewController.xib */,
-				FD6DE26815A7BD5000376A42 /* IPAddListItemViewController.h */,
-				FD6DE26915A7BD5000376A42 /* IPAddListItemViewController.m */,
-				FD6DE26A15A7BD5000376A42 /* IPAddListItemViewController.xib */,
+				FD1558B815ACDC6600C38A78 /* Page */,
+				FD1558B915ACDC6C00C38A78 /* Item */,
 			);
 			name = "Create Flow View Controllers";
 			sourceTree = "<group>";
@@ -401,6 +466,8 @@
 		FDC7337A15A3835000687431 = {
 			isa = PBXGroup;
 			children = (
+				FD15589B15ACB26900C38A78 /* MapKit.framework */,
+				FD15588B15ACB24200C38A78 /* QuickDialog.xcodeproj */,
 				FDCAFA0A15AAD22C00AC3D9E /* TestFlightSDK1.0 */,
 				FD6DE2DC15A7DB1D00376A42 /* iCarousel.h */,
 				FD6DE2DD15A7DB1D00376A42 /* iCarousel.m */,
@@ -573,6 +640,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				FD15589915ACB25B00C38A78 /* PBXTargetDependency */,
 			);
 			name = IPTest;
 			productName = IPTest;
@@ -617,6 +685,12 @@
 			mainGroup = FDC7337A15A3835000687431;
 			productRefGroup = FDC7338615A3835000687431 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FD15588C15ACB24200C38A78 /* Products */;
+					ProjectRef = FD15588B15ACB24200C38A78 /* QuickDialog.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				FDC7338415A3835000687431 /* IPTest */,
@@ -624,6 +698,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FD15589515ACB24200C38A78 /* QuickDialogExample.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = QuickDialogExample.app;
+			remoteRef = FD15589415ACB24200C38A78 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FD15589715ACB24200C38A78 /* libQuickDialog.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libQuickDialog.a;
+			remoteRef = FD15589615ACB24200C38A78 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		FDC7338315A3835000687431 /* Resources */ = {
@@ -662,6 +753,8 @@
 				FDCAFA1315AAD22C00AC3D9E /* release_notes.txt in Resources */,
 				FD1557FD15AB8E8C00C38A78 /* Default.png in Resources */,
 				FD1557FE15AB8E8C00C38A78 /* Default@2x.png in Resources */,
+				FD1558B215ACBEC700C38A78 /* ip_form.json in Resources */,
+				FD1558BB15ACDD2000C38A78 /* IPInviteFriendToPageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -693,6 +786,7 @@
 				FD6DE2EE15A8203700376A42 /* IPGridViewTemplate.xib in Resources */,
 				FDCAFA1215AAD22C00AC3D9E /* README.txt in Resources */,
 				FDCAFA1415AAD22C00AC3D9E /* release_notes.txt in Resources */,
+				FD1558B715ACDC6000C38A78 /* IPInviteFriendToPageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +840,7 @@
 				FD6DE2DE15A7DB1E00376A42 /* iCarousel.m in Sources */,
 				FD6DE2E815A8172100376A42 /* IPSegmentContainerViewController.m in Sources */,
 				FDCAFA1715AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */,
+				FD1558BA15ACDD1D00C38A78 /* IPInviteFriendToPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,12 +868,18 @@
 				FD6DE2DF15A7DB1E00376A42 /* iCarousel.m in Sources */,
 				FD6DE2E915A8172100376A42 /* IPSegmentContainerViewController.m in Sources */,
 				FDCAFA1815AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */,
+				FD1558B615ACDC6000C38A78 /* IPInviteFriendToPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		FD15589915ACB25B00C38A78 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = QuickDialog;
+			targetProxy = FD15589815ACB25B00C38A78 /* PBXContainerItemProxy */;
+		};
 		FDC733AF15A3835000687431 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FDC7338415A3835000687431 /* IPTest */;
@@ -880,10 +981,15 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IPTest/IPTest-Prefix.pch";
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/QuickDialog/**";
 				INFOPLIST_FILE = "IPTest/IPTest-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlightSDK1.0\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -903,10 +1009,15 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IPTest/IPTest-Prefix.pch";
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/QuickDialog/**";
 				INFOPLIST_FILE = "IPTest/IPTest-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TestFlightSDK1.0\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -1,0 +1,6 @@
+[submodule "IBAForms"]
+	path = IBAForms
+	url = https://github.com/ittybittydude/IBAForms.git
+[submodule "QuickDialog"]
+	path = QuickDialog
+	url = git@github.com:escoz/QuickDialog.git

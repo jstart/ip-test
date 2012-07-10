@@ -36,8 +36,10 @@
   self.objects = [[NSMutableArray alloc] init];
   self.listVC = [[IPListViewController alloc] initWithNibName:@"IPListViewController" bundle:[NSBundle mainBundle]];
   self.listVC.delegate = self;
+    self.listVC.pageObject  = self.pageObject;
   self.gridVC = [[IPGridViewController alloc] initWithNibName:@"IPGridViewController" bundle:[NSBundle mainBundle]];
   self.gridVC.delegate = self;
+
   [self.scrollView addPagedViewController:self.listVC animated:NO];
   [self.scrollView addPagedViewController:self.gridVC animated:NO];
   [self.navigationItem setTitleView:self.segmentControl];
@@ -130,13 +132,11 @@
   transition.subtype = kCATransitionFromBottom;
   transition.delegate = self;
   [self.navigationController.view.layer addAnimation:transition forKey:nil];
-  self.navigationController.navigationBarHidden = NO;
   [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)customBackActionNoAnimation:(int)homePageIndex {
     if (homePageIndex >= 0 && homePageIndex < 3) {
-        self.navigationController.navigationBarHidden = NO;
         [((IPViewController*)([self.navigationController.viewControllers objectAtIndex:0])) bookmarkViewWasDismissed:homePageIndex];
         [self.navigationController popToRootViewControllerAnimated:NO];
     }

@@ -108,13 +108,12 @@
   transition.subtype = kCATransitionFromTop;
   transition.delegate = self;
   [rootVC.topViewController.navigationController.view.layer addAnimation:transition forKey:nil];
-  self.navigationController.navigationBarHidden = NO;
   [rootVC.topViewController.navigationController pushViewController:vc animated:NO];
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (IBAction)createButtonPressed:(id)sender {
-  IPCreatePageViewController * cpvc = [[IPCreatePageViewController alloc] initWithNibName:@"IPCreatePageViewController" bundle:[NSBundle mainBundle]];
+  IPCreatePageViewController * cpvc = [[IPCreatePageViewController alloc] init];
   UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:cpvc];
   [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentModalViewController:navController animated:YES];
 }

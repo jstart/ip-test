@@ -26,8 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:NO];
-    [self setWantsFullScreenLayout:YES];
+//    [self.navigationController setNavigationBarHidden:NO];
+    [self setWantsFullScreenLayout:NO];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

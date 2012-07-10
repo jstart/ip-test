@@ -7,6 +7,7 @@
 //
 
 #import "IPCreatePageViewController.h"
+#import "IPInviteFriendToPageViewController.h"
 #import <Parse/Parse.h>
 
 @interface IPCreatePageViewController ()
@@ -21,17 +22,25 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"Create Page";
+        self.root = [[QRootElement alloc] initWithJSONFile:@"ip_form"];
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     UIBarButtonItem * closeButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(closeView)];
     [closeButtonItem setTitle:@"Close"];
     self.navigationItem.leftBarButtonItem = closeButtonItem;
+    
+    UIBarButtonItem * submitButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(createPage:)];
+    [closeButtonItem setTitle:@"Submit"];
+    self.navigationItem.rightBarButtonItem = submitButtonItem;
+    
 }
 
 - (void)viewDidUnload
@@ -51,22 +60,49 @@
   [[self presentingViewController] dismissModalViewControllerAnimated:YES];
 }
 
-- (IBAction)submitButtonPressed:(id)sender {
-  if (self.pageNameField.text.length <= 0) {
-    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"No Title" message:@"You must add a title to your page." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-    [alertView show];
-    return;
-  }
-  [self.pageNameField resignFirstResponder];
-  PFObject * newObject = [PFObject objectWithClassName:@"Page"];
-  [newObject setObject:[self.pageNameField text] forKey:@"Title"];
-  [newObject save];
-  PFRelation * pageRelation = [newObject relationforKey:@"Owner"];
-  [pageRelation addObject:[PFUser currentUser]];
-  PFRelation * ownerRelation = [[PFUser currentUser] relationforKey:@"Pages"];
-  [ownerRelation addObject:newObject];
-  [newObject saveInBackground];
-  [self.presentingViewController dismissModalViewControllerAnimated:YES];
+- (void)createPage:(QElement *)button {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    [self.root fetchValueUsingBindingsIntoObject:dict];
+    
+//    NSString *msg = @"Values:";
+//    for (NSString *aKey in dict){
+//        msg = [msg stringByAppendingFormat:@"\n- %@: %@", aKey, [dict valueForKey:aKey]];
+//    }
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Hello"
+//                                                    message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//    [alert show];
+
+    NSNumber * pickerIndex = [((NSArray*)[dict objectForKey:@"listType"]) objectAtIndex:0];
+//  PFObject * newObject = [PFObject objectWithClassName:@"Page"];
+//  [newObject setObject:[dict objectForKey:@"pageName"] forKey:@"Title"];
+//  [newObject setObject:pickerIndex forKey:@"listType"];
+//  [newObject save];
+//  PFRelation * pageRelation = [newObject relationforKey:@"Owner"];
+//  [pageRelation addObject:[PFUser currentUser]];
+//  PFRelation * ownerRelation = [[PFUser currentUser] relationforKey:@"Pages"];
+//  [ownerRelation addObject:newObject];
+//  [newObject saveInBackground];
+    
+    switch ([pickerIndex intValue]) {
+        case 0:
+            [self.presentingViewController dismissModalViewControllerAnimated:YES];
+            break;
+        case 1:
+                {
+                    IPInviteFriendToPageViewController * inviteVC = [[IPInviteFriendToPageViewController alloc] initWithNibName:@"IPInviteFriendToPageViewController" bundle:[NSBundle mainBundle]];
+                    [self.navigationController pushViewController:inviteVC animated:YES];
+                }
+            break;
+        case 2:
+            [self.presentingViewController dismissModalViewControllerAnimated:YES];
+
+            break;
+            
+        default:
+            [self.presentingViewController dismissModalViewControllerAnimated:YES];
+
+            break;
+    }
 }
 
 -(BOOL)textFieldShouldEndEditing:(UITextField *)textField{

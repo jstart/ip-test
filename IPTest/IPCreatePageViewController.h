@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface IPCreatePageViewController : UIViewController <UITextFieldDelegate>
+@interface IPCreatePageViewController : QuickDialogController <UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *pageNameField;
-- (IBAction)submitButtonPressed:(id)sender;
 
+- (void)createPage:(QElement *)button;
 @end

@@ -30,7 +30,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-
     }
     return self;
 }
@@ -38,10 +37,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.wantsFullScreenLayout = YES;
 
+    // Do any additional setup after loading the view from its nib.
     self.notificationViewController = [[IPNotificationListViewController alloc] initWithNibName:@"IPNotificationListViewController" bundle:[NSBundle mainBundle]];
-    [self.notificationViewController.navigationController setNavigationBarHidden:NO];
+//    [self.notificationViewController.navigationController setNavigationBarHidden:NO];
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     _searchBar.delegate = self;
     _searchBar.barStyle = UIBarStyleDefault;
@@ -58,16 +58,16 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
   NSLog(@"%@", NSStringFromCGRect(self.bookmarkTableView.frame));
   //HAX
-  [((IPTestView*)self.view) setHasBeenAdjusted:YES];
-  CGRect frame = self.closeButton.frame;
-  frame.origin.y = self.bookmarkTableView.frame.size.height;
-  self.closeButton.frame = frame;
+//  [((IPTestView*)self.view) setHasBeenAdjusted:YES];
+//  CGRect frame = self.closeButton.frame;
+//  frame.origin.y = self.bookmarkTableView.frame.size.height;
+//  self.closeButton.frame = frame;
 }
 
 - (void)viewDidUnload

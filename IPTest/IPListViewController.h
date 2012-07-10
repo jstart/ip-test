@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *createHeaderTableViewCell;
 @property (strong, nonatomic) id <IPListViewDelegate> delegate;
 @property (strong, nonatomic) NSMutableArray * objects;
+@property (strong, nonatomic) NSNumber * listTypeIndex;
 
 - (IBAction)addItemButton:(id)sender;
 - (void)updatedResultObjects:(NSMutableArray*)newObjects;

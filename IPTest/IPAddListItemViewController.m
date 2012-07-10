@@ -112,9 +112,7 @@
 		} else {
 			self.placesArray = [tmpPlaces mutableCopy];
 			[[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//				[self.tableView reloadData];
-        [[self.searchDisplayController searchResultsTableView] reloadData];
-				self.tableView.hidden = NO;
+        [[self.searchDisplayController searchResultsTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 			}];
 		}
   }];

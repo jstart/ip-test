@@ -18,6 +18,7 @@
 @synthesize delegate;
 @synthesize createHeaderTableViewCell;
 @synthesize objects;
+@synthesize listTypeIndex;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -41,7 +42,9 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    
+    if ([listTypeIndex intValue] == 1) {
+        [self.tableView setEditing:YES animated:YES];
+    }
 }
 
 - (void)viewDidLoad
@@ -56,6 +59,8 @@
     [self.tableView setTableHeaderView:self.createHeaderTableViewCell];
 
     self.title = [self.pageObject objectForKey:@"Title"];
+    self.listTypeIndex = [pageObject objectForKey:@"listType"];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -118,8 +123,16 @@
     }
     PFObject * object = [objects objectAtIndex:indexPath.row];
     cell.textLabel.text = [object objectForKey:@"Title"];
+    if ([listTypeIndex intValue] == 1) {
+        cell.showsReorderControl = YES;
+        [cell setEditingAccessoryType:UITableViewCellAccessoryNone];
+    }
   
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 /*
@@ -145,21 +158,22 @@
 }
 */
 
-/*
+
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+    
 }
-*/
 
-/*
+
+
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
     return YES;
 }
-*/
+
 
 //- (PFQuery *)queryForTable {
 //    PFQuery * query = nil;

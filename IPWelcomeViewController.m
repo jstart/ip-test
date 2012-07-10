@@ -41,6 +41,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Welcome to InsiderPages";
+
 	// Do any additional setup after loading the view, typically from a nib.
 }
 

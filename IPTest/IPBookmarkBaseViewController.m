@@ -85,7 +85,6 @@
 {
 	// Go to the welcome screen and have them log in or create an account.
 	IPWelcomeViewController *welcomeViewController = [[IPWelcomeViewController alloc] initWithNibName:@"IPWelcomeViewController" bundle:[NSBundle mainBundle]];
-	welcomeViewController.title = @"Welcome to InsiderPages";
     UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:welcomeViewController];
     
 	[self presentModalViewController:navController animated:NO];
@@ -97,14 +96,13 @@
     if (bookmarkNavigationController == nil) {
         IPBookmarkViewController *bookmarkViewController = [[IPBookmarkViewController alloc] initWithNibName:@"IPBookmarkViewController" bundle:[NSBundle mainBundle]];
         bookmarkNavigationController = [[UINavigationController alloc] initWithRootViewController:bookmarkViewController];
-//        [bookmarkNavigationController setNavigationBarHidden:YES];
     }
     if ([[self.navigationItem.rightBarButtonItem customView] isHidden]) {
         
     }else{
         
         [self.navigationController mh_presentSemiModalViewController:bookmarkNavigationController animated:YES];
-        [bookmarkNavigationController setNavigationBarHidden:YES];
+//        [self.navigationController presentModalViewController:bookmarkNavigationController animated:NO];
         [self hideBookmark];
     }
 }
