@@ -7,13 +7,13 @@
 //
 
 #import "IPViewController.h"
-#import "IPPageViewController.h"
 #import "IPPopularPagesViewController.h"
 #import "IPMyPagesViewController.h"
 #import "IPFollowingPagesViewController.h"
 #import <Parse/Parse.h>
 #import "IPWelcomeViewController.h"
 #import "UIViewController+MHSemiModal.h"
+#import "IPCreatePageViewController.h"
 
 @interface IPViewController ()
 
@@ -78,12 +78,17 @@
 }
 
 -(void) bookmarkViewWasDismissed:(int)homePageIndex{
-  [self.navigationController mh_dismissSemiModalViewController:super.bookmarkNavigationController animated:YES];
+    [self.navigationController mh_dismissSemiModalViewController:super.bookmarkNavigationController animated:YES];
 
-  [self showBookmark];
-  if (homePageIndex >= 0 && homePageIndex < 3) {
-    [self.scrollView gotoPage:homePageIndex animated:YES];
-  }
+    [self showBookmark];
+    if (homePageIndex >= 0 && homePageIndex < 3) {
+        [self.scrollView gotoPage:homePageIndex animated:YES];
+    }
+    if (homePageIndex >= 3 && homePageIndex < 4) {
+        IPCreatePageViewController * cpvc = [[IPCreatePageViewController alloc] initWithNibName:@"IPCreatePageViewController" bundle:[NSBundle mainBundle]];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:cpvc];
+        [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentModalViewController:navController animated:YES];
+    }
 }
 
 -(void)showBookmark{

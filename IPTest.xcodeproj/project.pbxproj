@@ -109,10 +109,6 @@
 		FDC733B815A3835000687431 /* IPTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733B715A3835000687431 /* IPTestTests.m */; };
 		FDC733CB15A38F3E00687431 /* FireUIPagedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733CA15A38F3E00687431 /* FireUIPagedScrollView.m */; };
 		FDC733CC15A38F3E00687431 /* FireUIPagedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733CA15A38F3E00687431 /* FireUIPagedScrollView.m */; };
-		FDC733D015A38FFC00687431 /* IPPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733CE15A38FFC00687431 /* IPPageViewController.m */; };
-		FDC733D115A38FFC00687431 /* IPPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733CE15A38FFC00687431 /* IPPageViewController.m */; };
-		FDC733D215A38FFC00687431 /* IPPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC733CF15A38FFC00687431 /* IPPageViewController.xib */; };
-		FDC733D315A38FFC00687431 /* IPPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC733CF15A38FFC00687431 /* IPPageViewController.xib */; };
 		FDC733D815A394C900687431 /* IPPopularPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733D615A394C900687431 /* IPPopularPagesViewController.m */; };
 		FDC733D915A394C900687431 /* IPPopularPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733D615A394C900687431 /* IPPopularPagesViewController.m */; };
 		FDC733DA15A394C900687431 /* IPPopularPagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC733D715A394C900687431 /* IPPopularPagesViewController.xib */; };
@@ -241,9 +237,6 @@
 		FDC733B715A3835000687431 /* IPTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPTestTests.m; sourceTree = "<group>"; };
 		FDC733C915A38F3E00687431 /* FireUIPagedScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FireUIPagedScrollView.h; sourceTree = "<group>"; };
 		FDC733CA15A38F3E00687431 /* FireUIPagedScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FireUIPagedScrollView.m; sourceTree = "<group>"; };
-		FDC733CD15A38FFC00687431 /* IPPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPPageViewController.h; sourceTree = "<group>"; };
-		FDC733CE15A38FFC00687431 /* IPPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPPageViewController.m; sourceTree = "<group>"; };
-		FDC733CF15A38FFC00687431 /* IPPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPPageViewController.xib; sourceTree = "<group>"; };
 		FDC733D515A394C900687431 /* IPPopularPagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPPopularPagesViewController.h; sourceTree = "<group>"; };
 		FDC733D615A394C900687431 /* IPPopularPagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPPopularPagesViewController.m; sourceTree = "<group>"; };
 		FDC733D715A394C900687431 /* IPPopularPagesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPPopularPagesViewController.xib; sourceTree = "<group>"; };
@@ -298,6 +291,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD15580715ABAA4600C38A78 /* Bookmark */ = {
+			isa = PBXGroup;
+			children = (
+				FD2032EA15A7AC0200FB5FF1 /* Notification List View */,
+				FDC3C1C715A753B100C44B57 /* IPTestView.h */,
+				FDC3C1C815A753B100C44B57 /* IPTestView.m */,
+				FD28433815A3C8020079D6D5 /* IPBookmarkViewController.h */,
+				FD28433915A3C8020079D6D5 /* IPBookmarkViewController.m */,
+				FD28433A15A3C8020079D6D5 /* IPBookmarkViewController.xib */,
+				FDC3C1CB15A75FA200C44B57 /* IPBookmarkHeaderViewController.h */,
+				FDC3C1CC15A75FA200C44B57 /* IPBookmarkHeaderViewController.m */,
+				FDC3C1CD15A75FA200C44B57 /* IPBookmarkHeaderViewController.xib */,
+			);
+			name = Bookmark;
+			sourceTree = "<group>";
+		};
 		FD2032EA15A7AC0200FB5FF1 /* Notification List View */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,6 +357,8 @@
 		FD6DE2E415A8170100376A42 /* Segment Container View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FD427B3015A615FD00835E3F /* List View Controllers */,
+				FD6DE2D415A7DA9400376A42 /* Grid View Controllers */,
 				FD6DE2E515A8172100376A42 /* IPSegmentContainerViewController.h */,
 				FD6DE2E615A8172100376A42 /* IPSegmentContainerViewController.m */,
 				FD6DE2E715A8172100376A42 /* IPSegmentContainerViewController.xib */,
@@ -449,12 +460,9 @@
 		FDC7338F15A3835000687431 /* IPTest */ = {
 			isa = PBXGroup;
 			children = (
+				FD15580715ABAA4600C38A78 /* Bookmark */,
 				FD6DE2E415A8170100376A42 /* Segment Container View Controller */,
-				FD6DE2D415A7DA9400376A42 /* Grid View Controllers */,
-				FD2032EA15A7AC0200FB5FF1 /* Notification List View */,
 				FDC3C1D715A7696C00C44B57 /* Create Flow View Controllers */,
-				FD427B3015A615FD00835E3F /* List View Controllers */,
-				FDAEE61215A3AA6000D05E9C /* Assets */,
 				FDC733D415A394A000687431 /* Home View Controllers */,
 				FDC7339815A3835000687431 /* IPAppDelegate.h */,
 				FDC7339915A3835000687431 /* IPAppDelegate.m */,
@@ -464,18 +472,8 @@
 				FDC733A215A3835000687431 /* IPViewController.m */,
 				FDCAFA1515AAD3AB00AC3D9E /* IPBookmarkBaseViewController.h */,
 				FDCAFA1615AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m */,
-				FDC733CD15A38FFC00687431 /* IPPageViewController.h */,
-				FDC733CE15A38FFC00687431 /* IPPageViewController.m */,
-				FDC733CF15A38FFC00687431 /* IPPageViewController.xib */,
+				FDAEE61215A3AA6000D05E9C /* Assets */,
 				FDC7339015A3835000687431 /* Supporting Files */,
-				FD28433815A3C8020079D6D5 /* IPBookmarkViewController.h */,
-				FD28433915A3C8020079D6D5 /* IPBookmarkViewController.m */,
-				FD28433A15A3C8020079D6D5 /* IPBookmarkViewController.xib */,
-				FDC3C1CB15A75FA200C44B57 /* IPBookmarkHeaderViewController.h */,
-				FDC3C1CC15A75FA200C44B57 /* IPBookmarkHeaderViewController.m */,
-				FDC3C1CD15A75FA200C44B57 /* IPBookmarkHeaderViewController.xib */,
-				FDC3C1C715A753B100C44B57 /* IPTestView.h */,
-				FDC3C1C815A753B100C44B57 /* IPTestView.m */,
 			);
 			path = IPTest;
 			sourceTree = "<group>";
@@ -635,7 +633,6 @@
 				FDC7339415A3835000687431 /* InfoPlist.strings in Resources */,
 				FDC7339D15A3835000687431 /* MainStoryboard_iPhone.storyboard in Resources */,
 				FDC733A015A3835000687431 /* MainStoryboard_iPad.storyboard in Resources */,
-				FDC733D215A38FFC00687431 /* IPPageViewController.xib in Resources */,
 				FDC733DA15A394C900687431 /* IPPopularPagesViewController.xib in Resources */,
 				FDC733E215A394DF00687431 /* IPMyPagesViewController.xib in Resources */,
 				FDC733EA15A394F700687431 /* IPFollowingPagesViewController.xib in Resources */,
@@ -673,7 +670,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDC733B515A3835000687431 /* InfoPlist.strings in Resources */,
-				FDC733D315A38FFC00687431 /* IPPageViewController.xib in Resources */,
 				FDC733DB15A394C900687431 /* IPPopularPagesViewController.xib in Resources */,
 				FDC733E315A394DF00687431 /* IPMyPagesViewController.xib in Resources */,
 				FDC733EB15A394F700687431 /* IPFollowingPagesViewController.xib in Resources */,
@@ -726,7 +722,6 @@
 				FDC7339615A3835000687431 /* main.m in Sources */,
 				FDC7339A15A3835000687431 /* IPAppDelegate.m in Sources */,
 				FDC733A315A3835000687431 /* IPViewController.m in Sources */,
-				FDC733D015A38FFC00687431 /* IPPageViewController.m in Sources */,
 				FDC733D815A394C900687431 /* IPPopularPagesViewController.m in Sources */,
 				FDC733E015A394DF00687431 /* IPMyPagesViewController.m in Sources */,
 				FDC733E815A394F700687431 /* IPFollowingPagesViewController.m in Sources */,
@@ -760,7 +755,6 @@
 			files = (
 				FDC733B815A3835000687431 /* IPTestTests.m in Sources */,
 				FDC733CC15A38F3E00687431 /* FireUIPagedScrollView.m in Sources */,
-				FDC733D115A38FFC00687431 /* IPPageViewController.m in Sources */,
 				FDC733D915A394C900687431 /* IPPopularPagesViewController.m in Sources */,
 				FDC733E115A394DF00687431 /* IPMyPagesViewController.m in Sources */,
 				FDC733E915A394F700687431 /* IPFollowingPagesViewController.m in Sources */,

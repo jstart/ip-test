@@ -97,8 +97,7 @@
     if (bookmarkNavigationController == nil) {
         IPBookmarkViewController *bookmarkViewController = [[IPBookmarkViewController alloc] initWithNibName:@"IPBookmarkViewController" bundle:[NSBundle mainBundle]];
         bookmarkNavigationController = [[UINavigationController alloc] initWithRootViewController:bookmarkViewController];
-        [bookmarkNavigationController setNavigationBarHidden:YES];
-        [bookmarkNavigationController setWantsFullScreenLayout:YES];
+//        [bookmarkNavigationController setNavigationBarHidden:YES];
     }
     if ([[self.navigationItem.rightBarButtonItem customView] isHidden]) {
         

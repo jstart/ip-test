@@ -9,6 +9,7 @@
 #import "IPSegmentContainerViewController.h"
 #import "IPViewController.h"
 #import "UIViewController+MHSemiModal.h"
+#import "IPCreatePageViewController.h"
 
 @interface IPSegmentContainerViewController ()
 
@@ -139,6 +140,12 @@
         [((IPViewController*)([self.navigationController.viewControllers objectAtIndex:0])) bookmarkViewWasDismissed:homePageIndex];
         [self.navigationController popToRootViewControllerAnimated:NO];
     }
+    if (homePageIndex >= 3 && homePageIndex < 4) {
+        IPCreatePageViewController * cpvc = [[IPCreatePageViewController alloc] initWithNibName:@"IPCreatePageViewController" bundle:[NSBundle mainBundle]];
+        UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:cpvc];
+        [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentModalViewController:navController animated:YES];
+    }
+
     [self showBookmark];
     [self mh_dismissSemiModalViewController:super.bookmarkNavigationController animated:YES];
 //    [self performSelector:@selector(mh_dismissSemiModalViewController:animated:) withObject:super.bookmarkNavigationController afterDelay:1.1];

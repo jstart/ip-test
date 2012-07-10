@@ -38,32 +38,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+
     self.notificationViewController = [[IPNotificationListViewController alloc] initWithNibName:@"IPNotificationListViewController" bundle:[NSBundle mainBundle]];
+    [self.notificationViewController.navigationController setNavigationBarHidden:NO];
     _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     _searchBar.delegate = self;
     _searchBar.barStyle = UIBarStyleDefault;
     _searchBar.contentMode = UIViewContentModeScaleToFill;
-//    self.bookmarkTableView.layer.cornerRadius = 1;
-//    self.bookmarkTableView.layer.borderColor = UIColor.blackColor.CGColor;
-//    self.bookmarkTableView.layer.borderWidth = 1;
-//    self.bookmarkTableView.layer.masksToBounds = YES;
-//    self.bookmarkTableView.layer.rasterizationScale = [[UIScreen mainScreen] scale];
-//    self.bookmarkTableView.layer.shouldRasterize = YES;
-//    self.closeButton.layer.rasterizationScale = [[UIScreen mainScreen] scale]; 
-//    self.closeButton.layer.shouldRasterize = YES;
-//    self.closeButton.layer.masksToBounds = YES;
-      // Do any additional setup after loading the view from its nib.
+
     
     self.headerViewController = [[IPBookmarkHeaderViewController alloc] initWithNibName:@"IPBookmarkHeaderViewController" bundle:[NSBundle mainBundle]];
-//    self.headerViewController.view.layer.cornerRadius = 10;
-//    self.headerViewController.view.layer.shadowOffset = CGSizeMake(0, 4);
-//    self.headerViewController.view.layer.shadowColor = UIColor.blackColor.CGColor;
-//    self.headerViewController.view.layer.shadowRadius = 10;
-//    self.headerViewController.view.layer.shadowOpacity = 0.5;
-//    self.headerViewController.view.layer.shouldRasterize = YES;
-//    self.headerViewController.view.layer.borderColor = UIColor.blackColor.CGColor;
-//    self.headerViewController.view.layer.borderWidth = 0.5f;
-//    self.headerViewController.view.layer.masksToBounds = YES;
+
     [self.bookmarkTableView setTableHeaderView:self.headerViewController.view];
     
     if ([PFUser currentUser]) {
@@ -217,13 +203,29 @@
       }
         //Notifications
       case 5:{
-
-//        [[self view] addSubview:notificationViewController.view];
+//          [self.navigationController pushViewController:notificationViewController animated:NO];
+//          CATransition *animationOut = [CATransition animation];
+//          [animationOut setDelegate:self];
+//          [animationOut setType:kCATransitionPush];
+//          [animationOut setSubtype:kCATransitionFromRight];
+//          [animationOut setDuration:0.4f];
+//          [animationOut setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+//          [self.view.layer addAnimation:animationOut forKey:nil];
+//          
+//          CATransition *animationIn = [CATransition animation];
+//          [animationIn setDelegate:self];
+//          [animationIn setType:kCATransitionPush];
+//          [animationIn setSubtype:kCATransitionFromRight];
+//          [animationIn setDuration:0.4f];
+//          [animationIn setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+//          [self.navigationController.view.layer addAnimation:animationIn forKey:nil];
+//          [[self view] addSubview:notificationViewController.navigationController.view];
         break;
       }
       default:
         break;
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark
