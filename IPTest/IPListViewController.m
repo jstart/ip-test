@@ -19,6 +19,9 @@
 @synthesize createHeaderTableViewCell;
 @synthesize objects;
 @synthesize listTypeIndex;
+@synthesize isRankLoaded;
+@synthesize queue;
+@synthesize rankingDictionary;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -38,13 +41,11 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    NSLog(@"");
+
 }
 
 - (void)viewDidAppear:(BOOL)animated{
-    if ([listTypeIndex intValue] == 1) {
-        [self.tableView setEditing:YES animated:YES];
-    }
+
 }
 
 - (void)viewDidLoad
@@ -53,7 +54,9 @@
 //    self.pullToRefreshEnabled = YES;
 //    self.paginationEnabled = YES;
 //    self.objectsPerPage = 25;
-
+    self.isRankLoaded = [NSNumber numberWithBool:NO];
+    self.queue = [[NSOperationQueue alloc] init];
+    [self.queue setMaxConcurrentOperationCount:1];
     [super viewDidLoad];
   
     [self.tableView setTableHeaderView:self.createHeaderTableViewCell];
@@ -66,7 +69,11 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-
+    if ([listTypeIndex intValue] == 1) {
+        [[self tableView] setAllowsSelectionDuringEditing:YES];
+        [self.tableView setEditing:YES animated:YES];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewDidUnload
@@ -96,7 +103,16 @@
 
 -(void)updatedResultObjects:(NSMutableArray*)newObjects{
   self.objects = newObjects;
+  IPRetrieveRankOperation * op = [[IPRetrieveRankOperation alloc] initWithItems:self.objects];
+  op.delegate = self;
+  [self.queue addOperation:op];
   [self.tableView reloadData];
+}
+
+-(void)retrievedRanks:(NSMutableDictionary *)ranks{
+    self.rankingDictionary = ranks;
+    self.isRankLoaded = [NSNumber numberWithBool:YES];
+    [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
 #pragma mark - Table view data source
@@ -119,13 +135,20 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     PFObject * object = [objects objectAtIndex:indexPath.row];
-    cell.textLabel.text = [object objectForKey:@"Title"];
     if ([listTypeIndex intValue] == 1) {
         cell.showsReorderControl = YES;
-        [cell setEditingAccessoryType:UITableViewCellAccessoryNone];
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.textLabel.text = [[NSString stringWithFormat:@"%d. ", indexPath.row + 1] stringByAppendingString:[object objectForKey:@"Title"]];
+        if ([rankingDictionary objectForKey:object.objectId]) {
+            NSNumber * position = [[rankingDictionary objectForKey:object.objectId] objectForKey:@"position"];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"You ranked: %d", [position intValue]];
+        }
+
+    }else{
+        cell.textLabel.text = [object objectForKey:@"Title"];
     }
   
     return cell;
@@ -135,37 +158,75 @@
     return NO;
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    if ([self.isRankLoaded boolValue]) {
+        return YES;
+    }
+    return NO;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        // Delete the row from the data source
+//        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    }   
+//    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+//        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+//    }   
+//}
 
+
+// The editing style for a row is the kind of button displayed to the left of the cell when in editing mode.
+- (UITableViewCellEditingStyle)tableView:(UITableView *)aTableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // No editing style if not editing or the index path is nil.
+
+    return UITableViewCellEditingStyleNone;
+}
 
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+    PFObject *movingObject = [self.objects objectAtIndex:fromIndexPath.row];
+	[objects removeObject:movingObject];
+	[objects insertObject:movingObject atIndex:toIndexPath.row];
+    [[self tableView] reloadData];
     
+    int count = 0;
+    for (PFObject * object in self.objects) {
+        PFObject * ranking = nil;
+        if ([rankingDictionary objectForKey:object.objectId]) {
+            ranking = [rankingDictionary objectForKey:object.objectId];
+        }else {
+            ranking = [PFObject objectWithClassName:@"Ranking"];
+            [ranking save];
+        }
+        
+        PFRelation * item_relation = [ranking relationforKey:@"Parent_Item"];
+        [item_relation addObject:object];
+        PFRelation * page_relation = [ranking relationforKey:@"Parent_Page"];
+        [page_relation addObject:self.pageObject];
+        PFRelation * user_relation = [ranking relationforKey:@"Parent_User"];
+        [user_relation addObject:[PFUser currentUser]];
+        [ranking setValue:[NSNumber numberWithInt:count+1] forKey:@"position"];
+        [ranking saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error){
+            if (succeeded) {
+                [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+            }
+        }];
+        count++;
+    }
+    IPAveragePageRankOperation * avOP = [[IPAveragePageRankOperation alloc] initWithPage:self.pageObject];
+    avOP.delegate = (id<IPAveragePageRankDelegate>)self.delegate;
+    [self.queue addOperation:avOP];
 }
-
-
 
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath

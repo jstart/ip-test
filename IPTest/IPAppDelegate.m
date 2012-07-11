@@ -8,7 +8,6 @@
 
 #import "IPAppDelegate.h"
 #import "IPWelcomeViewController.h"
-#import <Parse/Parse.h>
 #import "DCIntrospect.h"
 #import <CityGrid/CityGrid.h>
 

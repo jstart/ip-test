@@ -62,7 +62,15 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    PFQuery *query = [PFQuery queryWithClassName:@"Item"];
+    [self reloadItems];
+}
+
+-(void)reloadItems{
+    PFQuery *query = nil;
+    //    NSInteger listTypeIndex = [[self.pageObject objectForKey:@"listType"] integerValue];
+    
+    query = [PFQuery queryWithClassName:@"Item"];
+    [query orderByDescending:@"createdAt"];
     [query whereKey:@"Parent_Page" equalTo:pageObject];
     
     // If no objects are loaded in memory, we look to the cache
@@ -72,12 +80,47 @@
         query.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
     
-    [query orderByDescending:@"createdAt"];
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray * objects, NSError * error){
-        [self.gridVC updatedResultObjects:[objects mutableCopy]];
-        [self.listVC updatedResultObjects:[objects mutableCopy]];
+        
+        NSMutableArray * sortedObjects = [self sortObjects:objects];
+        
+        [self.gridVC updatedResultObjects:sortedObjects];
+        [self.listVC updatedResultObjects:sortedObjects];
     }];
+}
 
+-(NSMutableArray*)sortObjects:(NSArray *)objects{
+    NSMutableDictionary * sortDictionary = [[NSMutableDictionary alloc] init];
+    for (PFObject * item in objects) {
+        PFQuery * query = [PFQuery queryWithClassName:@"GlobalRanking"];
+        [query whereKey:@"Parent_Page" equalTo:self.pageObject];
+        [query whereKey:@"Parent_Item" equalTo:item];
+        PFObject * globalRanking = [query getFirstObject];
+        [sortDictionary setObject:globalRanking forKey:item.objectId];
+    }
+    NSArray *sortedArray = nil;
+    sortedArray = [objects sortedArrayUsingComparator:^NSComparisonResult(PFObject* obj1, PFObject* obj2){
+        PFObject * rankObject1 = [sortDictionary objectForKey:obj1.objectId];
+        PFObject * rankObject2 = [sortDictionary objectForKey:obj2.objectId];
+        if ([[rankObject1 objectForKey:@"position"] intValue] < [[rankObject2 objectForKey:@"position"] intValue]) {
+            return NSOrderedAscending;
+        }
+        else if ([[rankObject1 objectForKey:@"position"] intValue] == [[rankObject2 objectForKey:@"position"] intValue]) {
+            return NSOrderedSame;
+        }
+        else{
+            return NSOrderedDescending;
+        }
+    }];
+    
+    return [sortedArray mutableCopy];
 }
 
 - (void)viewDidUnload
@@ -104,6 +147,11 @@
   if (selection)
     [self.listVC.tableView deselectRowAtIndexPath:selection animated:YES];
   [self.segmentControl setSelectedSegmentIndex:currentPageIndex];
+}
+
+#pragma AverageRankOperation delegate
+-(void)didGenerateAverageRanking:(NSMutableDictionary*)averageRankingDictionary{
+    [self performSelectorOnMainThread:@selector(reloadItems) withObject:nil waitUntilDone:NO];
 }
 
 #pragma GridDelegate

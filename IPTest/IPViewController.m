@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
   [self.scrollView setPageControl:self.pageControl];
 
 //  [PFUser logOut];
@@ -33,12 +33,12 @@
   if (currentUser) {
 		// Skip straight to the main view.
 		
-	} else {
+  } else {
 		// Go to the welcome screen and have them log in or create an account.
 		[self presentWelcomeViewController];
-	}
+  }
 
-    [super viewDidLoad];
+  [super viewDidLoad];
 
 	// Do any additional setup after loading the view, typically from a nib.
   [self.scrollView addPagedViewController:[[IPPopularPagesViewController alloc] initWithNibName:@"IPPopularPagesViewController" bundle:[NSBundle mainBundle]] animated:NO];

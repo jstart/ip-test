@@ -64,6 +64,9 @@
 		FD6DE2EB15A8172100376A42 /* IPSegmentContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2E715A8172100376A42 /* IPSegmentContainerViewController.xib */; };
 		FD6DE2ED15A8203700376A42 /* IPGridViewTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2EC15A8203700376A42 /* IPGridViewTemplate.xib */; };
 		FD6DE2EE15A8203700376A42 /* IPGridViewTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2EC15A8203700376A42 /* IPGridViewTemplate.xib */; };
+		FD78214415AD362900447F92 /* IPRetrieveRankOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD78214315AD362900447F92 /* IPRetrieveRankOperation.m */; };
+		FD78214715AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD78214615AD43B900447F92 /* IPAveragePageRankOperation.m */; };
+		FD78214815AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD78214615AD43B900447F92 /* IPAveragePageRankOperation.m */; };
 		FDAEE5E315A3979000D05E9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAEE5E215A3979000D05E9C /* QuartzCore.framework */; };
 		FDAEE5E615A3A60A00D05E9C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAEE5E515A3A60A00D05E9C /* Parse.framework */; };
 		FDAEE5E715A3A60A00D05E9C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAEE5E515A3A60A00D05E9C /* Parse.framework */; };
@@ -218,6 +221,10 @@
 		FD6DE2E615A8172100376A42 /* IPSegmentContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPSegmentContainerViewController.m; sourceTree = "<group>"; };
 		FD6DE2E715A8172100376A42 /* IPSegmentContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPSegmentContainerViewController.xib; sourceTree = "<group>"; };
 		FD6DE2EC15A8203700376A42 /* IPGridViewTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPGridViewTemplate.xib; sourceTree = "<group>"; };
+		FD78214215AD362900447F92 /* IPRetrieveRankOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPRetrieveRankOperation.h; sourceTree = "<group>"; };
+		FD78214315AD362900447F92 /* IPRetrieveRankOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPRetrieveRankOperation.m; sourceTree = "<group>"; };
+		FD78214515AD43B900447F92 /* IPAveragePageRankOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAveragePageRankOperation.h; sourceTree = "<group>"; };
+		FD78214615AD43B900447F92 /* IPAveragePageRankOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAveragePageRankOperation.m; sourceTree = "<group>"; };
 		FDAEE5E215A3979000D05E9C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FDAEE5E515A3A60A00D05E9C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		FDAEE5E815A3A6BB00D05E9C /* IPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPLoginViewController.h; sourceTree = "<group>"; };
@@ -434,6 +441,17 @@
 			name = "Segment Container View Controller";
 			sourceTree = "<group>";
 		};
+		FD78214115AD360700447F92 /* Parse Operations */ = {
+			isa = PBXGroup;
+			children = (
+				FD78214515AD43B900447F92 /* IPAveragePageRankOperation.h */,
+				FD78214615AD43B900447F92 /* IPAveragePageRankOperation.m */,
+				FD78214215AD362900447F92 /* IPRetrieveRankOperation.h */,
+				FD78214315AD362900447F92 /* IPRetrieveRankOperation.m */,
+			);
+			name = "Parse Operations";
+			sourceTree = "<group>";
+		};
 		FDAEE61215A3AA6000D05E9C /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -527,6 +545,7 @@
 		FDC7338F15A3835000687431 /* IPTest */ = {
 			isa = PBXGroup;
 			children = (
+				FD78214115AD360700447F92 /* Parse Operations */,
 				FD15580715ABAA4600C38A78 /* Bookmark */,
 				FD6DE2E415A8170100376A42 /* Segment Container View Controller */,
 				FDC3C1D715A7696C00C44B57 /* Create Flow View Controllers */,
@@ -841,6 +860,8 @@
 				FD6DE2E815A8172100376A42 /* IPSegmentContainerViewController.m in Sources */,
 				FDCAFA1715AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */,
 				FD1558BA15ACDD1D00C38A78 /* IPInviteFriendToPageViewController.m in Sources */,
+				FD78214415AD362900447F92 /* IPRetrieveRankOperation.m in Sources */,
+				FD78214715AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -869,6 +890,7 @@
 				FD6DE2E915A8172100376A42 /* IPSegmentContainerViewController.m in Sources */,
 				FDCAFA1815AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */,
 				FD1558B615ACDC6000C38A78 /* IPInviteFriendToPageViewController.m in Sources */,
+				FD78214815AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
