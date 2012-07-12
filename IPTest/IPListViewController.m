@@ -142,8 +142,10 @@
     if (cell == nil) {
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    if ([self.objects count] <= indexPath.row) {
+    
+    if (indexPath.row  < [self.objects count]) {
         PFObject * object = [self.objects objectAtIndex:indexPath.row];
+        [object fetchIfNeeded];
         if ([listTypeIndex intValue] == 1) {
             cell.showsReorderControl = YES;
             //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -152,12 +154,10 @@
                 NSNumber * position = [[rankingDictionary objectForKey:object.objectId] objectForKey:@"position"];
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"You ranked: %d", [position intValue]];
             }
-            UITableViewController	UITableViewController	
         }else{
             cell.textLabel.text = [object objectForKey:@"Title"];
         }
     }
-  
     return cell;
 }
 
@@ -208,28 +208,25 @@
     [array addObject:fromIndexPath];
     [array addObject:toIndexPath];
 //    [[self tableView] reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
-    NSMutableArray * objectsCopy = [self.objects mutableCopy];
-    NSMutableDictionary * rankingDictionaryCopy = [self.rankingDictionary mutableCopy];
 
     [self.queue addOperationWithBlock:^(){
         int count = 0;
-        for (PFObject * object in objectsCopy) {
+        for (PFObject * object in self.objects) {
             PFObject * ranking = nil;
-            if ([rankingDictionaryCopy objectForKey:object.objectId]) {
-                ranking = [rankingDictionaryCopy objectForKey:object.objectId];
+            if ([rankingDictionary objectForKey:object.objectId]) {
+                ranking = [rankingDictionary objectForKey:object.objectId];
             }else {
                 ranking = [PFObject objectWithClassName:@"Ranking"];
+                [ranking setObject:object forKey:@"Parent_Item"];
+                [ranking setObject:self.pageObject forKey:@"Parent_Page"];
+                [ranking setObject:[PFUser currentUser] forKey:@"Parent_User"];
                 [ranking save];
-            }
-            
-            PFRelation * item_relation = [ranking relationforKey:@"Parent_Item"];
-            [item_relation addObject:object];
-            PFRelation * page_relation = [ranking relationforKey:@"Parent_Page"];
-            [page_relation addObject:self.pageObject];
-            PFRelation * user_relation = [ranking relationforKey:@"Parent_User"];
-            [user_relation addObject:[PFUser currentUser]];
+                [self.pageObject addObject:ranking forKey:@"Rankings"];
+                [self.pageObject save];
+            }   
             [ranking setValue:[NSNumber numberWithInt:count+1] forKey:@"position"];
             BOOL succeeded = [ranking save];
+
             if (succeeded) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];

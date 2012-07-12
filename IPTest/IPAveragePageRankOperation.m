@@ -23,12 +23,12 @@
 }
 
 -(void)start{
-    PFQuery * query = [PFQuery queryWithClassName:@"Ranking"];
-    [query whereKey:@"Parent_Page" equalTo:self.pageObject];
-    NSArray * objects = [query findObjects];
+    
+    NSArray * objects = [self.pageObject objectForKey:@"Rankings"];
     NSMutableDictionary * itemIDDictionary = [NSMutableDictionary dictionary];
     for (PFObject * object in objects) {
-        PFObject * parentItem = [[((PFRelation*)[object objectForKey:@"Parent_Item"]) query] getFirstObject];
+        [object fetchIfNeeded];
+        PFObject * parentItem = ((PFObject*)[object objectForKey:@"Parent_Item"]);
         [itemIDDictionary setObject:parentItem forKey:parentItem.objectId];
         NSMutableArray * array = [self.itemsDictionary objectForKey:parentItem.objectId];
         if (array == nil){
@@ -47,35 +47,26 @@
         }
         NSLog(@"Key: %@ total %d average: %d/%d = %d",key, average, average, [rankings count], average/[rankings count]);
         [self.itemsAverageRankingDictionary setObject:[NSNumber numberWithInt:average] forKey:key];
-                PFQuery * query = [PFQuery queryWithClassName:@"GlobalRanking"];
-        [query whereKey:@"Parent_Page" equalTo:self.pageObject];
-        [query whereKey:@"Parent_Item" equalTo:[itemIDDictionary objectForKey:key]];
-        PFObject* globalRankingObject = [query getFirstObject];
+        PFObject* globalRankingObject = nil;
+        for (PFObject * globalRankingObjectIterated in [self.pageObject objectForKey:@"Global_Rankings"]) {
+            [globalRankingObjectIterated fetchIfNeeded];
+            if ([((PFObject*)[globalRankingObjectIterated objectForKey:@"Parent_Item"]).objectId isEqualToString:key]) {
+                globalRankingObject = globalRankingObjectIterated;
+            }
+        }
         
         if (globalRankingObject == nil) {
             PFObject * newGlobalRanking = [PFObject objectWithClassName:@"GlobalRanking"];
+            [newGlobalRanking setObject:[itemIDDictionary objectForKey:key] forKey:@"Parent_Item"];
+            [newGlobalRanking setObject:self.pageObject forKey:@"Parent_Page"];
             [newGlobalRanking setValue:[NSNumber numberWithInt:average] forKey:@"position"];
-            PFRelation * item_relation = [newGlobalRanking relationforKey:@"Parent_Item"];
-            [item_relation addObject:[itemIDDictionary objectForKey:key]];
-            PFRelation * page_relation = [newGlobalRanking relationforKey:@"Parent_Page"];
-            [page_relation addObject:self.pageObject];
-            [newGlobalRanking saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error){
-                if (succeeded) {
-                    NSLog(@"Created new global ranking object");
-                }else{
-                    NSLog(@"%@", error);
-                }
-            }];
+            [newGlobalRanking save];
+            [self.pageObject addObject:newGlobalRanking forKey:@"Global_Rankings"];
+            [self.pageObject save];
         }
         else{
             [globalRankingObject setValue:[NSNumber numberWithInt:average] forKey:@"position"];
-            [globalRankingObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error){
-                if (succeeded) {
-                    NSLog(@"Updating global ranking object");
-                }else{
-                    NSLog(@"%@", error);
-                }
-            }];
+            [globalRankingObject save];
         }
     }
     

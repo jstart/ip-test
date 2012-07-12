@@ -93,7 +93,9 @@
     //views outside of the `if (view == nil) {...}` check otherwise
     //you'll get weird issues with carousel item content appearing
     //in the wrong place in the carousel
-    nameLabel.text = [[self.objects objectAtIndex:index] objectForKey:@"Title"];
+    PFObject * object = [self.objects objectAtIndex:index];
+    [object fetchIfNeeded];
+    nameLabel.text = [object objectForKey:@"Title"];
     
 //    CGFloat yourDesiredWidth = view.frame.size.width * .8f;
 //    CGFloat yourDesiredHeight = view.frame.size.height * .8f;

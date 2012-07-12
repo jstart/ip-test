@@ -8,7 +8,7 @@
 
 #import "IPBookmarkBaseViewController.h"
 #import "IPWelcomeViewController.h"
-#import "UIViewController+MHSemiModal.h"
+#import "UIViewController+KNSemiModal.h"
 
 @interface IPBookmarkBaseViewController ()
 
@@ -33,6 +33,7 @@
 	// Do any additional setup after loading the view.
     IPBookmarkViewController *bookmarkViewController = [[IPBookmarkViewController alloc] initWithNibName:@"IPBookmarkViewController" bundle:[NSBundle mainBundle]];
     self.bookmarkNavigationController = [[UINavigationController alloc] initWithRootViewController:bookmarkViewController];
+    
     bookmarkViewController.delegate = self;
 }
 
@@ -77,7 +78,7 @@
 }
 
 -(void) bookmarkViewWasDismissed:(int)homePageIndex{
-    [self.navigationController mh_dismissSemiModalViewController:bookmarkNavigationController animated:YES];
+    [self.navigationController dismissSemiModalView];
     [self showBookmark];
 }
 
@@ -100,9 +101,7 @@
     if ([[self.navigationItem.rightBarButtonItem customView] isHidden]) {
         
     }else{
-        
-        [self.navigationController mh_presentSemiModalViewController:bookmarkNavigationController animated:YES];
-//        [self.navigationController presentModalViewController:bookmarkNavigationController animated:NO];
+        [self.navigationController presentSemiViewController:bookmarkNavigationController];
         [self hideBookmark];
     }
 }

@@ -40,6 +40,8 @@
 		FD427B4B15A6561200835E3F /* DCIntrospect.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B4215A6561200835E3F /* DCIntrospect.m */; };
 		FD427B4C15A6561200835E3F /* DCStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B4515A6561200835E3F /* DCStatusBarOverlay.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FD427B4D15A6561200835E3F /* DCStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B4515A6561200835E3F /* DCStatusBarOverlay.m */; };
+		FD49EA2315AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = FD49EA2215AF4D8A0091BCCB /* UIViewController+KNSemiModal.m */; };
+		FD49EA2415AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = FD49EA2215AF4D8A0091BCCB /* UIViewController+KNSemiModal.m */; };
 		FD6DE26B15A7BD5000376A42 /* IPAddListItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6DE26915A7BD5000376A42 /* IPAddListItemViewController.m */; };
 		FD6DE26C15A7BD5000376A42 /* IPAddListItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE26A15A7BD5000376A42 /* IPAddListItemViewController.xib */; };
 		FD6DE2A815A7C0E500376A42 /* CityGrid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6DE2A715A7C0E500376A42 /* CityGrid.framework */; };
@@ -98,7 +100,6 @@
 		FDAEE61C15A3AA6800D05E9C /* just_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FDAEE61515A3AA6800D05E9C /* just_background@2x.png */; };
 		FDAEE61D15A3AA6800D05E9C /* just_background.png in Resources */ = {isa = PBXBuildFile; fileRef = FDAEE61615A3AA6800D05E9C /* just_background.png */; };
 		FDAEE61E15A3AA6800D05E9C /* just_background.png in Resources */ = {isa = PBXBuildFile; fileRef = FDAEE61615A3AA6800D05E9C /* just_background.png */; };
-		FDC3C1C915A753B100C44B57 /* IPTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC3C1C815A753B100C44B57 /* IPTestView.m */; };
 		FDC3C1CE15A75FA200C44B57 /* IPBookmarkHeaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC3C1CC15A75FA200C44B57 /* IPBookmarkHeaderViewController.m */; };
 		FDC3C1CF15A75FA200C44B57 /* IPBookmarkHeaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC3C1CD15A75FA200C44B57 /* IPBookmarkHeaderViewController.xib */; };
 		FDC3C1DB15A7698E00C44B57 /* IPCreatePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC3C1D915A7698E00C44B57 /* IPCreatePageViewController.m */; };
@@ -203,6 +204,8 @@
 		FD427B4315A6561200835E3F /* DCIntrospectSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCIntrospectSettings.h; sourceTree = "<group>"; };
 		FD427B4415A6561200835E3F /* DCStatusBarOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCStatusBarOverlay.h; sourceTree = "<group>"; };
 		FD427B4515A6561200835E3F /* DCStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCStatusBarOverlay.m; sourceTree = "<group>"; };
+		FD49EA2115AF4D8A0091BCCB /* UIViewController+KNSemiModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KNSemiModal.h"; sourceTree = "<group>"; };
+		FD49EA2215AF4D8A0091BCCB /* UIViewController+KNSemiModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KNSemiModal.m"; sourceTree = "<group>"; };
 		FD6DE26815A7BD5000376A42 /* IPAddListItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAddListItemViewController.h; sourceTree = "<group>"; };
 		FD6DE26915A7BD5000376A42 /* IPAddListItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAddListItemViewController.m; sourceTree = "<group>"; };
 		FD6DE26A15A7BD5000376A42 /* IPAddListItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPAddListItemViewController.xib; sourceTree = "<group>"; };
@@ -248,8 +251,6 @@
 		FDAEE61415A3AA6800D05E9C /* Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button@2x.png"; sourceTree = "<group>"; };
 		FDAEE61515A3AA6800D05E9C /* just_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "just_background@2x.png"; sourceTree = "<group>"; };
 		FDAEE61615A3AA6800D05E9C /* just_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = just_background.png; sourceTree = "<group>"; };
-		FDC3C1C715A753B100C44B57 /* IPTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPTestView.h; sourceTree = "<group>"; };
-		FDC3C1C815A753B100C44B57 /* IPTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPTestView.m; sourceTree = "<group>"; };
 		FDC3C1CB15A75FA200C44B57 /* IPBookmarkHeaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPBookmarkHeaderViewController.h; sourceTree = "<group>"; };
 		FDC3C1CC15A75FA200C44B57 /* IPBookmarkHeaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPBookmarkHeaderViewController.m; sourceTree = "<group>"; };
 		FDC3C1CD15A75FA200C44B57 /* IPBookmarkHeaderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPBookmarkHeaderViewController.xib; sourceTree = "<group>"; };
@@ -338,8 +339,6 @@
 			isa = PBXGroup;
 			children = (
 				FD2032EA15A7AC0200FB5FF1 /* Notification List View */,
-				FDC3C1C715A753B100C44B57 /* IPTestView.h */,
-				FDC3C1C815A753B100C44B57 /* IPTestView.m */,
 				FD28433815A3C8020079D6D5 /* IPBookmarkViewController.h */,
 				FD28433915A3C8020079D6D5 /* IPBookmarkViewController.m */,
 				FD28433A15A3C8020079D6D5 /* IPBookmarkViewController.xib */,
@@ -418,6 +417,15 @@
 			path = DCIntrospect;
 			sourceTree = "<group>";
 		};
+		FD49EA2515AF4D900091BCCB /* Bookmark transition category */ = {
+			isa = PBXGroup;
+			children = (
+				FD49EA2115AF4D8A0091BCCB /* UIViewController+KNSemiModal.h */,
+				FD49EA2215AF4D8A0091BCCB /* UIViewController+KNSemiModal.m */,
+			);
+			name = "Bookmark transition category";
+			sourceTree = "<group>";
+		};
 		FD6DE2D415A7DA9400376A42 /* Grid View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +492,7 @@
 		FDC7337A15A3835000687431 = {
 			isa = PBXGroup;
 			children = (
+				FD49EA2515AF4D900091BCCB /* Bookmark transition category */,
 				FD15589B15ACB26900C38A78 /* MapKit.framework */,
 				FD15588B15ACB24200C38A78 /* QuickDialog.xcodeproj */,
 				FDCAFA0A15AAD22C00AC3D9E /* TestFlightSDK1.0 */,
@@ -850,7 +859,6 @@
 				FD427B4815A6561200835E3F /* DCFrameView.m in Sources */,
 				FD427B4A15A6561200835E3F /* DCIntrospect.m in Sources */,
 				FD427B4C15A6561200835E3F /* DCStatusBarOverlay.m in Sources */,
-				FDC3C1C915A753B100C44B57 /* IPTestView.m in Sources */,
 				FDC3C1CE15A75FA200C44B57 /* IPBookmarkHeaderViewController.m in Sources */,
 				FDC3C1DB15A7698E00C44B57 /* IPCreatePageViewController.m in Sources */,
 				FD2032EF15A7AC2600FB5FF1 /* IPNotificationListViewController.m in Sources */,
@@ -862,6 +870,7 @@
 				FD1558BA15ACDD1D00C38A78 /* IPInviteFriendToPageViewController.m in Sources */,
 				FD78214415AD362900447F92 /* IPRetrieveRankOperation.m in Sources */,
 				FD78214715AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */,
+				FD49EA2315AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,6 +900,7 @@
 				FDCAFA1815AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */,
 				FD1558B615ACDC6000C38A78 /* IPInviteFriendToPageViewController.m in Sources */,
 				FD78214815AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */,
+				FD49EA2415AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

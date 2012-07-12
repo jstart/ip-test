@@ -15,7 +15,7 @@
 -(id)initWithItems:(NSArray*)itemsArray pageObject:(PFObject*)pageObject{
     self = [super init];
     if (self) {
-        _itemsArray = itemsArray;
+        _itemsArray = [itemsArray copy];
         _rankingDictionary = [[NSMutableDictionary alloc] init];
         _pageObject = pageObject;
     }

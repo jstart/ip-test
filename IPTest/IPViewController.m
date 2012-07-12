@@ -64,25 +64,11 @@
 
 - (void)presentBookmarkViewController;
 {
-	// Go to the welcome screen and have them log in or create an account.
-  if (super.bookmarkNavigationController == nil) {
-    IPBookmarkViewController *bookmarkViewController = [[IPBookmarkViewController alloc] initWithNibName:@"IPBookmarkViewController" bundle:[NSBundle mainBundle]];
-    super.bookmarkNavigationController = [[UINavigationController alloc] initWithRootViewController:bookmarkViewController];
-    [super.bookmarkNavigationController setNavigationBarHidden:YES];
-    [super.bookmarkNavigationController setWantsFullScreenLayout:YES];
-  }
-  if ([[self.navigationItem.rightBarButtonItem customView] isHidden]) {
-    
-  }else{
-
-    [self.navigationController mh_presentSemiModalViewController:super.bookmarkNavigationController animated:YES];
-    [super.bookmarkNavigationController setNavigationBarHidden:YES];
-    [self hideBookmark];
-  }
+    [super presentBookmarkViewController];
 }
 
 -(void) bookmarkViewWasDismissed:(int)homePageIndex{
-    [self.navigationController mh_dismissSemiModalViewController:super.bookmarkNavigationController animated:YES];
+    [super bookmarkViewWasDismissed:homePageIndex];
 
     [self showBookmark];
     if (homePageIndex >= 0 && homePageIndex < 3) {

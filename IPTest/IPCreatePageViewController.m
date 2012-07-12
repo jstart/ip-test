@@ -76,11 +76,7 @@
   PFObject * newObject = [PFObject objectWithClassName:@"Page"];
   [newObject setObject:[dict objectForKey:@"pageName"] forKey:@"Title"];
   [newObject setObject:pickerIndex forKey:@"listType"];
-  [newObject save];
-  PFRelation * pageRelation = [newObject relationforKey:@"Owner"];
-  [pageRelation addObject:[PFUser currentUser]];
-  PFRelation * ownerRelation = [[PFUser currentUser] relationforKey:@"Pages"];
-  [ownerRelation addObject:newObject];
+  [newObject setObject:[PFUser currentUser] forKey:@"Owner"];
   [newObject save];
     
     switch ([pickerIndex intValue]) {

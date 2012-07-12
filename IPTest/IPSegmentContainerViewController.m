@@ -65,36 +65,48 @@
     [self reloadItems];
 }
 
+//-(void)reloadItems{
+//    PFQuery *query = nil;
+//    //    NSInteger listTypeIndex = [[self.pageObject objectForKey:@"listType"] integerValue];
+//    
+//    query = [PFQuery queryWithClassName:@"Item"];
+//    [query orderByDescending:@"createdAt"];
+//    [query whereKey:@"Parent_Page" equalTo:pageObject];
+//    
+//    // If no objects are loaded in memory, we look to the cache
+//    // first to fill the table and then subsequently do a query
+//    // against the network.
+//    if ([self.objects count] == 0) {
+//        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+//    }
+//    
+//    // Uncomment the following line to preserve selection between presentations.
+//    // self.clearsSelectionOnViewWillAppear = NO;
+//    
+//    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+//    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//    
+//    
+//    [query findObjectsInBackgroundWithBlock:^(NSArray * objects, NSError * error){
+//        
+//        NSMutableArray * sortedObjects = [self sortObjects:objects];
+//        
+//        [self.gridVC updatedResultObjects:sortedObjects];
+//        [self.listVC updatedResultObjects:sortedObjects];
+//    }];
+//}
+
 -(void)reloadItems{
-    PFQuery *query = nil;
-    //    NSInteger listTypeIndex = [[self.pageObject objectForKey:@"listType"] integerValue];
-    
-    query = [PFQuery queryWithClassName:@"Item"];
-    [query orderByDescending:@"createdAt"];
-    [query whereKey:@"Parent_Page" equalTo:pageObject];
-    
-    // If no objects are loaded in memory, we look to the cache
-    // first to fill the table and then subsequently do a query
-    // against the network.
-    if ([self.objects count] == 0) {
-        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-    }
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray * objects, NSError * error){
         
-        NSMutableArray * sortedObjects = [self sortObjects:objects];
+    [pageObject refreshInBackgroundWithBlock:^(PFObject *object, NSError * error){
+        NSArray * items = [object objectForKey:@"Items"];
+        NSMutableArray * sortedObjects = [self sortObjects:items];
         
         [self.gridVC updatedResultObjects:sortedObjects];
         [self.listVC updatedResultObjects:sortedObjects];
     }];
 }
+
 
 -(NSMutableArray*)sortObjects:(NSArray *)objects{
     NSMutableDictionary * sortDictionary = [[NSMutableDictionary alloc] init];

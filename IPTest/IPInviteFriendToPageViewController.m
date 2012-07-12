@@ -156,9 +156,7 @@
      */
   
     PFObject * user = [usersArray objectAtIndex:indexPath.row];
-    [[user ACL] setPublicWriteAccess:YES];
-    NSLog(@"%d", [[user ACL] getPublicWriteAccess]);
-    [user addObject:pageObject forKey:@"following"];
+//Push a notification to the user
     [[self presentingViewController] dismissModalViewControllerAnimated:YES];
 }
 

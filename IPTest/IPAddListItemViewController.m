@@ -176,9 +176,8 @@
     NSNumber * locationIDNumber = [NSNumber numberWithInt:location.locationId];
     [object setValue:locationIDNumber forKey:@"cg_id"];
     [object save];
-    PFRelation * relation = [object relationforKey:@"Parent_Page"];
-    [relation addObject:pageObject];
-    [object saveInBackground];
+    [pageObject addObject:object forKey:@"Items"];
+    [pageObject saveInBackground];
     [[self presentingViewController] dismissModalViewControllerAnimated:YES];
 }
 
