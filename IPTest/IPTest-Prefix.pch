@@ -13,7 +13,6 @@
   #import <Foundation/Foundation.h>
   #import <QuartzCore/QuartzCore.h>
   #import "TestFlight.h"
-  #import <QuickDialog/QuickDialog.h>
+  #import <QuickDialog.h>
   #import <Parse/Parse.h>
-
 #endif

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPFollowingPagesViewController : UITableViewController
+@interface IPFollowingPagesViewController : PFQueryTableViewController
 
 @end

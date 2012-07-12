@@ -300,6 +300,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDAEE5E615A3A60A00D05E9C /* Parse.framework in Frameworks */,
 				FD6DE2AA15A7C34900376A42 /* CoreLocation.framework in Frameworks */,
 				FD15589C15ACB26900C38A78 /* MapKit.framework in Frameworks */,
 				FD15589A15ACB25F00C38A78 /* libQuickDialog.a in Frameworks */,
@@ -313,7 +314,6 @@
 				FDC7338C15A3835000687431 /* Foundation.framework in Frameworks */,
 				FDAEE60615A3A92300D05E9C /* AudioToolbox.framework in Frameworks */,
 				FDC7338E15A3835000687431 /* CoreGraphics.framework in Frameworks */,
-				FDAEE5E615A3A60A00D05E9C /* Parse.framework in Frameworks */,
 				FD6DE2A815A7C0E500376A42 /* CityGrid.framework in Frameworks */,
 				FDCAFA0F15AAD22C00AC3D9E /* libTestFlight.a in Frameworks */,
 			);
@@ -995,15 +995,15 @@
 		FDC733BC15A3835000687431 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Truman (XL8C53TT76)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Truman (XL8C53TT76)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IPTest/IPTest-Prefix.pch";
-				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/QuickDialog/**";
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/QuickDialog/quickdialog";
 				INFOPLIST_FILE = "IPTest/IPTest-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1014,8 +1014,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "E4E53F92-A720-4ECD-BC29-177F9D4EF8D7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E4E53F92-A720-4ECD-BC29-177F9D4EF8D7";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1023,15 +1023,15 @@
 		FDC733BD15A3835000687431 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Azusa Pacific University (Computer Science)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Azusa Pacific University (Computer Science)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IPTest/IPTest-Prefix.pch";
-				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/QuickDialog/**";
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/QuickDialog/quickdialog";
 				INFOPLIST_FILE = "IPTest/IPTest-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1042,8 +1042,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "22856F33-5881-46B7-97ED-EAEAC8CAF191";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "22856F33-5881-46B7-97ED-EAEAC8CAF191";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

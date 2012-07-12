@@ -14,7 +14,7 @@
 
 @implementation IPInviteFriendToPageViewController
 
-@synthesize queue, usersArray;
+@synthesize queue, usersArray, pageObject;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -97,11 +97,11 @@
 
 -(void)userSearchRequestForString:(NSString*)searchQuery{
     PFQuery * query = [PFUser query];
-    [query whereKey:@"username" notEqualTo:[[PFUser currentUser] objectForKey:@"username"]];
+//    [query whereKey:@"username" notEqualTo:[[PFUser currentUser] objectForKey:@"username"]];
     [query orderByDescending:@"createdAt"];
-    [query whereKey:@"username" containsString:searchQuery];
+    [query whereKey:@"username" matchesRegex:searchQuery modifiers:@"i"];
     self.usersArray = [[query findObjects] mutableCopy];
-    [[self tableView] reloadData];
+    [[self.searchDisplayController searchResultsTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
 /*
@@ -155,13 +155,10 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
   
-//    PFObject * object = [PFObject objectWithClassName:@"Item"];
-//    PFObject * user = [usersArray objectAtIndex:indexPath.row];
-//
-//    [object save];
-//    PFRelation * relation = [object relationforKey:@"Parent_Page"];
-//    [relation addObject:user];
-//    [object saveInBackground];
+    PFObject * user = [usersArray objectAtIndex:indexPath.row];
+    [[user ACL] setPublicWriteAccess:YES];
+    NSLog(@"%d", [[user ACL] getPublicWriteAccess]);
+    [user addObject:pageObject forKey:@"following"];
     [[self presentingViewController] dismissModalViewControllerAnimated:YES];
 }
 

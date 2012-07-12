@@ -19,8 +19,8 @@
 @property (nonatomic, strong) id<IPRetrieveRankDelegate> delegate;
 @property (nonatomic, strong) NSArray * itemsArray;
 @property (nonatomic, strong) NSMutableDictionary * rankingDictionary;
-@property (nonatomic, readwrite) BOOL isFinished;
+@property (nonatomic, strong) PFObject * pageObject;
 
--(id)initWithItems:(NSArray*)itemsArray;
+-(id)initWithItems:(NSArray*)itemsArray pageObject:(PFObject*)pageObject;
 
 @end

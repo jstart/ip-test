@@ -103,12 +103,21 @@
         [query whereKey:@"Parent_Page" equalTo:self.pageObject];
         [query whereKey:@"Parent_Item" equalTo:item];
         PFObject * globalRanking = [query getFirstObject];
-        [sortDictionary setObject:globalRanking forKey:item.objectId];
+        if (globalRanking) {
+            [sortDictionary setObject:globalRanking forKey:item.objectId];
+        }
     }
     NSArray *sortedArray = nil;
     sortedArray = [objects sortedArrayUsingComparator:^NSComparisonResult(PFObject* obj1, PFObject* obj2){
         PFObject * rankObject1 = [sortDictionary objectForKey:obj1.objectId];
         PFObject * rankObject2 = [sortDictionary objectForKey:obj2.objectId];
+        
+        if ([rankObject1 objectForKey:@"position"] == nil) {
+            return NSOrderedDescending;
+        }else if([rankObject2 objectForKey:@"position"] == nil){
+            return NSOrderedAscending;
+        }
+        
         if ([[rankObject1 objectForKey:@"position"] intValue] < [[rankObject2 objectForKey:@"position"] intValue]) {
             return NSOrderedAscending;
         }

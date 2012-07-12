@@ -32,6 +32,10 @@
   PFUser *currentUser = [PFUser currentUser];
   if (currentUser) {
 		// Skip straight to the main view.
+      [[UIApplication sharedApplication] registerForRemoteNotificationTypes: 
+       UIRemoteNotificationTypeBadge |
+       UIRemoteNotificationTypeAlert |             
+       UIRemoteNotificationTypeSound];
 		
   } else {
 		// Go to the welcome screen and have them log in or create an account.
@@ -111,6 +115,15 @@
   [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
   [[self.navigationItem.rightBarButtonItem.customView layer] addAnimation:animation forKey:@"pushOut"];
   [[self.navigationItem.rightBarButtonItem customView] setHidden:YES];
+}
+
+-(void)reloadViewControllers{
+    IPPopularPagesViewController * popularVC = [[self.scrollView controllers] objectAtIndex:0];
+    [popularVC loadObjects];
+    IPMyPagesViewController * myPagesVC = [[self.scrollView controllers] objectAtIndex:1];
+    [myPagesVC loadObjects];
+    IPFollowingPagesViewController * followingVC = [[self.scrollView controllers] objectAtIndex:2];
+    [followingVC loadObjects];
 }
 
 -(void)viewWillAppear:(BOOL)animated{

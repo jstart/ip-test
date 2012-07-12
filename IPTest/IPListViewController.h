@@ -23,7 +23,7 @@
 @property (nonatomic, strong) PFObject * pageObject;
 @property (strong, nonatomic) IBOutlet UITableViewCell *createHeaderTableViewCell;
 @property (strong, nonatomic) id <IPListViewDelegate> delegate;
-@property (strong, nonatomic) NSMutableArray * objects;
+@property (strong, atomic) NSMutableArray * objects;
 @property (strong, nonatomic) NSNumber * listTypeIndex;
 @property (strong, nonatomic) NSNumber * isRankLoaded;
 @property (strong, nonatomic) NSOperationQueue * queue;

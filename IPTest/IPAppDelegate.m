@@ -22,18 +22,26 @@
 #ifdef TESTING
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
 #endif
-    [TestFlight takeOff:@"30d92a896df4ab4b4873886ea58f8b06_NzE0NzIyMDEyLTAzLTE0IDEzOjQ0OjU4Ljk3MDAxOQ"];
 
   [Parse setApplicationId:@"Sw86jP5zMknD2Gp52hXMUH6cLoBq5YpzIR5SYWlW"
                 clientKey:@"XaM7srV5NdkbOEWXjXzFvFjXLD7w2YzAimdo0m27"];
   [CityGrid setPublisher:@"test"];
 	[CityGrid setPlacement:@"ios-example"];
 	[CityGrid setDebug:YES];
+    [[PFUser currentUser] refresh];
   [_window makeKeyAndVisible];  
   // always call after makeKeyAndDisplay.
 #if TARGET_IPHONE_SIMULATOR
   [[DCIntrospect sharedIntrospector] start];
+#else
+    [TestFlight takeOff:@"30d92a896df4ab4b4873886ea58f8b06_NzE0NzIyMDEyLTAzLTE0IDEzOjQ0OjU4Ljk3MDAxOQ"];
 #endif
+    
+    [application registerForRemoteNotificationTypes: 
+     UIRemoteNotificationTypeBadge |
+     UIRemoteNotificationTypeAlert |             
+     UIRemoteNotificationTypeSound];
+    
     [self displaySplash];
     return YES;
 }
@@ -51,6 +59,25 @@
 
 -(void)removeSplash{
     [iv removeFromSuperview];
+}
+
+- (void)application:(UIApplication *)application 
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
+{
+    [PFPush storeDeviceToken:newDeviceToken]; // Send parse the device token
+    // Subscribe this user to the broadcast channel, "" 
+    [PFPush subscribeToChannelInBackground:@"" block:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Successfully subscribed to the broadcast channel.");
+        } else {
+            NSLog(@"Failed to subscribe to the broadcast channel.");
+        }
+    }];
+}
+
+- (void)application:(UIApplication *)application 
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

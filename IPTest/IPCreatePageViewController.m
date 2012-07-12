@@ -73,15 +73,15 @@
 //    [alert show];
 
     NSNumber * pickerIndex = [((NSArray*)[dict objectForKey:@"listType"]) objectAtIndex:0];
-//  PFObject * newObject = [PFObject objectWithClassName:@"Page"];
-//  [newObject setObject:[dict objectForKey:@"pageName"] forKey:@"Title"];
-//  [newObject setObject:pickerIndex forKey:@"listType"];
-//  [newObject save];
-//  PFRelation * pageRelation = [newObject relationforKey:@"Owner"];
-//  [pageRelation addObject:[PFUser currentUser]];
-//  PFRelation * ownerRelation = [[PFUser currentUser] relationforKey:@"Pages"];
-//  [ownerRelation addObject:newObject];
-//  [newObject saveInBackground];
+  PFObject * newObject = [PFObject objectWithClassName:@"Page"];
+  [newObject setObject:[dict objectForKey:@"pageName"] forKey:@"Title"];
+  [newObject setObject:pickerIndex forKey:@"listType"];
+  [newObject save];
+  PFRelation * pageRelation = [newObject relationforKey:@"Owner"];
+  [pageRelation addObject:[PFUser currentUser]];
+  PFRelation * ownerRelation = [[PFUser currentUser] relationforKey:@"Pages"];
+  [ownerRelation addObject:newObject];
+  [newObject save];
     
     switch ([pickerIndex intValue]) {
         case 0:
@@ -90,6 +90,7 @@
         case 1:
                 {
                     IPInviteFriendToPageViewController * inviteVC = [[IPInviteFriendToPageViewController alloc] initWithNibName:@"IPInviteFriendToPageViewController" bundle:[NSBundle mainBundle]];
+                    inviteVC.pageObject = newObject;
                     [self.navigationController pushViewController:inviteVC animated:YES];
                 }
             break;

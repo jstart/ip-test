@@ -16,4 +16,6 @@
 //@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
 
+-(void)reloadViewControllers;
+
 @end

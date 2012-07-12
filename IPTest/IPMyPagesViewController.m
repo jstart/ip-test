@@ -29,6 +29,7 @@
     self.pullToRefreshEnabled = YES;
     self.paginationEnabled = YES;
     self.objectsPerPage = 25;
+    self.loadingViewEnabled = YES;
   }
   return self;
 }

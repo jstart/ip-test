@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
 
 @interface IPInviteFriendToPageViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property (nonatomic, strong) NSOperationQueue * queue;
 @property (nonatomic, strong) NSMutableArray * usersArray;
+@property (nonatomic, strong) PFObject * pageObject;
 
 -(void)userSearchRequestForString:(NSString*)searchQuery;
 

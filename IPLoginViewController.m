@@ -13,6 +13,7 @@
 #import "IPActivityView.h"
 #import "IPViewController.h"
 #import "IPMyPagesViewController.h"
+#import "IPFollowingPagesViewController.h"
 
 @interface IPLoginViewController ()
 
@@ -196,10 +197,8 @@
             
             //HACK to reload after login
             UINavigationController * parentNav = (UINavigationController*)self.presentingViewController;
-            
-            IPMyPagesViewController* myPagesVC = ((IPMyPagesViewController*)[((IPViewController*)[parentNav.viewControllers objectAtIndex:0]).scrollView.controllers objectAtIndex:1]);
-            [myPagesVC loadObjects];
-            
+            IPViewController* ipVC = ((IPViewController*)[parentNav.viewControllers objectAtIndex:0]);
+            [ipVC reloadViewControllers];
 		} else {
 			// Didn't get a user.
 			NSLog(@"%s didn't get a user!", __PRETTY_FUNCTION__);

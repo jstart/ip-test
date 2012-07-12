@@ -10,34 +10,41 @@
 
 @implementation IPRetrieveRankOperation
 
-@synthesize delegate, itemsArray = _itemsArray, rankingDictionary = _rankingDictionary, isFinished;
+@synthesize delegate, itemsArray = _itemsArray, rankingDictionary = _rankingDictionary, pageObject = _pageObject;
 
--(id)initWithItems:(NSArray*)itemsArray{
+-(id)initWithItems:(NSArray*)itemsArray pageObject:(PFObject*)pageObject{
     self = [super init];
     if (self) {
         _itemsArray = itemsArray;
         _rankingDictionary = [[NSMutableDictionary alloc] init];
-        self.isFinished = NO;
+        _pageObject = pageObject;
     }
     return self;
 }
 
 -(void)start{
-    for (PFObject * itemObject in _itemsArray) {
+    for (PFObject * itemObject in self.itemsArray) {        
         PFQuery * query = [PFQuery queryWithClassName:@"Ranking"];
         [query whereKey:@"Parent_Item" equalTo:itemObject];
-        NSArray * objects = [query findObjects];
-            if ([objects count]>=1) {
-                [self.rankingDictionary setObject:[objects objectAtIndex:0] forKey:itemObject.objectId];
+        [query whereKey:@"Parent_Page" equalTo:self.pageObject];
+        PFQuery * innerQuery = [PFUser query];
+        [innerQuery whereKey:@"username" equalTo:[PFUser currentUser].username];
+        [query whereKey:@"Parent_User" matchesQuery:innerQuery];
+        [query setCachePolicy:kPFCachePolicyNetworkElseCache];
+        PFObject * object = [query getFirstObject];
+            if (object) {
+//                PFRelation * parentUserRelation = [object objectForKey:@"Parent_User"];
+//                PFObject * parentUser = [[parentUserRelation query] getFirstObject];
+//                NSLog(@"user who owns rank: %@", parentUser);
+                [self.rankingDictionary setObject:object forKey:itemObject.objectId];
             }
     }
     [self.delegate retrievedRanks:self.rankingDictionary];
-    isFinished = YES;
     [self didChangeValueForKey:@"isFinished"];
 }
 
 -(BOOL)isFinished{
-    return isFinished;
+    return YES;
 }
 
 @end

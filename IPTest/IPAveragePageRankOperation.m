@@ -45,7 +45,7 @@
             average += [position intValue];
             
         }
-//        NSLog(@"Key: %@ total %d average: %d/%d = %d",key, average, average, [rankings count], average/[rankings    count]);
+        NSLog(@"Key: %@ total %d average: %d/%d = %d",key, average, average, [rankings count], average/[rankings count]);
         [self.itemsAverageRankingDictionary setObject:[NSNumber numberWithInt:average] forKey:key];
                 PFQuery * query = [PFQuery queryWithClassName:@"GlobalRanking"];
         [query whereKey:@"Parent_Page" equalTo:self.pageObject];

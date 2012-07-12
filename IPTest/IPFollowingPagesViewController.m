@@ -7,6 +7,7 @@
 //
 
 #import "IPFollowingPagesViewController.h"
+#import "IPSegmentContainerViewController.h"
 
 @interface IPFollowingPagesViewController ()
 
@@ -20,6 +21,11 @@
     if (self) {
         // Custom initialization
       self.title = @"Following";
+        self.pullToRefreshEnabled = YES;
+        self.paginationEnabled = YES;
+        self.objectsPerPage = 25;
+        self.loadingViewEnabled = YES;
+
     }
     return self;
 }
@@ -44,24 +50,63 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-  return 1;
+- (PFQuery *)queryForTable {
+    PFQuery * query = nil;
+
+    query = [PFQuery queryWithClassName:@"Page"];
+
+    [query whereKey:@"Title" equalTo:@"Lunch Options"];
+
+
+    // If no objects are loaded in memory, we look to the cache
+    // first to fill the table and then subsequently do a query
+    // against the network.
+    if ([self.objects count] == 0) {
+        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    }
+
+    [query orderByDescending:@"createdAt"];
+    return query;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-  UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-  if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-  }
-  cell.textLabel.text = @"You aren't following any Users.";
-  return cell;
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//  return 1;
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    if (![[[PFUser currentUser] objectForKey:@"following"]isKindOfClass:[NSNull class]]) {
+//        return [[[PFUser currentUser] objectForKey:@"following"] count];
+//    }else {
+//        return 0;
+//    }
+//}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    }
+    cell.textLabel.text = [object objectForKey:@"Title"];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    return cell;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-  return 1;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UINavigationController * rootVC = (UINavigationController*)[[[[UIApplication sharedApplication] delegate] window] rootViewController];
+    IPSegmentContainerViewController * vc = [[IPSegmentContainerViewController alloc] initWithNibName:@"IPSegmentContainerViewController" bundle:[NSBundle mainBundle]];
+    PFObject * object = [self.objects objectAtIndex:indexPath.row];
+    [vc setPageObject:object];
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.4f;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionPush;
+    transition.subtype = kCATransitionFromTop;
+    transition.delegate = self;
+    [rootVC.topViewController.navigationController.view.layer addAnimation:transition forKey:nil];
+    [rootVC.topViewController.navigationController pushViewController:vc animated:NO];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
