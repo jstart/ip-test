@@ -8,7 +8,7 @@
 
 #import "IPSegmentContainerViewController.h"
 #import "IPViewController.h"
-#import "UIViewController+MHSemiModal.h"
+#import "UIViewController+KNSemiModal.h"
 #import "IPCreatePageViewController.h"
 
 @interface IPSegmentContainerViewController ()
@@ -216,7 +216,7 @@
     }
 
     [self showBookmark];
-    [self mh_dismissSemiModalViewController:super.bookmarkNavigationController animated:YES];
+    [self dismissSemiModalView];
 //    [self performSelector:@selector(mh_dismissSemiModalViewController:animated:) withObject:super.bookmarkNavigationController afterDelay:1.1];
 }
 

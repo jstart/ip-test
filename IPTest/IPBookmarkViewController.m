@@ -8,7 +8,7 @@
 
 #import "IPBookmarkViewController.h"
 #import "IPViewController.h"
-#import "UIViewController+MHSemiModal.h"
+#import "IPBookmarkContainerViewController.h"
 #import <Parse/Parse.h>
 
 @interface IPBookmarkViewController ()
@@ -17,9 +17,7 @@
 
 @implementation IPBookmarkViewController
 
-@synthesize delegate;
 @synthesize bookmarkTableView;
-@synthesize closeButton;
 @synthesize headerViewController;
 @synthesize notificationViewController;
 @synthesize searchBar = _searchBar;
@@ -37,7 +35,9 @@
 {
     [super viewDidLoad];
 //    self.wantsFullScreenLayout = YES;
-
+    CGRect frame = self.navigationController.view.frame;
+    frame.size.height = 308;
+    self.navigationController.view.frame = frame;
     // Do any additional setup after loading the view from its nib.
     self.notificationViewController = [[IPNotificationListViewController alloc] initWithNibName:@"IPNotificationListViewController" bundle:[NSBundle mainBundle]];
     [self.notificationViewController.navigationController setNavigationBarHidden:NO];
@@ -67,7 +67,6 @@
 - (void)viewDidUnload
 {
   [self setBookmarkTableView:nil];
-  [self setCloseButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -81,14 +80,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction)closeButton:(id)sender {
-  if (self.delegate) {
-    [self.delegate bookmarkViewWasDismissed:-1];
-  }
-  else{
-    NSLog(@"No delegate for bookmarkview");
-  }
-}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
   return 1;
@@ -157,8 +149,8 @@
       }
         //Create New Page
       case 1:{
-        if (self.delegate) {
-          [self.delegate bookmarkViewWasDismissed:-1];
+        if (((IPBookmarkContainerViewController*)self.navigationController.parentViewController).delegate) {
+          [((IPBookmarkContainerViewController*)self.navigationController.parentViewController).delegate bookmarkViewWasDismissed:-1];
         }
         else{
           NSLog(@"No delegate for bookmarkview");
@@ -167,8 +159,8 @@
       }
         //My Pages
       case 2:{
-        if (self.delegate) {
-          [self.delegate bookmarkViewWasDismissed:1];
+        if (((IPBookmarkContainerViewController*)self.navigationController.parentViewController).delegate) {
+          [((IPBookmarkContainerViewController*)self.navigationController.parentViewController).delegate bookmarkViewWasDismissed:1];
         }
         else{
           NSLog(@"No delegate for bookmarkview");
@@ -177,8 +169,8 @@
       }
         //Following
       case 3:{
-        if (self.delegate) {
-          [self.delegate bookmarkViewWasDismissed:2];
+        if (((IPBookmarkContainerViewController*)self.navigationController.parentViewController).delegate) {
+          [((IPBookmarkContainerViewController*)self.navigationController.parentViewController).delegate bookmarkViewWasDismissed:2];
         }
         else{
           NSLog(@"No delegate for bookmarkview");
@@ -187,8 +179,8 @@
       }
         //Popular
       case 4:{
-        if (self.delegate) {
-          [self.delegate bookmarkViewWasDismissed:0];
+        if (((IPBookmarkContainerViewController*)self.navigationController.parentViewController).delegate) {
+          [((IPBookmarkContainerViewController*)self.navigationController.parentViewController).delegate bookmarkViewWasDismissed:0];
         }
         else{
           NSLog(@"No delegate for bookmarkview");

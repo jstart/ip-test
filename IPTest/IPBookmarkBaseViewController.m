@@ -31,10 +31,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    IPBookmarkViewController *bookmarkViewController = [[IPBookmarkViewController alloc] initWithNibName:@"IPBookmarkViewController" bundle:[NSBundle mainBundle]];
-    self.bookmarkNavigationController = [[UINavigationController alloc] initWithRootViewController:bookmarkViewController];
+//    IPBookmarkViewController *bookmarkViewController = [[IPBookmarkViewController alloc] initWithNibName:@"IPBookmarkViewController" bundle:[NSBundle mainBundle]];
+    IPBookmarkContainerViewController *bookmarkContainerViewController = [[IPBookmarkContainerViewController alloc] initWithNibName:@"IPBookmarkContainerViewController" bundle:[NSBundle mainBundle]];
+    self.bookmarkNavigationController = [[UINavigationController alloc] initWithRootViewController:bookmarkContainerViewController];
     
-    bookmarkViewController.delegate = self;
+    bookmarkContainerViewController.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -95,8 +96,9 @@
 {
 	// Go to the welcome screen and have them log in or create an account.
     if (bookmarkNavigationController == nil) {
-        IPBookmarkViewController *bookmarkViewController = [[IPBookmarkViewController alloc] initWithNibName:@"IPBookmarkViewController" bundle:[NSBundle mainBundle]];
-        bookmarkNavigationController = [[UINavigationController alloc] initWithRootViewController:bookmarkViewController];
+        IPBookmarkContainerViewController *bookmarkContainerViewController = [[IPBookmarkContainerViewController alloc] initWithNibName:@"IPBookmarkContainerViewController" bundle:[NSBundle mainBundle]];
+        bookmarkNavigationController = [[UINavigationController alloc] initWithRootViewController:bookmarkContainerViewController];
+        bookmarkContainerViewController.delegate = self;
     }
     if ([[self.navigationItem.rightBarButtonItem customView] isHidden]) {
         

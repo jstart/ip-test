@@ -42,6 +42,8 @@
 		FD427B4D15A6561200835E3F /* DCStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B4515A6561200835E3F /* DCStatusBarOverlay.m */; };
 		FD49EA2315AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = FD49EA2215AF4D8A0091BCCB /* UIViewController+KNSemiModal.m */; };
 		FD49EA2415AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = FD49EA2215AF4D8A0091BCCB /* UIViewController+KNSemiModal.m */; };
+		FD49EA3F15AF5C070091BCCB /* IPBookmarkContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD49EA3D15AF5C060091BCCB /* IPBookmarkContainerViewController.m */; };
+		FD49EA4015AF5C070091BCCB /* IPBookmarkContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD49EA3E15AF5C060091BCCB /* IPBookmarkContainerViewController.xib */; };
 		FD6DE26B15A7BD5000376A42 /* IPAddListItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6DE26915A7BD5000376A42 /* IPAddListItemViewController.m */; };
 		FD6DE26C15A7BD5000376A42 /* IPAddListItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE26A15A7BD5000376A42 /* IPAddListItemViewController.xib */; };
 		FD6DE2A815A7C0E500376A42 /* CityGrid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6DE2A715A7C0E500376A42 /* CityGrid.framework */; };
@@ -206,6 +208,9 @@
 		FD427B4515A6561200835E3F /* DCStatusBarOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCStatusBarOverlay.m; sourceTree = "<group>"; };
 		FD49EA2115AF4D8A0091BCCB /* UIViewController+KNSemiModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KNSemiModal.h"; sourceTree = "<group>"; };
 		FD49EA2215AF4D8A0091BCCB /* UIViewController+KNSemiModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KNSemiModal.m"; sourceTree = "<group>"; };
+		FD49EA3C15AF5C060091BCCB /* IPBookmarkContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPBookmarkContainerViewController.h; sourceTree = "<group>"; };
+		FD49EA3D15AF5C060091BCCB /* IPBookmarkContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPBookmarkContainerViewController.m; sourceTree = "<group>"; };
+		FD49EA3E15AF5C060091BCCB /* IPBookmarkContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPBookmarkContainerViewController.xib; sourceTree = "<group>"; };
 		FD6DE26815A7BD5000376A42 /* IPAddListItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAddListItemViewController.h; sourceTree = "<group>"; };
 		FD6DE26915A7BD5000376A42 /* IPAddListItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAddListItemViewController.m; sourceTree = "<group>"; };
 		FD6DE26A15A7BD5000376A42 /* IPAddListItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPAddListItemViewController.xib; sourceTree = "<group>"; };
@@ -345,6 +350,9 @@
 				FDC3C1CB15A75FA200C44B57 /* IPBookmarkHeaderViewController.h */,
 				FDC3C1CC15A75FA200C44B57 /* IPBookmarkHeaderViewController.m */,
 				FDC3C1CD15A75FA200C44B57 /* IPBookmarkHeaderViewController.xib */,
+				FD49EA3C15AF5C060091BCCB /* IPBookmarkContainerViewController.h */,
+				FD49EA3D15AF5C060091BCCB /* IPBookmarkContainerViewController.m */,
+				FD49EA3E15AF5C060091BCCB /* IPBookmarkContainerViewController.xib */,
 			);
 			name = Bookmark;
 			sourceTree = "<group>";
@@ -783,6 +791,7 @@
 				FD1557FE15AB8E8C00C38A78 /* Default@2x.png in Resources */,
 				FD1558B215ACBEC700C38A78 /* ip_form.json in Resources */,
 				FD1558BB15ACDD2000C38A78 /* IPInviteFriendToPageViewController.xib in Resources */,
+				FD49EA4015AF5C070091BCCB /* IPBookmarkContainerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -871,6 +880,7 @@
 				FD78214415AD362900447F92 /* IPRetrieveRankOperation.m in Sources */,
 				FD78214715AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */,
 				FD49EA2315AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */,
+				FD49EA3F15AF5C070091BCCB /* IPBookmarkContainerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

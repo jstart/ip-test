@@ -76,7 +76,7 @@
     CGRect sf = view.frame;
     CGRect vf = target.frame;
     CGRect f  = CGRectMake(0, 0, vf.size.width, sf.size.height);
-    CGRect of = CGRectMake(0, vf.size.height-sf.size.height, vf.size.width, vf.size.height-sf.size.height);
+    CGRect of = CGRectMake(0, sf.size.height, vf.size.width, vf.size.height-sf.size.height);
 
     // Add semi overlay
     UIView * overlay = [[UIView alloc] initWithFrame:target.bounds];

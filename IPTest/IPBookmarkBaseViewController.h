@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "IPBookmarkViewController.h"
+#import "IPBookmarkContainerViewController.h"
 
 @interface IPBookmarkBaseViewController : UIViewController <IPBookmarkViewDelegate>
 
