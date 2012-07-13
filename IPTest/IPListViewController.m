@@ -7,6 +7,7 @@
 //
 
 #import "IPListViewController.h"
+#import "SVPullToRefresh.h"
 
 @interface IPListViewController ()
 
@@ -21,7 +22,7 @@
 @synthesize listTypeIndex;
 @synthesize isRankLoaded;
 @synthesize queue;
-@synthesize rankingDictionary;
+@synthesize rankingDictionary = _rankingDictionary;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -74,10 +75,17 @@
         [self.tableView setEditing:YES animated:YES];
         [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self.delegate selector:@selector(didRequestRefresh) name:@"RankingPush" object:nil];
+    [[self tableView] addPullToRefreshWithActionHandler:^{
+        // refresh data
+        // call [tableView.pullToRefreshView stopAnimating] when done
+        [self.delegate didRequestRefresh];
+    }];
 }
 
 - (void)viewDidUnload
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self setCreateHeaderTableViewCell:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -102,22 +110,23 @@
 }
 
 -(void)updatedResultObjects:(NSMutableArray*)newObjects{
+    [[self tableView] beginUpdates];
   self.objects = newObjects;
     IPRetrieveRankOperation * op = [[IPRetrieveRankOperation alloc] initWithItems:self.objects pageObject:self.pageObject];
   op.delegate = self;
   [self.queue addOperation:op];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
-    });
+  [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+  [self.tableView.pullToRefreshView stopAnimating];
 }
 
 -(void)retrievedRanks:(NSMutableDictionary *)ranks{
     self.rankingDictionary = ranks;
     self.isRankLoaded = [NSNumber numberWithBool:YES];
 //    [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-    dispatch_async(dispatch_get_main_queue(), ^{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^(){
         [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
-    });
+        [[self tableView] endUpdates];
+    }];
 }
 
 #pragma mark - Table view data source
@@ -150,12 +159,13 @@
             cell.showsReorderControl = YES;
             //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text = [[NSString stringWithFormat:@"%d. ", indexPath.row + 1] stringByAppendingString:[object objectForKey:@"Title"]];
-            if ([rankingDictionary objectForKey:object.objectId]) {
-                NSNumber * position = [[rankingDictionary objectForKey:object.objectId] objectForKey:@"position"];
+            if ([self.rankingDictionary objectForKey:object.objectId]) {
+                NSNumber * position = [[self.rankingDictionary objectForKey:object.objectId] objectForKey:@"position"];
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"You ranked: %d", [position intValue]];
             }
         }else{
             cell.textLabel.text = [object objectForKey:@"Title"];
+            cell.detailTextLabel.text = @"";
         }
     }
     return cell;
@@ -213,10 +223,11 @@
         int count = 0;
         for (PFObject * object in self.objects) {
             PFObject * ranking = nil;
-            if ([rankingDictionary objectForKey:object.objectId]) {
-                ranking = [rankingDictionary objectForKey:object.objectId];
+            if ([self.rankingDictionary objectForKey:object.objectId]) {
+                ranking = [self.rankingDictionary objectForKey:object.objectId];
             }else {
                 ranking = [PFObject objectWithClassName:@"Ranking"];
+                NSLog(@"Creating new rank object for itemID:%@", object.objectId);
                 [ranking setObject:object forKey:@"Parent_Item"];
                 [ranking setObject:self.pageObject forKey:@"Parent_Page"];
                 [ranking setObject:[PFUser currentUser] forKey:@"Parent_User"];
@@ -228,9 +239,11 @@
             BOOL succeeded = [ranking save];
 
             if (succeeded) {
+                [self.queue addOperationWithBlock:^(){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
                 });
+                }];
             }
             count++;
         }
@@ -238,6 +251,22 @@
         avOP.delegate = (id<IPAveragePageRankDelegate>)self.delegate;
         [self.queue addOperation:avOP];
     }];
+    NSString * rankText = [NSString stringWithFormat:@"%@ submitted a ranking to the page %@", [PFUser currentUser].username, [pageObject objectForKey:@"Title"]];
+    
+    NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"Ranking", @"Type",
+                          rankText, @"alert",
+                          [NSNumber numberWithInt:1], @"badge",
+                          pageObject.objectId, @"pageObjectId",
+                          nil];
+    NSString * channelName = [NSString stringWithFormat:@"PageChannel_%@", pageObject.objectId];
+    
+    PFPush *push = [[PFPush alloc] init];
+    [push setChannel:channelName];
+    [push setPushToAndroid:NO];
+    [push setPushToIOS:YES];
+    [push setData:data];
+    [push sendPushInBackground];
 }
 
 // Override to support conditional rearranging of the table view.

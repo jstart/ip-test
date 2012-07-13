@@ -14,7 +14,7 @@
 
 @implementation IPInviteFriendToPageViewController
 
-@synthesize queue, usersArray, pageObject;
+@synthesize queue, usersArray, selectedUsersArray, pageObject;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,13 +30,18 @@
     [super viewDidLoad];
     self.queue = [[NSOperationQueue alloc] init];
     self.usersArray = [[NSMutableArray alloc] init];
+    self.selectedUsersArray = [[NSMutableArray alloc] init];
     UIBarButtonItem * closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed)];
     self.navigationItem.leftBarButtonItem = closeButton;
+    
+    UIBarButtonItem * inviteButton = [[UIBarButtonItem alloc] initWithTitle:@"Invite" style:UIBarButtonItemStyleDone target:self action:@selector(pushInviteToSelectedUsers)];
+    self.navigationItem.rightBarButtonItem = inviteButton;
     self.title = @"Invite Friends";
-    PFACL *defaultACL = [PFACL ACL];
-    // Optionally enable public read access while disabling public write access.
-    // [defaultACL setPublicReadAccess:YES];
-    [PFACL setDefaultACL:defaultACL withAccessForCurrentUser:YES];
+    self.tableView.allowsMultipleSelection = YES;
+    [self.searchDisplayController.searchBar setShowsCancelButton:NO];
+//    [self.searchDisplayController.searchBar setShowsScopeBar:YES];
+//    [self.searchDisplayController.searchBar setShowsBookmarkButton:YES];
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -88,19 +93,51 @@
     }
     // Configure the cell...
     if ([usersArray count] >= indexPath.row) {
-        cell.textLabel.text = ((PFUser *)[usersArray objectAtIndex:indexPath.row]).username;
+        PFUser * user = ((PFUser *)[usersArray objectAtIndex:indexPath.row]);
+        if ([self.selectedUsersArray containsObject:user]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else{
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        cell.textLabel.text = user.username;
     }else {
         cell.textLabel.text = @"No Results";
     }
     return cell;
 }
 
+//-(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return UITableViewCellEditingStyleInsert;
+//}
+
 -(void)userSearchRequestForString:(NSString*)searchQuery{
     PFQuery * query = [PFUser query];
-//    [query whereKey:@"username" notEqualTo:[[PFUser currentUser] objectForKey:@"username"]];
+    //    [query whereKey:@"username" notEqualTo:[[PFUser currentUser] objectForKey:@"username"]];
     [query orderByDescending:@"createdAt"];
     [query whereKey:@"username" matchesRegex:searchQuery modifiers:@"i"];
-    self.usersArray = [[query findObjects] mutableCopy];
+    
+    NSMutableArray * array = [usersArray mutableCopy];
+    for (PFUser * user in array) {
+        if (![self.selectedUsersArray containsObject:user]) {
+            [[self usersArray] removeObject:user];
+        }
+    }
+    
+    NSMutableArray * queryArray = [[query findObjects] mutableCopy];
+    NSMutableArray * iterateArray = [queryArray mutableCopy];
+    
+    for (PFUser * user in iterateArray) {
+        for (PFUser * selectedUser in self.selectedUsersArray) {
+            if ([user.objectId isEqualToString:selectedUser.objectId]) {
+                [queryArray removeObject:user];
+            }
+        }
+    }
+    
+
+    [queryArray addObjectsFromArray:self.usersArray];
+    self.usersArray = queryArray;
     [[self.searchDisplayController searchResultsTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
@@ -154,9 +191,40 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-  
     PFObject * user = [usersArray objectAtIndex:indexPath.row];
-//Push a notification to the user
+
+    if ([self.selectedUsersArray containsObject:user]) {
+        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+        [self.selectedUsersArray removeObject:user];
+
+    }else{
+        [self.selectedUsersArray addObject:user];
+        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    
+}
+
+-(void)pushInviteToSelectedUsers{
+    //Push a notification to the user
+    for (PFUser * user in self.selectedUsersArray) {
+        NSString * inviteText = [NSString stringWithFormat:@"%@ invited you to the page %@", [PFUser currentUser].username, [pageObject objectForKey:@"Title"]];
+        
+        NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                              @"Invite", @"Type",
+                              inviteText, @"alert",
+                              [NSNumber numberWithInt:1], @"badge",
+                              pageObject.objectId, @"pageObjectId",
+                              nil];
+        NSString * channelName = [NSString stringWithFormat:@"UserChannel_%@", user.objectId];
+        
+        PFPush *push = [[PFPush alloc] init];
+        [push setChannel:channelName];
+        [push setPushToAndroid:NO];
+        [push setPushToIOS:YES];
+        [push setData:data];
+        [push sendPushInBackground];
+    }
+    
     [[self presentingViewController] dismissModalViewControllerAnimated:YES];
 }
 
@@ -171,6 +239,8 @@
 }
 
 - (void) searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller{
+    self.usersArray = self.selectedUsersArray;
+    [[self tableView] reloadData];
 }
 
 // called when the table is created destroyed, shown or hidden. configure as necessary.
@@ -190,7 +260,7 @@
   
 }
 - (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView{
-  
+    
 }
 
 // return YES to reload table. called when search string/option changes. convenience methods on top UISearchBar delegate methods

@@ -11,6 +11,8 @@
 #import "DCIntrospect.h"
 #import <CityGrid/CityGrid.h>
 
+#define NSLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+
 @implementation IPAppDelegate
 
 @synthesize window = _window, iv;
@@ -29,20 +31,16 @@
 	[CityGrid setPlacement:@"ios-example"];
 	[CityGrid setDebug:YES];
     [[PFUser currentUser] refresh];
-  [_window makeKeyAndVisible];  
   // always call after makeKeyAndDisplay.
 #if TARGET_IPHONE_SIMULATOR
   [[DCIntrospect sharedIntrospector] start];
 #else
     [TestFlight takeOff:@"30d92a896df4ab4b4873886ea58f8b06_NzE0NzIyMDEyLTAzLTE0IDEzOjQ0OjU4Ljk3MDAxOQ"];
 #endif
-    
-    [application registerForRemoteNotificationTypes: 
-     UIRemoteNotificationTypeBadge |
-     UIRemoteNotificationTypeAlert |             
-     UIRemoteNotificationTypeSound];
-    
+
     [self displaySplash];
+    [_window makeKeyAndVisible];  
+
     return YES;
 }
 
@@ -65,19 +63,40 @@
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken
 {
     [PFPush storeDeviceToken:newDeviceToken]; // Send parse the device token
-    // Subscribe this user to the broadcast channel, "" 
-    [PFPush subscribeToChannelInBackground:@"" block:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Successfully subscribed to the broadcast channel.");
-        } else {
-            NSLog(@"Failed to subscribe to the broadcast channel.");
-        }
-    }];
+    // Subscribe this user to the broadcast channel, ""
+    NSError * error = nil;
+    [PFPush subscribeToChannel:@"" error:&error];
+    if (error) {
+        NSLog(@"subscribe error %@", error);
+    }
+    [[PFUser currentUser] refresh];
+    NSString * channelName = [NSString stringWithFormat:@"UserChannel_%@", [PFUser currentUser].objectId];
+    error = nil;
+    [PFPush subscribeToChannel:channelName error:&error];
+    if (error) {
+        NSLog(@"subscribe error %@", error);
+    }
 }
 
-- (void)application:(UIApplication *)application 
+- (void)application:(UIApplication *)application
 didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
+
+//    [PFPush handlePush:userInfo];
+    if ([[userInfo objectForKey:@"Type"] isEqualToString:@"Invite"]) {
+        PFObject * object = [PFQuery getObjectOfClass:@"Page"
+                                           objectId:[userInfo objectForKey:@"pageObjectId"]];
+        [[PFUser currentUser] addObject:object forKey:@"following"];
+        [[PFUser currentUser] save];
+        PFRelation * followersRelation = [object relationforKey:@"Followers"];
+        [followersRelation addObject:[PFUser currentUser]];
+        [object save];
+    }
+    if ([[userInfo objectForKey:@"Type"] isEqualToString:@"Ranking"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RankingPush" object:nil];
+    }
+    if ([[userInfo objectForKey:@"Type"] isEqualToString:@"AddItem"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"RankingPush" object:nil];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

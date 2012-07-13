@@ -24,7 +24,7 @@
 @property (strong, nonatomic) NSMutableArray * objects;
 
 -(void)customBackActionNoAnimation:(int)homePageIndex;
--(NSMutableArray*)sortObjects:(NSArray *)objects;
+-(void)sortObjects:(NSArray *)objects;
 -(void)reloadItems;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "IPAddListItemViewController.h"
+#import "IPSegmentContainerViewController.h"
 #import <CityGrid/CityGrid.h>
 
 @interface IPAddListItemViewController ()
@@ -175,9 +176,34 @@
     [object setValue:location.name forKey:@"Title"];
     NSNumber * locationIDNumber = [NSNumber numberWithInt:location.locationId];
     [object setValue:locationIDNumber forKey:@"cg_id"];
-    [object save];
+    NSError * error = nil;
+
+    [object save:&error];
+    if (error) {
+        NSLog(@"error saving item %@", error);
+    }
     [pageObject addObject:object forKey:@"Items"];
-    [pageObject saveInBackground];
+    [pageObject save:&error];
+    if (error) {
+        NSLog(@"error saving item to page %@", error);
+    }
+    [((IPSegmentContainerViewController*)((UINavigationController*)self.presentingViewController).topViewController) reloadItems];
+    NSString * rankText = [NSString stringWithFormat:@"%@ added a business name %@ to the page %@", [PFUser currentUser].username, [object objectForKey:@"Title"], [pageObject objectForKey:@"Title"]];
+    
+    NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+                          @"AddItem", @"Type",
+                          rankText, @"alert",
+                          [NSNumber numberWithInt:1], @"badge",
+                          pageObject.objectId, @"pageObjectId",
+                          nil];
+    NSString * channelName = [NSString stringWithFormat:@"PageChannel_%@", pageObject.objectId];
+    
+    PFPush *push = [[PFPush alloc] init];
+    [push setChannel:channelName];
+    [push setPushToAndroid:NO];
+    [push setPushToIOS:YES];
+    [push setData:data];
+    [push sendPushInBackground];
     [[self presentingViewController] dismissModalViewControllerAnimated:YES];
 }
 

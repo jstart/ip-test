@@ -36,6 +36,13 @@
     // Do any additional setup after loading the view from its nib.
   self.view.layer.cornerRadius = 10;
   self.view.layer.masksToBounds = YES;
+//    PFObject * object = [PFQuery getObjectOfClass:@"Page"
+//                                         objectId:@"WOZt83yqm4"];
+//    [[PFUser currentUser] addObject:object forKey:@"following"];
+//    [[PFUser currentUser] save];
+//    PFRelation * followersRelation = [object relationforKey:@"Followers"];
+//    [followersRelation addObject:[PFUser currentUser]];
+//    [object save];
 }
 
 - (void)viewDidUnload
@@ -52,20 +59,20 @@
 
 - (PFQuery *)queryForTable {
     PFQuery * query = nil;
-
-    query = [PFQuery queryWithClassName:@"Page"];
-
-    [query whereKey:@"Title" equalTo:@"Lunch Options"];
-    [query includeKey:@"Items"];
-    [query includeKey:@"Rankings"];
-    // If no objects are loaded in memory, we look to the cache
-    // first to fill the table and then subsequently do a query
-    // against the network.
-    if ([self.objects count] == 0) {
-        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+    if ([PFUser currentUser]) {
+        query = [PFQuery queryWithClassName:@"Page"];
+        
+        [query whereKey:@"Followers" equalTo:[PFUser currentUser]];
+        // If no objects are loaded in memory, we look to the cache
+        // first to fill the table and then subsequently do a query
+        // against the network.
+        if ([self.objects count] == 0) {
+            query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+        }
+        
+        [query orderByDescending:@"createdAt"];
     }
-
-    [query orderByDescending:@"createdAt"];
+    
     return query;
 }
 

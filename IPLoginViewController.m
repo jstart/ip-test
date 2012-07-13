@@ -190,11 +190,12 @@
 		[activityView removeFromSuperview];
 
 		if (user) {
-//			PAWWallViewController *wallViewController = [[PAWWallViewController alloc] initWithNibName:nil bundle:nil];
-//			[(UINavigationController *)self.presentingViewController pushViewController:wallViewController animated:NO];
-      [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes: 
+             UIRemoteNotificationTypeBadge |
+             UIRemoteNotificationTypeAlert |             
+             UIRemoteNotificationTypeSound];
+            [self.presentingViewController.presentingViewController dismissModalViewControllerAnimated:YES];
 			[self.presentingViewController dismissModalViewControllerAnimated:YES];
-            
             //HACK to reload after login
             UINavigationController * parentNav = (UINavigationController*)self.presentingViewController;
             IPViewController* ipVC = ((IPViewController*)[parentNav.viewControllers objectAtIndex:0]);

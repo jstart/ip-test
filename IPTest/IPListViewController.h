@@ -15,6 +15,7 @@
 
 -(void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 -(void)didPushCreateButton:(id)sender;
+-(void)didRequestRefresh;
 
 @end
 

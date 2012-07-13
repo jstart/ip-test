@@ -142,6 +142,7 @@
 		FDCAFA1415AAD22C00AC3D9E /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDCAFA0D15AAD22C00AC3D9E /* release_notes.txt */; };
 		FDCAFA1715AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDCAFA1615AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m */; };
 		FDCAFA1815AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDCAFA1615AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m */; };
+		FDD2EB9515AFCD9700A2FCE1 /* SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = FDD2EB9415AFCD9700A2FCE1 /* SVPullToRefresh.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -299,6 +300,8 @@
 		FDCAFA0E15AAD22C00AC3D9E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		FDCAFA1515AAD3AB00AC3D9E /* IPBookmarkBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPBookmarkBaseViewController.h; sourceTree = "<group>"; };
 		FDCAFA1615AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPBookmarkBaseViewController.m; sourceTree = "<group>"; };
+		FDD2EB9315AFCD9700A2FCE1 /* SVPullToRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPullToRefresh.h; sourceTree = "<group>"; };
+		FDD2EB9415AFCD9700A2FCE1 /* SVPullToRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPullToRefresh.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -500,6 +503,7 @@
 		FDC7337A15A3835000687431 = {
 			isa = PBXGroup;
 			children = (
+				FDD2EB9215AFCD9700A2FCE1 /* SVPullToRefresh */,
 				FD49EA2515AF4D900091BCCB /* Bookmark transition category */,
 				FD15589B15ACB26900C38A78 /* MapKit.framework */,
 				FD15588B15ACB24200C38A78 /* QuickDialog.xcodeproj */,
@@ -660,6 +664,15 @@
 				FDCAFA0E15AAD22C00AC3D9E /* TestFlight.h */,
 			);
 			path = TestFlightSDK1.0;
+			sourceTree = "<group>";
+		};
+		FDD2EB9215AFCD9700A2FCE1 /* SVPullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				FDD2EB9315AFCD9700A2FCE1 /* SVPullToRefresh.h */,
+				FDD2EB9415AFCD9700A2FCE1 /* SVPullToRefresh.m */,
+			);
+			path = SVPullToRefresh;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -881,6 +894,7 @@
 				FD78214715AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */,
 				FD49EA2315AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */,
 				FD49EA3F15AF5C070091BCCB /* IPBookmarkContainerViewController.m in Sources */,
+				FDD2EB9515AFCD9700A2FCE1 /* SVPullToRefresh.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,7 +985,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Truman (XL8C53TT76)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Truman (XL8C53TT76)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -986,6 +1001,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PROVISIONING_PROFILE = "CAAC0731-F100-4017-B9EC-D0C11040B2AD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CAAC0731-F100-4017-B9EC-D0C11040B2AD";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -997,7 +1014,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Truman (XL8C53TT76)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Truman (XL8C53TT76)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1006,6 +1024,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "CAAC0731-F100-4017-B9EC-D0C11040B2AD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CAAC0731-F100-4017-B9EC-D0C11040B2AD";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1034,8 +1054,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E4E53F92-A720-4ECD-BC29-177F9D4EF8D7";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E4E53F92-A720-4ECD-BC29-177F9D4EF8D7";
+				PROVISIONING_PROFILE = "ACF6FAE7-ACA9-442B-BBFD-CA4E1CF0E687";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ACF6FAE7-ACA9-442B-BBFD-CA4E1CF0E687";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1043,8 +1063,8 @@
 		FDC733BD15A3835000687431 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Azusa Pacific University (Computer Science)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Azusa Pacific University (Computer Science)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Christopher Truman (XL8C53TT76)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Christopher Truman (XL8C53TT76)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1062,8 +1082,8 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "22856F33-5881-46B7-97ED-EAEAC8CAF191";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "22856F33-5881-46B7-97ED-EAEAC8CAF191";
+				PROVISIONING_PROFILE = "ACF6FAE7-ACA9-442B-BBFD-CA4E1CF0E687";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ACF6FAE7-ACA9-442B-BBFD-CA4E1CF0E687";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -97,51 +97,62 @@
 //}
 
 -(void)reloadItems{
-        
-    [pageObject refreshInBackgroundWithBlock:^(PFObject *object, NSError * error){
-        NSArray * items = [object objectForKey:@"Items"];
-        NSMutableArray * sortedObjects = [self sortObjects:items];
-        
-        [self.gridVC updatedResultObjects:sortedObjects];
-        [self.listVC updatedResultObjects:sortedObjects];
-    }];
+    NSError * error = nil;
+    [pageObject refresh:&error];
+    if (error) {
+        NSLog(@"Error refreshing page %@", error);
+    }else{
+        NSArray * items = [pageObject objectForKey:@"Items"];
+        [self sortObjects:items];
+    }
 }
 
+-(void)didRequestRefresh{
+    [self reloadItems];
+}
 
--(NSMutableArray*)sortObjects:(NSArray *)objects{
-    NSMutableDictionary * sortDictionary = [[NSMutableDictionary alloc] init];
-    for (PFObject * item in objects) {
-        PFQuery * query = [PFQuery queryWithClassName:@"GlobalRanking"];
-        [query whereKey:@"Parent_Page" equalTo:self.pageObject];
-        [query whereKey:@"Parent_Item" equalTo:item];
-        PFObject * globalRanking = [query getFirstObject];
-        if (globalRanking) {
-            [sortDictionary setObject:globalRanking forKey:item.objectId];
-        }
-    }
-    NSArray *sortedArray = nil;
-    sortedArray = [objects sortedArrayUsingComparator:^NSComparisonResult(PFObject* obj1, PFObject* obj2){
-        PFObject * rankObject1 = [sortDictionary objectForKey:obj1.objectId];
-        PFObject * rankObject2 = [sortDictionary objectForKey:obj2.objectId];
+-(void)sortObjects:(NSArray *)objects{
+    dispatch_async( dispatch_get_global_queue(0, 0), ^{
         
-        if ([rankObject1 objectForKey:@"position"] == nil) {
-            return NSOrderedDescending;
-        }else if([rankObject2 objectForKey:@"position"] == nil){
-            return NSOrderedAscending;
-        }
-        
-        if ([[rankObject1 objectForKey:@"position"] intValue] < [[rankObject2 objectForKey:@"position"] intValue]) {
-            return NSOrderedAscending;
-        }
-        else if ([[rankObject1 objectForKey:@"position"] intValue] == [[rankObject2 objectForKey:@"position"] intValue]) {
-            return NSOrderedSame;
-        }
-        else{
-            return NSOrderedDescending;
-        }
-    }];
-    
-    return [sortedArray mutableCopy];
+        // call the result handler block on the main queue (i.e. main thread)
+      
+            // running synchronously on the main thread now -- call the handler
+            NSMutableDictionary * sortDictionary = [[NSMutableDictionary alloc] init];
+            for (PFObject * item in objects) {
+                PFQuery * query = [PFQuery queryWithClassName:@"GlobalRanking"];
+                [query whereKey:@"Parent_Page" equalTo:self.pageObject];
+                [query whereKey:@"Parent_Item" equalTo:item];
+                PFObject * globalRanking = [query getFirstObject];
+                if (globalRanking) {
+                    [sortDictionary setObject:globalRanking forKey:item.objectId];
+                }
+            }
+            NSArray *sortedArray = nil;
+            sortedArray = [objects sortedArrayUsingComparator:^NSComparisonResult(PFObject* obj1, PFObject* obj2){
+                PFObject * rankObject1 = [sortDictionary objectForKey:obj1.objectId];
+                PFObject * rankObject2 = [sortDictionary objectForKey:obj2.objectId];
+                
+                if ([rankObject1 objectForKey:@"position"] == nil) {
+                    return NSOrderedDescending;
+                }else if([rankObject2 objectForKey:@"position"] == nil){
+                    return NSOrderedAscending;
+                }
+                
+                if ([[rankObject1 objectForKey:@"position"] intValue] < [[rankObject2 objectForKey:@"position"] intValue]) {
+                    return NSOrderedAscending;
+                }
+                else if ([[rankObject1 objectForKey:@"position"] intValue] == [[rankObject2 objectForKey:@"position"] intValue]) {
+                    return NSOrderedSame;
+                }
+                else{
+                    return NSOrderedDescending;
+                }
+            }];
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [self.gridVC updatedResultObjects:[sortedArray mutableCopy]];
+            [self.listVC updatedResultObjects:[sortedArray mutableCopy]];
+        });
+    });
 }
 
 - (void)viewDidUnload
@@ -217,7 +228,6 @@
 
     [self showBookmark];
     [self dismissSemiModalView];
-//    [self performSelector:@selector(mh_dismissSemiModalViewController:animated:) withObject:super.bookmarkNavigationController afterDelay:1.1];
 }
 
 @end

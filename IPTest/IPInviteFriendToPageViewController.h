@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSOperationQueue * queue;
 @property (nonatomic, strong) NSMutableArray * usersArray;
 @property (nonatomic, strong) PFObject * pageObject;
+@property (nonatomic, strong) NSMutableArray * selectedUsersArray;
 
 -(void)userSearchRequestForString:(NSString*)searchQuery;
 

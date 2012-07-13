@@ -30,11 +30,11 @@
   CATransform3D t1 = CATransform3DIdentity;
   t1.m34 = 1.0/-900;
   t1 = CATransform3DScale(t1, 0.95, 0.95, 1);
-//  t1 = CATransform3DRotate(t1, 15.0f*M_PI/180.0f, 1, 0, 0);
+  t1 = CATransform3DRotate(t1, 15.0f*M_PI/180.0f, 1, 0, 0);
 
   CATransform3D t2 = CATransform3DIdentity;
   t2.m34 = t1.m34;
-//  t2 = CATransform3DTranslate(t2, 0, [self parentTarget].frame.size.height*-0.08, 0);
+  t2 = CATransform3DTranslate(t2, 0, [self parentTarget].frame.size.height*-0.08, 0);
   t2 = CATransform3DScale(t2, 0.95, 0.95, 1);
 
   CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform"];
@@ -107,10 +107,11 @@
     // Present view animated
     view.frame = CGRectMake(0, -vf.size.height, vf.size.width, sf.size.height);
     [target addSubview:view];
-    view.layer.shadowColor = [[UIColor blackColor] CGColor];
-    view.layer.shadowOffset = CGSizeMake(0, -2);
-    view.layer.shadowRadius = 5.0;
-    view.layer.shadowOpacity = 0.8;
+      //This code kills performance
+//    view.layer.shadowColor = [[UIColor blackColor] CGColor];
+//    view.layer.shadowOffset = CGSizeMake(0, -2);
+//    view.layer.shadowRadius = 5.0;
+//    view.layer.shadowOpacity = 0.8;
     [UIView animateWithDuration:kSemiModalAnimationDuration animations:^{
       view.frame = f;
     }];

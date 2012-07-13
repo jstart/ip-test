@@ -32,11 +32,6 @@
   PFUser *currentUser = [PFUser currentUser];
   if (currentUser) {
 		// Skip straight to the main view.
-      [[UIApplication sharedApplication] registerForRemoteNotificationTypes: 
-       UIRemoteNotificationTypeBadge |
-       UIRemoteNotificationTypeAlert |             
-       UIRemoteNotificationTypeSound];
-		
   } else {
 		// Go to the welcome screen and have them log in or create an account.
 		[self presentWelcomeViewController];

@@ -8,6 +8,7 @@
 
 #import "IPCreatePageViewController.h"
 #import "IPInviteFriendToPageViewController.h"
+#import "IPViewController.h"
 #import <Parse/Parse.h>
 
 @interface IPCreatePageViewController ()
@@ -72,32 +73,47 @@
 //                                                    message:msg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
 //    [alert show];
 
-    NSNumber * pickerIndex = [((NSArray*)[dict objectForKey:@"listType"]) objectAtIndex:0];
   PFObject * newObject = [PFObject objectWithClassName:@"Page"];
-  [newObject setObject:[dict objectForKey:@"pageName"] forKey:@"Title"];
-  [newObject setObject:pickerIndex forKey:@"listType"];
+    NSNumber * pickerIndex = [((NSArray*)[dict objectForKey:@"listType"]) objectAtIndex:0];
+    if ([dict objectForKey:@"pageName"]) {
+        [newObject setObject:[dict objectForKey:@"pageName"] forKey:@"Title"];
+    }
+    if ([dict objectForKey:@"listType"]) {
+        [newObject setObject:pickerIndex forKey:@"listType"];
+    }
   [newObject setObject:[PFUser currentUser] forKey:@"Owner"];
   [newObject save];
+    NSString * pageChannelName = [NSString stringWithFormat:@"PageChannel_%@", newObject.objectId];
+  [PFPush subscribeToChannelInBackground:pageChannelName block:^(BOOL succeeded, NSError * error){
+  
+      if (succeeded) {
+          NSLog(@"Subscribed to channel for page with id: %@", newObject.objectId);
+      }else {
+          NSLog(@"Subscribe Error %@", error);
+      }
+  }];
     
     switch ([pickerIndex intValue]) {
         case 0:
             [self.presentingViewController dismissModalViewControllerAnimated:YES];
+            [((IPViewController*)((UINavigationController*)self.presentingViewController).topViewController) reloadViewControllers];
             break;
         case 1:
                 {
                     IPInviteFriendToPageViewController * inviteVC = [[IPInviteFriendToPageViewController alloc] initWithNibName:@"IPInviteFriendToPageViewController" bundle:[NSBundle mainBundle]];
                     inviteVC.pageObject = newObject;
                     [self.navigationController pushViewController:inviteVC animated:YES];
+                    [((IPViewController*)((UINavigationController*)self.presentingViewController).topViewController) reloadViewControllers];
                 }
             break;
         case 2:
             [self.presentingViewController dismissModalViewControllerAnimated:YES];
-
+            [((IPViewController*)((UINavigationController*)self.presentingViewController).topViewController) reloadViewControllers];
             break;
             
         default:
             [self.presentingViewController dismissModalViewControllerAnimated:YES];
-
+            [((IPViewController*)((UINavigationController*)self.presentingViewController).topViewController) reloadViewControllers];
             break;
     }
 }
