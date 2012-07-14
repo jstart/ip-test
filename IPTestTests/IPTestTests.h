@@ -7,7 +7,10 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "IPParseObjectManager.h"
 
-@interface IPTestTests : SenTestCase
+@interface IPTestTests : SenTestCase <IPPageManagerDelegate>
+
+@property (nonatomic, strong) IPPageManager * pageManager;
 
 @end

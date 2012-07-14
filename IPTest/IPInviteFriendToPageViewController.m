@@ -16,11 +16,21 @@
 
 @synthesize queue, usersArray, selectedUsersArray, pageObject;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.queue = [[NSOperationQueue alloc] init];
+        self.usersArray = [[NSMutableArray alloc] init];
+        self.selectedUsersArray = [[NSMutableArray alloc] init];
+        UIBarButtonItem * closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed)];
+        self.navigationItem.leftBarButtonItem = closeButton;
+        
+        UIBarButtonItem * inviteButton = [[UIBarButtonItem alloc] initWithTitle:@"Invite" style:UIBarButtonItemStyleDone target:self action:@selector(pushInviteToSelectedUsers)];
+        self.navigationItem.rightBarButtonItem = inviteButton;
+        self.title = @"Invite Friends";
+        [self.searchDisplayController.searchBar setDelegate:self];
     }
     return self;
 }
@@ -28,25 +38,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.queue = [[NSOperationQueue alloc] init];
-    self.usersArray = [[NSMutableArray alloc] init];
-    self.selectedUsersArray = [[NSMutableArray alloc] init];
-    UIBarButtonItem * closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed)];
-    self.navigationItem.leftBarButtonItem = closeButton;
-    
-    UIBarButtonItem * inviteButton = [[UIBarButtonItem alloc] initWithTitle:@"Invite" style:UIBarButtonItemStyleDone target:self action:@selector(pushInviteToSelectedUsers)];
-    self.navigationItem.rightBarButtonItem = inviteButton;
-    self.title = @"Invite Friends";
-    self.tableView.allowsMultipleSelection = YES;
-    [self.searchDisplayController.searchBar setShowsCancelButton:NO];
-//    [self.searchDisplayController.searchBar setShowsScopeBar:YES];
-//    [self.searchDisplayController.searchBar setShowsBookmarkButton:YES];
+}
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -272,5 +267,14 @@
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption{
   return YES;
 }
+#pragma UISearchBar delegate
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar    {
+    [[self searchDisplayController] setActive:NO animated:YES];
+}
+
+// called when bookmark button pressed
+- (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar{
+    [[self searchDisplayController] setActive:NO animated:YES];
+}
 @end

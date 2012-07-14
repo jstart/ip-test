@@ -50,6 +50,12 @@
   // e.g. self.myOutlet = nil;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [[self tableView] reloadData];
+    [[self tableView] reloadData];
+    [[self tableView] reloadData];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
   return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -119,7 +125,7 @@
 }
 
 - (IBAction)createButtonPressed:(id)sender {
-  IPCreatePageViewController * cpvc = [[IPCreatePageViewController alloc] init];
+  IPCreatePageViewController * cpvc = [[IPCreatePageViewController alloc] initWithNibName:@"IPCreatePageViewController" bundle:[NSBundle mainBundle]];
   UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:cpvc];
   [[[[[UIApplication sharedApplication] delegate] window] rootViewController] presentModalViewController:navController animated:YES];
 }

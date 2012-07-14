@@ -12,7 +12,6 @@
 		FD15589A15ACB25F00C38A78 /* libQuickDialog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FD15589715ACB24200C38A78 /* libQuickDialog.a */; };
 		FD15589C15ACB26900C38A78 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD15589B15ACB26900C38A78 /* MapKit.framework */; };
 		FD1558B215ACBEC700C38A78 /* ip_form.json in Resources */ = {isa = PBXBuildFile; fileRef = FD1558B115ACBEC700C38A78 /* ip_form.json */; };
-		FD1558B615ACDC6000C38A78 /* IPInviteFriendToPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1558B415ACDC6000C38A78 /* IPInviteFriendToPageViewController.m */; };
 		FD1558B715ACDC6000C38A78 /* IPInviteFriendToPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD1558B515ACDC6000C38A78 /* IPInviteFriendToPageViewController.xib */; };
 		FD1558BA15ACDD1D00C38A78 /* IPInviteFriendToPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD1558B415ACDC6000C38A78 /* IPInviteFriendToPageViewController.m */; };
 		FD1558BB15ACDD2000C38A78 /* IPInviteFriendToPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD1558B515ACDC6000C38A78 /* IPInviteFriendToPageViewController.xib */; };
@@ -23,27 +22,21 @@
 		FD28433615A3C0010079D6D5 /* bookmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD28433515A3C0010079D6D5 /* bookmark@2x.png */; };
 		FD28433715A3C0010079D6D5 /* bookmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD28433515A3C0010079D6D5 /* bookmark@2x.png */; };
 		FD28433B15A3C8020079D6D5 /* IPBookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28433915A3C8020079D6D5 /* IPBookmarkViewController.m */; };
-		FD28433C15A3C8020079D6D5 /* IPBookmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD28433915A3C8020079D6D5 /* IPBookmarkViewController.m */; };
 		FD28433D15A3C8020079D6D5 /* IPBookmarkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD28433A15A3C8020079D6D5 /* IPBookmarkViewController.xib */; };
 		FD28433E15A3C8020079D6D5 /* IPBookmarkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD28433A15A3C8020079D6D5 /* IPBookmarkViewController.xib */; };
 		FD427B2D15A6112300835E3F /* UIViewController+MHSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B2C15A6112300835E3F /* UIViewController+MHSemiModal.m */; };
-		FD427B2E15A6112300835E3F /* UIViewController+MHSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B2C15A6112300835E3F /* UIViewController+MHSemiModal.m */; };
 		FD427B3415A6163A00835E3F /* IPListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B3215A6163A00835E3F /* IPListViewController.m */; };
-		FD427B3515A6163A00835E3F /* IPListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B3215A6163A00835E3F /* IPListViewController.m */; };
 		FD427B3615A6163A00835E3F /* IPListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD427B3315A6163A00835E3F /* IPListViewController.xib */; };
 		FD427B3715A6163A00835E3F /* IPListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD427B3315A6163A00835E3F /* IPListViewController.xib */; };
 		FD427B4615A6561200835E3F /* DCCrossHairView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B3E15A6561200835E3F /* DCCrossHairView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		FD427B4715A6561200835E3F /* DCCrossHairView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B3E15A6561200835E3F /* DCCrossHairView.m */; };
 		FD427B4815A6561200835E3F /* DCFrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B4015A6561200835E3F /* DCFrameView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		FD427B4915A6561200835E3F /* DCFrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B4015A6561200835E3F /* DCFrameView.m */; };
 		FD427B4A15A6561200835E3F /* DCIntrospect.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B4215A6561200835E3F /* DCIntrospect.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		FD427B4B15A6561200835E3F /* DCIntrospect.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B4215A6561200835E3F /* DCIntrospect.m */; };
 		FD427B4C15A6561200835E3F /* DCStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B4515A6561200835E3F /* DCStatusBarOverlay.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		FD427B4D15A6561200835E3F /* DCStatusBarOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = FD427B4515A6561200835E3F /* DCStatusBarOverlay.m */; };
 		FD49EA2315AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = FD49EA2215AF4D8A0091BCCB /* UIViewController+KNSemiModal.m */; };
-		FD49EA2415AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */ = {isa = PBXBuildFile; fileRef = FD49EA2215AF4D8A0091BCCB /* UIViewController+KNSemiModal.m */; };
 		FD49EA3F15AF5C070091BCCB /* IPBookmarkContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD49EA3D15AF5C060091BCCB /* IPBookmarkContainerViewController.m */; };
 		FD49EA4015AF5C070091BCCB /* IPBookmarkContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD49EA3E15AF5C060091BCCB /* IPBookmarkContainerViewController.xib */; };
+		FD58771215B16E3B00152258 /* IPPageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8BE23E15B15B7F007C79B7 /* IPPageManager.m */; };
+		FD58771315B16E3E00152258 /* IPParseObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8BE23B15B157CA007C79B7 /* IPParseObjectManager.m */; };
 		FD6DE26B15A7BD5000376A42 /* IPAddListItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6DE26915A7BD5000376A42 /* IPAddListItemViewController.m */; };
 		FD6DE26C15A7BD5000376A42 /* IPAddListItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE26A15A7BD5000376A42 /* IPAddListItemViewController.xib */; };
 		FD6DE2A815A7C0E500376A42 /* CityGrid.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD6DE2A715A7C0E500376A42 /* CityGrid.framework */; };
@@ -57,37 +50,31 @@
 		FD6DE2D215A7D94600376A42 /* list_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2CF15A7D94600376A42 /* list_icon@2x.png */; };
 		FD6DE2D315A7D94600376A42 /* list_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2CF15A7D94600376A42 /* list_icon@2x.png */; };
 		FD6DE2D815A7DAB500376A42 /* IPGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6DE2D615A7DAB500376A42 /* IPGridViewController.m */; };
-		FD6DE2D915A7DAB500376A42 /* IPGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6DE2D615A7DAB500376A42 /* IPGridViewController.m */; };
 		FD6DE2DA15A7DAB500376A42 /* IPGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2D715A7DAB500376A42 /* IPGridViewController.xib */; };
 		FD6DE2DB15A7DAB500376A42 /* IPGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2D715A7DAB500376A42 /* IPGridViewController.xib */; };
 		FD6DE2DE15A7DB1E00376A42 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6DE2DD15A7DB1D00376A42 /* iCarousel.m */; };
-		FD6DE2DF15A7DB1E00376A42 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6DE2DD15A7DB1D00376A42 /* iCarousel.m */; };
 		FD6DE2E815A8172100376A42 /* IPSegmentContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6DE2E615A8172100376A42 /* IPSegmentContainerViewController.m */; };
-		FD6DE2E915A8172100376A42 /* IPSegmentContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD6DE2E615A8172100376A42 /* IPSegmentContainerViewController.m */; };
 		FD6DE2EA15A8172100376A42 /* IPSegmentContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2E715A8172100376A42 /* IPSegmentContainerViewController.xib */; };
 		FD6DE2EB15A8172100376A42 /* IPSegmentContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2E715A8172100376A42 /* IPSegmentContainerViewController.xib */; };
 		FD6DE2ED15A8203700376A42 /* IPGridViewTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2EC15A8203700376A42 /* IPGridViewTemplate.xib */; };
 		FD6DE2EE15A8203700376A42 /* IPGridViewTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2EC15A8203700376A42 /* IPGridViewTemplate.xib */; };
 		FD78214415AD362900447F92 /* IPRetrieveRankOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD78214315AD362900447F92 /* IPRetrieveRankOperation.m */; };
 		FD78214715AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD78214615AD43B900447F92 /* IPAveragePageRankOperation.m */; };
-		FD78214815AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD78214615AD43B900447F92 /* IPAveragePageRankOperation.m */; };
+		FD8BE23C15B157CA007C79B7 /* IPParseObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8BE23B15B157CA007C79B7 /* IPParseObjectManager.m */; };
+		FD8BE23F15B15B7F007C79B7 /* IPPageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8BE23E15B15B7F007C79B7 /* IPPageManager.m */; };
 		FDAEE5E315A3979000D05E9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAEE5E215A3979000D05E9C /* QuartzCore.framework */; };
 		FDAEE5E615A3A60A00D05E9C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAEE5E515A3A60A00D05E9C /* Parse.framework */; };
 		FDAEE5E715A3A60A00D05E9C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAEE5E515A3A60A00D05E9C /* Parse.framework */; };
 		FDAEE5EE15A3A6BB00D05E9C /* IPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAEE5E915A3A6BB00D05E9C /* IPLoginViewController.m */; };
-		FDAEE5EF15A3A6BB00D05E9C /* IPLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAEE5E915A3A6BB00D05E9C /* IPLoginViewController.m */; };
 		FDAEE5F015A3A6BB00D05E9C /* IPLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDAEE5EA15A3A6BB00D05E9C /* IPLoginViewController.xib */; };
 		FDAEE5F115A3A6BB00D05E9C /* IPLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDAEE5EA15A3A6BB00D05E9C /* IPLoginViewController.xib */; };
 		FDAEE5F215A3A6BB00D05E9C /* IPNewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAEE5EC15A3A6BB00D05E9C /* IPNewUserViewController.m */; };
-		FDAEE5F315A3A6BB00D05E9C /* IPNewUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAEE5EC15A3A6BB00D05E9C /* IPNewUserViewController.m */; };
 		FDAEE5F415A3A6BB00D05E9C /* IPNewUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDAEE5ED15A3A6BB00D05E9C /* IPNewUserViewController.xib */; };
 		FDAEE5F515A3A6BB00D05E9C /* IPNewUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDAEE5ED15A3A6BB00D05E9C /* IPNewUserViewController.xib */; };
 		FDAEE5F815A3A7E500D05E9C /* IPWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAEE5F715A3A7E500D05E9C /* IPWelcomeViewController.m */; };
-		FDAEE5F915A3A7E500D05E9C /* IPWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAEE5F715A3A7E500D05E9C /* IPWelcomeViewController.m */; };
 		FDAEE5FF15A3A83200D05E9C /* IPWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDAEE5FE15A3A83200D05E9C /* IPWelcomeViewController.xib */; };
 		FDAEE60015A3A83200D05E9C /* IPWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDAEE5FE15A3A83200D05E9C /* IPWelcomeViewController.xib */; };
 		FDAEE60315A3A8C500D05E9C /* IPActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAEE60215A3A8C400D05E9C /* IPActivityView.m */; };
-		FDAEE60415A3A8C500D05E9C /* IPActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAEE60215A3A8C400D05E9C /* IPActivityView.m */; };
 		FDAEE60615A3A92300D05E9C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAEE60515A3A92300D05E9C /* AudioToolbox.framework */; };
 		FDAEE60815A3A92D00D05E9C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAEE60715A3A92D00D05E9C /* CFNetwork.framework */; };
 		FDAEE60A15A3A95E00D05E9C /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAEE60915A3A95E00D05E9C /* libz.1.2.5.dylib */; };
@@ -121,17 +108,13 @@
 		FDC733B515A3835000687431 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FDC733B315A3835000687431 /* InfoPlist.strings */; };
 		FDC733B815A3835000687431 /* IPTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733B715A3835000687431 /* IPTestTests.m */; };
 		FDC733CB15A38F3E00687431 /* FireUIPagedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733CA15A38F3E00687431 /* FireUIPagedScrollView.m */; };
-		FDC733CC15A38F3E00687431 /* FireUIPagedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733CA15A38F3E00687431 /* FireUIPagedScrollView.m */; };
 		FDC733D815A394C900687431 /* IPPopularPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733D615A394C900687431 /* IPPopularPagesViewController.m */; };
-		FDC733D915A394C900687431 /* IPPopularPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733D615A394C900687431 /* IPPopularPagesViewController.m */; };
 		FDC733DA15A394C900687431 /* IPPopularPagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC733D715A394C900687431 /* IPPopularPagesViewController.xib */; };
 		FDC733DB15A394C900687431 /* IPPopularPagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC733D715A394C900687431 /* IPPopularPagesViewController.xib */; };
 		FDC733E015A394DF00687431 /* IPMyPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733DE15A394DF00687431 /* IPMyPagesViewController.m */; };
-		FDC733E115A394DF00687431 /* IPMyPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733DE15A394DF00687431 /* IPMyPagesViewController.m */; };
 		FDC733E215A394DF00687431 /* IPMyPagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC733DF15A394DF00687431 /* IPMyPagesViewController.xib */; };
 		FDC733E315A394DF00687431 /* IPMyPagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC733DF15A394DF00687431 /* IPMyPagesViewController.xib */; };
 		FDC733E815A394F700687431 /* IPFollowingPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733E615A394F700687431 /* IPFollowingPagesViewController.m */; };
-		FDC733E915A394F700687431 /* IPFollowingPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC733E615A394F700687431 /* IPFollowingPagesViewController.m */; };
 		FDC733EA15A394F700687431 /* IPFollowingPagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC733E715A394F700687431 /* IPFollowingPagesViewController.xib */; };
 		FDC733EB15A394F700687431 /* IPFollowingPagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FDC733E715A394F700687431 /* IPFollowingPagesViewController.xib */; };
 		FDCAFA0F15AAD22C00AC3D9E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDCAFA0B15AAD22C00AC3D9E /* libTestFlight.a */; };
@@ -141,7 +124,6 @@
 		FDCAFA1315AAD22C00AC3D9E /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDCAFA0D15AAD22C00AC3D9E /* release_notes.txt */; };
 		FDCAFA1415AAD22C00AC3D9E /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDCAFA0D15AAD22C00AC3D9E /* release_notes.txt */; };
 		FDCAFA1715AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDCAFA1615AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m */; };
-		FDCAFA1815AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDCAFA1615AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m */; };
 		FDD2EB9515AFCD9700A2FCE1 /* SVPullToRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = FDD2EB9415AFCD9700A2FCE1 /* SVPullToRefresh.m */; };
 /* End PBXBuildFile section */
 
@@ -234,6 +216,10 @@
 		FD78214315AD362900447F92 /* IPRetrieveRankOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPRetrieveRankOperation.m; sourceTree = "<group>"; };
 		FD78214515AD43B900447F92 /* IPAveragePageRankOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAveragePageRankOperation.h; sourceTree = "<group>"; };
 		FD78214615AD43B900447F92 /* IPAveragePageRankOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAveragePageRankOperation.m; sourceTree = "<group>"; };
+		FD8BE23A15B157CA007C79B7 /* IPParseObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPParseObjectManager.h; path = "Parse Object Managing/IPParseObjectManager.h"; sourceTree = "<group>"; };
+		FD8BE23B15B157CA007C79B7 /* IPParseObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPParseObjectManager.m; path = "Parse Object Managing/IPParseObjectManager.m"; sourceTree = "<group>"; };
+		FD8BE23D15B15B7F007C79B7 /* IPPageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPPageManager.h; path = "Parse Object Managing/IPPageManager.h"; sourceTree = "<group>"; };
+		FD8BE23E15B15B7F007C79B7 /* IPPageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPPageManager.m; path = "Parse Object Managing/IPPageManager.m"; sourceTree = "<group>"; };
 		FDAEE5E215A3979000D05E9C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FDAEE5E515A3A60A00D05E9C /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		FDAEE5E815A3A6BB00D05E9C /* IPLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPLoginViewController.h; sourceTree = "<group>"; };
@@ -471,6 +457,17 @@
 			name = "Parse Operations";
 			sourceTree = "<group>";
 		};
+		FD8BE23915B15775007C79B7 /* Parse Object Managing */ = {
+			isa = PBXGroup;
+			children = (
+				FD8BE23A15B157CA007C79B7 /* IPParseObjectManager.h */,
+				FD8BE23B15B157CA007C79B7 /* IPParseObjectManager.m */,
+				FD8BE23D15B15B7F007C79B7 /* IPPageManager.h */,
+				FD8BE23E15B15B7F007C79B7 /* IPPageManager.m */,
+			);
+			name = "Parse Object Managing";
+			sourceTree = "<group>";
+		};
 		FDAEE61215A3AA6000D05E9C /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +563,7 @@
 		FDC7338F15A3835000687431 /* IPTest */ = {
 			isa = PBXGroup;
 			children = (
+				FD8BE23915B15775007C79B7 /* Parse Object Managing */,
 				FD78214115AD360700447F92 /* Parse Operations */,
 				FD15580715ABAA4600C38A78 /* Bookmark */,
 				FD6DE2E415A8170100376A42 /* Segment Container View Controller */,
@@ -609,8 +607,8 @@
 		FDC733B115A3835000687431 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FDC733B215A3835000687431 /* IPTestTests-Info.plist */,
 				FDC733B315A3835000687431 /* InfoPlist.strings */,
+				FDC733B215A3835000687431 /* IPTestTests-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -895,6 +893,8 @@
 				FD49EA2315AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */,
 				FD49EA3F15AF5C070091BCCB /* IPBookmarkContainerViewController.m in Sources */,
 				FDD2EB9515AFCD9700A2FCE1 /* SVPullToRefresh.m in Sources */,
+				FD8BE23C15B157CA007C79B7 /* IPParseObjectManager.m in Sources */,
+				FD8BE23F15B15B7F007C79B7 /* IPPageManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,28 +903,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDC733B815A3835000687431 /* IPTestTests.m in Sources */,
-				FDC733CC15A38F3E00687431 /* FireUIPagedScrollView.m in Sources */,
-				FDC733D915A394C900687431 /* IPPopularPagesViewController.m in Sources */,
-				FDC733E115A394DF00687431 /* IPMyPagesViewController.m in Sources */,
-				FDC733E915A394F700687431 /* IPFollowingPagesViewController.m in Sources */,
-				FDAEE5EF15A3A6BB00D05E9C /* IPLoginViewController.m in Sources */,
-				FDAEE5F315A3A6BB00D05E9C /* IPNewUserViewController.m in Sources */,
-				FDAEE5F915A3A7E500D05E9C /* IPWelcomeViewController.m in Sources */,
-				FDAEE60415A3A8C500D05E9C /* IPActivityView.m in Sources */,
-				FD28433C15A3C8020079D6D5 /* IPBookmarkViewController.m in Sources */,
-				FD427B2E15A6112300835E3F /* UIViewController+MHSemiModal.m in Sources */,
-				FD427B3515A6163A00835E3F /* IPListViewController.m in Sources */,
-				FD427B4715A6561200835E3F /* DCCrossHairView.m in Sources */,
-				FD427B4915A6561200835E3F /* DCFrameView.m in Sources */,
-				FD427B4B15A6561200835E3F /* DCIntrospect.m in Sources */,
-				FD427B4D15A6561200835E3F /* DCStatusBarOverlay.m in Sources */,
-				FD6DE2D915A7DAB500376A42 /* IPGridViewController.m in Sources */,
-				FD6DE2DF15A7DB1E00376A42 /* iCarousel.m in Sources */,
-				FD6DE2E915A8172100376A42 /* IPSegmentContainerViewController.m in Sources */,
-				FDCAFA1815AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */,
-				FD1558B615ACDC6000C38A78 /* IPInviteFriendToPageViewController.m in Sources */,
-				FD78214815AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */,
-				FD49EA2415AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */,
+				FD58771215B16E3B00152258 /* IPPageManager.m in Sources */,
+				FD58771315B16E3E00152258 /* IPParseObjectManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1099,6 +1079,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IPTest/IPTest-Prefix.pch";
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/QuickDialog/quickdialog";
 				INFOPLIST_FILE = "IPTestTests/IPTestTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1121,6 +1102,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IPTest/IPTest-Prefix.pch";
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/QuickDialog/quickdialog";
 				INFOPLIST_FILE = "IPTestTests/IPTestTests-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -15,6 +15,7 @@
 
 -(void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 -(void)didPushCreateButton:(id)sender;
+-(void)didPushInviteButton:(id)sender;
 -(void)didRequestRefresh;
 
 @end
@@ -31,5 +32,6 @@
 @property (strong, nonatomic) NSMutableDictionary * rankingDictionary;
 
 - (IBAction)addItemButton:(id)sender;
+- (IBAction)inviteFriendButtonPressed:(id)sender;
 - (void)updatedResultObjects:(NSMutableArray*)newObjects;
 @end

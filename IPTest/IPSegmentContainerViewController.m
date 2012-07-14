@@ -10,7 +10,7 @@
 #import "IPViewController.h"
 #import "UIViewController+KNSemiModal.h"
 #import "IPCreatePageViewController.h"
-
+#import "IPInviteFriendToPageViewController.h"
 @interface IPSegmentContainerViewController ()
 
 @end
@@ -20,6 +20,8 @@
 @synthesize segmentControl;
 @synthesize listVC, gridVC;
 @synthesize pageObject, objects = _objects;
+
+@synthesize pageManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,17 +46,49 @@
   [self.scrollView addPagedViewController:self.gridVC animated:NO];
   [self.navigationItem setTitleView:self.segmentControl];
   //HAX
-  UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
   UIBarButtonItem *spacerButton = [[UIBarButtonItem alloc]
-                                   initWithCustomView:view];
+                                   initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
   self.navigationItem.rightBarButtonItem = spacerButton;
+
   [self.navigationItem setHidesBackButton:YES];
   UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back"
                                  style:UIBarButtonSystemItemDone
                                  target:self
                                  action:@selector(customBackAction:)];
   self.navigationItem.leftBarButtonItem = backButton;
+    
+    self.pageManager = [[IPParseObjectManager sharedInstance]  pageManagerForObject:pageObject];
+    self.pageManager.delegate = self;
+
   // Do any additional setup after loading the view from its nib.
+}
+
+-(void)didFinishRefreshing{
+    NSLog(@"didFinishRefreshing");
+}
+
+-(void)didInviteUser{
+    NSLog(@"didInviteUser");
+}
+
+-(void)didAddCurrentUserToFollowing{
+    NSLog(@"didAddCurrentUserToFollowing");
+}
+
+-(void)didSubmitRankings{
+    NSLog(@"didSubmitRankings");
+}
+
+-(void)didComputeGlobalRanking{
+    NSLog(@"didComputeGlobalRanking");
+}
+
+-(void)didAddItem{
+    NSLog(@"didAddItem");
+}
+
+-(void)didRetrieveRankingForItems:(NSDictionary*)rankingDictionary{
+    NSLog(@"didRetrieveRankingForItems: %@", rankingDictionary);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,37 +98,6 @@
 -(void)viewDidAppear:(BOOL)animated{
     [self reloadItems];
 }
-
-//-(void)reloadItems{
-//    PFQuery *query = nil;
-//    //    NSInteger listTypeIndex = [[self.pageObject objectForKey:@"listType"] integerValue];
-//    
-//    query = [PFQuery queryWithClassName:@"Item"];
-//    [query orderByDescending:@"createdAt"];
-//    [query whereKey:@"Parent_Page" equalTo:pageObject];
-//    
-//    // If no objects are loaded in memory, we look to the cache
-//    // first to fill the table and then subsequently do a query
-//    // against the network.
-//    if ([self.objects count] == 0) {
-//        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
-//    }
-//    
-//    // Uncomment the following line to preserve selection between presentations.
-//    // self.clearsSelectionOnViewWillAppear = NO;
-//    
-//    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-//    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-//    
-//    
-//    [query findObjectsInBackgroundWithBlock:^(NSArray * objects, NSError * error){
-//        
-//        NSMutableArray * sortedObjects = [self sortObjects:objects];
-//        
-//        [self.gridVC updatedResultObjects:sortedObjects];
-//        [self.listVC updatedResultObjects:sortedObjects];
-//    }];
-//}
 
 -(void)reloadItems{
     NSError * error = nil;
@@ -148,10 +151,10 @@
                     return NSOrderedDescending;
                 }
             }];
-        dispatch_async( dispatch_get_main_queue(), ^{
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(){
             [self.gridVC updatedResultObjects:[sortedArray mutableCopy]];
             [self.listVC updatedResultObjects:[sortedArray mutableCopy]];
-        });
+        }];
     });
 }
 
@@ -202,6 +205,16 @@
   UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:addListItemVC];
 
   [self presentModalViewController:navigationController animated:YES];
+}
+
+-(void)didPushInviteButton:(id)sender{
+    IPInviteFriendToPageViewController * inviteVC = [[IPInviteFriendToPageViewController alloc] initWithNibName:@"IPInviteFriendToPageViewController" bundle:[NSBundle mainBundle]];
+    UINavigationController * navigationController = [[UINavigationController alloc] initWithRootViewController:inviteVC];
+    [inviteVC setPageObject:self.pageObject];
+    PFRelation * followersRelation = [self.pageObject relationforKey:@"Followers"];
+    NSArray * followersArray = [[followersRelation query] findObjects];
+    [[inviteVC selectedUsersArray] addObjectsFromArray:followersArray];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (void)customBackAction:(id)sender {

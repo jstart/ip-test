@@ -12,8 +12,9 @@
 #import "IPGridViewController.h"
 #import "IPBookmarkBaseViewController.h"
 #import "IPAveragePageRankOperation.h"
+#import "IPParseObjectManager.h"
 
-@interface IPSegmentContainerViewController : IPBookmarkBaseViewController <IPGridViewDelegate, IPListViewDelegate, IPAveragePageRankDelegate>{
+@interface IPSegmentContainerViewController : IPBookmarkBaseViewController <IPGridViewDelegate, IPListViewDelegate, IPAveragePageRankDelegate, IPPageManagerDelegate>{
   NSMutableArray * _objects;
 }
 @property (strong, nonatomic) IBOutlet FireUIPagedScrollView *scrollView;
@@ -22,6 +23,8 @@
 @property (strong, nonatomic) IPGridViewController * gridVC;
 @property (strong, nonatomic) PFObject * pageObject;
 @property (strong, nonatomic) NSMutableArray * objects;
+
+@property (strong, nonatomic) IPPageManager * pageManager;
 
 -(void)customBackActionNoAnimation:(int)homePageIndex;
 -(void)sortObjects:(NSArray *)objects;

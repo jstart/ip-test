@@ -73,7 +73,11 @@
     if ([listTypeIndex intValue] == 1) {
         [[self tableView] setAllowsSelectionDuringEditing:YES];
         [self.tableView setEditing:YES animated:YES];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(){
+            [[self tableView] beginUpdates];
         [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [[self tableView] endUpdates];
+        }];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self.delegate selector:@selector(didRequestRefresh) name:@"RankingPush" object:nil];
     [[self tableView] addPullToRefreshWithActionHandler:^{
@@ -110,12 +114,11 @@
 }
 
 -(void)updatedResultObjects:(NSMutableArray*)newObjects{
-    [[self tableView] beginUpdates];
   self.objects = newObjects;
     IPRetrieveRankOperation * op = [[IPRetrieveRankOperation alloc] initWithItems:self.objects pageObject:self.pageObject];
   op.delegate = self;
   [self.queue addOperation:op];
-  [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+//  [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
   [self.tableView.pullToRefreshView stopAnimating];
 }
 
@@ -124,6 +127,7 @@
     self.isRankLoaded = [NSNumber numberWithBool:YES];
 //    [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     [[NSOperationQueue mainQueue] addOperationWithBlock:^(){
+        [[self tableView] beginUpdates];
         [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
         [[self tableView] endUpdates];
     }];
@@ -213,44 +217,38 @@
 {
     PFObject *movingObject = [self.objects objectAtIndex:fromIndexPath.row];
 	[self.objects removeObject:movingObject];
-	[self.objects insertObject:movingObject atIndex:toIndexPath.row];
+    if (toIndexPath.row > [self.objects count]) {
+        [self.objects insertObject:movingObject atIndex:[self.objects count]-1];
+    }else{
+        [self.objects insertObject:movingObject atIndex:toIndexPath.row];
+    }
     NSMutableArray * array = [NSMutableArray array];
     [array addObject:fromIndexPath];
     [array addObject:toIndexPath];
-//    [[self tableView] reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
 
-    [self.queue addOperationWithBlock:^(){
-        int count = 0;
-        for (PFObject * object in self.objects) {
-            PFObject * ranking = nil;
-            if ([self.rankingDictionary objectForKey:object.objectId]) {
-                ranking = [self.rankingDictionary objectForKey:object.objectId];
-            }else {
-                ranking = [PFObject objectWithClassName:@"Ranking"];
-                NSLog(@"Creating new rank object for itemID:%@", object.objectId);
-                [ranking setObject:object forKey:@"Parent_Item"];
-                [ranking setObject:self.pageObject forKey:@"Parent_Page"];
-                [ranking setObject:[PFUser currentUser] forKey:@"Parent_User"];
-                [ranking save];
-                [self.pageObject addObject:ranking forKey:@"Rankings"];
-                [self.pageObject save];
-            }   
-            [ranking setValue:[NSNumber numberWithInt:count+1] forKey:@"position"];
-            BOOL succeeded = [ranking save];
-
-            if (succeeded) {
-                [self.queue addOperationWithBlock:^(){
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
-                });
-                }];
-            }
-            count++;
-        }
-        IPAveragePageRankOperation * avOP = [[IPAveragePageRankOperation alloc] initWithPage:self.pageObject];
-        avOP.delegate = (id<IPAveragePageRankDelegate>)self.delegate;
-        [self.queue addOperation:avOP];
-    }];
+    int count = 0;
+    NSMutableArray * rankingsArray = [[NSMutableArray alloc] init];
+    for (PFObject * object in self.objects) {
+        PFObject * ranking = nil;
+        if ([self.rankingDictionary objectForKey:object.objectId]) {
+            ranking = [self.rankingDictionary objectForKey:object.objectId];
+        }else {
+            ranking = [PFObject objectWithClassName:@"Ranking"];
+            NSLog(@"Creating new rank object for itemID:%@", object.objectId);
+            [ranking setObject:object forKey:@"Parent_Item"];
+            [ranking setObject:self.pageObject forKey:@"Parent_Page"];
+            [ranking setObject:[PFUser currentUser] forKey:@"Parent_User"];
+            [self.pageObject addObject:ranking forKey:@"Rankings"];
+        }   
+        [ranking setValue:[NSNumber numberWithInt:count+1] forKey:@"position"];
+        [rankingsArray addObject:ranking];
+        count++;
+    }
+    
+    IPAveragePageRankOperation * avOP = [[IPAveragePageRankOperation alloc] initWithPage:self.pageObject];
+    avOP.delegate = (id<IPAveragePageRankDelegate>)self.delegate;
+    [self.queue addOperation:avOP];
+    
     NSString * rankText = [NSString stringWithFormat:@"%@ submitted a ranking to the page %@", [PFUser currentUser].username, [pageObject objectForKey:@"Title"]];
     
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -302,6 +300,10 @@
 
 - (IBAction)addItemButton:(id)sender {
     [self.delegate didPushCreateButton:sender];
+}
+
+- (IBAction)inviteFriendButtonPressed:(id)sender {
+    [self.delegate didPushInviteButton:sender];
 }
 
 @end
