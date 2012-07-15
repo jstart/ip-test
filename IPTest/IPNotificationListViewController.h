@@ -10,4 +10,6 @@
 
 @interface IPNotificationListViewController : UITableViewController
 
+@property (nonatomic, strong) NSMutableArray * notificationsArray;
+
 @end

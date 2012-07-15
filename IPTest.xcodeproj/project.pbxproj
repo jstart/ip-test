@@ -58,8 +58,10 @@
 		FD6DE2EB15A8172100376A42 /* IPSegmentContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2E715A8172100376A42 /* IPSegmentContainerViewController.xib */; };
 		FD6DE2ED15A8203700376A42 /* IPGridViewTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2EC15A8203700376A42 /* IPGridViewTemplate.xib */; };
 		FD6DE2EE15A8203700376A42 /* IPGridViewTemplate.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD6DE2EC15A8203700376A42 /* IPGridViewTemplate.xib */; };
-		FD78214415AD362900447F92 /* IPRetrieveRankOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD78214315AD362900447F92 /* IPRetrieveRankOperation.m */; };
-		FD78214715AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD78214615AD43B900447F92 /* IPAveragePageRankOperation.m */; };
+		FD88345215B28A2000149871 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FD88344F15B28A2000149871 /* SVProgressHUD.bundle */; };
+		FD88345315B28A2000149871 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = FD88345115B28A2000149871 /* SVProgressHUD.m */; };
+		FD88345B15B2936100149871 /* IPBookmarkSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD88345915B2936100149871 /* IPBookmarkSearchViewController.m */; };
+		FD88345C15B2936100149871 /* IPBookmarkSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD88345A15B2936100149871 /* IPBookmarkSearchViewController.xib */; };
 		FD8BE23C15B157CA007C79B7 /* IPParseObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8BE23B15B157CA007C79B7 /* IPParseObjectManager.m */; };
 		FD8BE23F15B15B7F007C79B7 /* IPPageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8BE23E15B15B7F007C79B7 /* IPPageManager.m */; };
 		FDAEE5E315A3979000D05E9C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAEE5E215A3979000D05E9C /* QuartzCore.framework */; };
@@ -212,10 +214,12 @@
 		FD6DE2E615A8172100376A42 /* IPSegmentContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPSegmentContainerViewController.m; sourceTree = "<group>"; };
 		FD6DE2E715A8172100376A42 /* IPSegmentContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPSegmentContainerViewController.xib; sourceTree = "<group>"; };
 		FD6DE2EC15A8203700376A42 /* IPGridViewTemplate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPGridViewTemplate.xib; sourceTree = "<group>"; };
-		FD78214215AD362900447F92 /* IPRetrieveRankOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPRetrieveRankOperation.h; sourceTree = "<group>"; };
-		FD78214315AD362900447F92 /* IPRetrieveRankOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPRetrieveRankOperation.m; sourceTree = "<group>"; };
-		FD78214515AD43B900447F92 /* IPAveragePageRankOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAveragePageRankOperation.h; sourceTree = "<group>"; };
-		FD78214615AD43B900447F92 /* IPAveragePageRankOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPAveragePageRankOperation.m; sourceTree = "<group>"; };
+		FD88344F15B28A2000149871 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		FD88345015B28A2000149871 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		FD88345115B28A2000149871 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		FD88345815B2936100149871 /* IPBookmarkSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPBookmarkSearchViewController.h; sourceTree = "<group>"; };
+		FD88345915B2936100149871 /* IPBookmarkSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPBookmarkSearchViewController.m; sourceTree = "<group>"; };
+		FD88345A15B2936100149871 /* IPBookmarkSearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPBookmarkSearchViewController.xib; sourceTree = "<group>"; };
 		FD8BE23A15B157CA007C79B7 /* IPParseObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPParseObjectManager.h; path = "Parse Object Managing/IPParseObjectManager.h"; sourceTree = "<group>"; };
 		FD8BE23B15B157CA007C79B7 /* IPParseObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPParseObjectManager.m; path = "Parse Object Managing/IPParseObjectManager.m"; sourceTree = "<group>"; };
 		FD8BE23D15B15B7F007C79B7 /* IPPageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPPageManager.h; path = "Parse Object Managing/IPPageManager.h"; sourceTree = "<group>"; };
@@ -332,6 +336,7 @@
 		FD15580715ABAA4600C38A78 /* Bookmark */ = {
 			isa = PBXGroup;
 			children = (
+				FD88345715B2933900149871 /* Search View Controller */,
 				FD2032EA15A7AC0200FB5FF1 /* Notification List View */,
 				FD28433815A3C8020079D6D5 /* IPBookmarkViewController.h */,
 				FD28433915A3C8020079D6D5 /* IPBookmarkViewController.m */,
@@ -446,15 +451,80 @@
 			name = "Segment Container View Controller";
 			sourceTree = "<group>";
 		};
-		FD78214115AD360700447F92 /* Parse Operations */ = {
+		FD88344E15B28A2000149871 /* SVProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				FD78214515AD43B900447F92 /* IPAveragePageRankOperation.h */,
-				FD78214615AD43B900447F92 /* IPAveragePageRankOperation.m */,
-				FD78214215AD362900447F92 /* IPRetrieveRankOperation.h */,
-				FD78214315AD362900447F92 /* IPRetrieveRankOperation.m */,
+				FD88344F15B28A2000149871 /* SVProgressHUD.bundle */,
+				FD88345015B28A2000149871 /* SVProgressHUD.h */,
+				FD88345115B28A2000149871 /* SVProgressHUD.m */,
 			);
-			name = "Parse Operations";
+			name = SVProgressHUD;
+			path = SVProgressHUD/SVProgressHUD;
+			sourceTree = "<group>";
+		};
+		FD88345415B2911A00149871 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				FDAEE5E515A3A60A00D05E9C /* Parse.framework */,
+				FDAEE5E215A3979000D05E9C /* QuartzCore.framework */,
+				FD15589B15ACB26900C38A78 /* MapKit.framework */,
+				FD6DE2A915A7C34900376A42 /* CoreLocation.framework */,
+				FD6DE2A715A7C0E500376A42 /* CityGrid.framework */,
+				FDAEE60F15A3A97700D05E9C /* SystemConfiguration.framework */,
+				FDAEE60D15A3A96600D05E9C /* Security.framework */,
+				FDAEE60B15A3A96200D05E9C /* MobileCoreServices.framework */,
+				FDAEE60915A3A95E00D05E9C /* libz.1.2.5.dylib */,
+				FDAEE60715A3A92D00D05E9C /* CFNetwork.framework */,
+				FDAEE60515A3A92300D05E9C /* AudioToolbox.framework */,
+			);
+			name = Framework;
+			sourceTree = "<group>";
+		};
+		FD88345515B2912C00149871 /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				FDC733C915A38F3E00687431 /* FireUIPagedScrollView.h */,
+				FDC733CA15A38F3E00687431 /* FireUIPagedScrollView.m */,
+				FD88344E15B28A2000149871 /* SVProgressHUD */,
+				FDD2EB9215AFCD9700A2FCE1 /* SVPullToRefresh */,
+				FD49EA2515AF4D900091BCCB /* Bookmark transition category */,
+				FD15588B15ACB24200C38A78 /* QuickDialog.xcodeproj */,
+				FDCAFA0A15AAD22C00AC3D9E /* TestFlightSDK1.0 */,
+				FD6DE2DC15A7DB1D00376A42 /* iCarousel.h */,
+				FD6DE2DD15A7DB1D00376A42 /* iCarousel.m */,
+				FD427B3C15A6561200835E3F /* DCIntrospect */,
+			);
+			name = Externals;
+			sourceTree = "<group>";
+		};
+		FD88345615B2913600149871 /* Login&Signup */ = {
+			isa = PBXGroup;
+			children = (
+				FDAEE60115A3A8C400D05E9C /* IPActivityView.h */,
+				FDAEE60215A3A8C400D05E9C /* IPActivityView.m */,
+				FD427B2B15A6112300835E3F /* UIViewController+MHSemiModal.h */,
+				FD427B2C15A6112300835E3F /* UIViewController+MHSemiModal.m */,
+				FDAEE5FE15A3A83200D05E9C /* IPWelcomeViewController.xib */,
+				FDAEE5F615A3A7E500D05E9C /* IPWelcomeViewController.h */,
+				FDAEE5F715A3A7E500D05E9C /* IPWelcomeViewController.m */,
+				FDAEE5E815A3A6BB00D05E9C /* IPLoginViewController.h */,
+				FDAEE5E915A3A6BB00D05E9C /* IPLoginViewController.m */,
+				FDAEE5EA15A3A6BB00D05E9C /* IPLoginViewController.xib */,
+				FDAEE5EB15A3A6BB00D05E9C /* IPNewUserViewController.h */,
+				FDAEE5EC15A3A6BB00D05E9C /* IPNewUserViewController.m */,
+				FDAEE5ED15A3A6BB00D05E9C /* IPNewUserViewController.xib */,
+			);
+			name = "Login&Signup";
+			sourceTree = "<group>";
+		};
+		FD88345715B2933900149871 /* Search View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FD88345815B2936100149871 /* IPBookmarkSearchViewController.h */,
+				FD88345915B2936100149871 /* IPBookmarkSearchViewController.m */,
+				FD88345A15B2936100149871 /* IPBookmarkSearchViewController.xib */,
+			);
+			name = "Search View Controller";
 			sourceTree = "<group>";
 		};
 		FD8BE23915B15775007C79B7 /* Parse Object Managing */ = {
@@ -500,39 +570,9 @@
 		FDC7337A15A3835000687431 = {
 			isa = PBXGroup;
 			children = (
-				FDD2EB9215AFCD9700A2FCE1 /* SVPullToRefresh */,
-				FD49EA2515AF4D900091BCCB /* Bookmark transition category */,
-				FD15589B15ACB26900C38A78 /* MapKit.framework */,
-				FD15588B15ACB24200C38A78 /* QuickDialog.xcodeproj */,
-				FDCAFA0A15AAD22C00AC3D9E /* TestFlightSDK1.0 */,
-				FD6DE2DC15A7DB1D00376A42 /* iCarousel.h */,
-				FD6DE2DD15A7DB1D00376A42 /* iCarousel.m */,
-				FD6DE2A915A7C34900376A42 /* CoreLocation.framework */,
-				FD6DE2A715A7C0E500376A42 /* CityGrid.framework */,
-				FD427B3C15A6561200835E3F /* DCIntrospect */,
-				FDAEE60F15A3A97700D05E9C /* SystemConfiguration.framework */,
-				FDAEE60D15A3A96600D05E9C /* Security.framework */,
-				FDAEE60B15A3A96200D05E9C /* MobileCoreServices.framework */,
-				FDAEE60915A3A95E00D05E9C /* libz.1.2.5.dylib */,
-				FDAEE60715A3A92D00D05E9C /* CFNetwork.framework */,
-				FDAEE60515A3A92300D05E9C /* AudioToolbox.framework */,
-				FDAEE60115A3A8C400D05E9C /* IPActivityView.h */,
-				FDAEE60215A3A8C400D05E9C /* IPActivityView.m */,
-				FD427B2B15A6112300835E3F /* UIViewController+MHSemiModal.h */,
-				FD427B2C15A6112300835E3F /* UIViewController+MHSemiModal.m */,
-				FDAEE5FE15A3A83200D05E9C /* IPWelcomeViewController.xib */,
-				FDAEE5F615A3A7E500D05E9C /* IPWelcomeViewController.h */,
-				FDAEE5F715A3A7E500D05E9C /* IPWelcomeViewController.m */,
-				FDAEE5E815A3A6BB00D05E9C /* IPLoginViewController.h */,
-				FDAEE5E915A3A6BB00D05E9C /* IPLoginViewController.m */,
-				FDAEE5EA15A3A6BB00D05E9C /* IPLoginViewController.xib */,
-				FDAEE5EB15A3A6BB00D05E9C /* IPNewUserViewController.h */,
-				FDAEE5EC15A3A6BB00D05E9C /* IPNewUserViewController.m */,
-				FDAEE5ED15A3A6BB00D05E9C /* IPNewUserViewController.xib */,
-				FDAEE5E515A3A60A00D05E9C /* Parse.framework */,
-				FDAEE5E215A3979000D05E9C /* QuartzCore.framework */,
-				FDC733C915A38F3E00687431 /* FireUIPagedScrollView.h */,
-				FDC733CA15A38F3E00687431 /* FireUIPagedScrollView.m */,
+				FD88345515B2912C00149871 /* Externals */,
+				FD88345415B2911A00149871 /* Framework */,
+				FD88345615B2913600149871 /* Login&Signup */,
 				FDC7338F15A3835000687431 /* IPTest */,
 				FDC733B015A3835000687431 /* IPTestTests */,
 				FDC7338815A3835000687431 /* Frameworks */,
@@ -564,7 +604,6 @@
 			isa = PBXGroup;
 			children = (
 				FD8BE23915B15775007C79B7 /* Parse Object Managing */,
-				FD78214115AD360700447F92 /* Parse Operations */,
 				FD15580715ABAA4600C38A78 /* Bookmark */,
 				FD6DE2E415A8170100376A42 /* Segment Container View Controller */,
 				FDC3C1D715A7696C00C44B57 /* Create Flow View Controllers */,
@@ -803,6 +842,8 @@
 				FD1558B215ACBEC700C38A78 /* ip_form.json in Resources */,
 				FD1558BB15ACDD2000C38A78 /* IPInviteFriendToPageViewController.xib in Resources */,
 				FD49EA4015AF5C070091BCCB /* IPBookmarkContainerViewController.xib in Resources */,
+				FD88345215B28A2000149871 /* SVProgressHUD.bundle in Resources */,
+				FD88345C15B2936100149871 /* IPBookmarkSearchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,13 +929,13 @@
 				FD6DE2E815A8172100376A42 /* IPSegmentContainerViewController.m in Sources */,
 				FDCAFA1715AAD3AB00AC3D9E /* IPBookmarkBaseViewController.m in Sources */,
 				FD1558BA15ACDD1D00C38A78 /* IPInviteFriendToPageViewController.m in Sources */,
-				FD78214415AD362900447F92 /* IPRetrieveRankOperation.m in Sources */,
-				FD78214715AD43B900447F92 /* IPAveragePageRankOperation.m in Sources */,
 				FD49EA2315AF4D8B0091BCCB /* UIViewController+KNSemiModal.m in Sources */,
 				FD49EA3F15AF5C070091BCCB /* IPBookmarkContainerViewController.m in Sources */,
 				FDD2EB9515AFCD9700A2FCE1 /* SVPullToRefresh.m in Sources */,
 				FD8BE23C15B157CA007C79B7 /* IPParseObjectManager.m in Sources */,
 				FD8BE23F15B15B7F007C79B7 /* IPPageManager.m in Sources */,
+				FD88345315B28A2000149871 /* SVProgressHUD.m in Sources */,
+				FD88345B15B2936100149871 /* IPBookmarkSearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

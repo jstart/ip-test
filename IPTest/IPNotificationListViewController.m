@@ -14,6 +14,8 @@
 
 @implementation IPNotificationListViewController
 
+@synthesize notificationsArray;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -26,7 +28,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self setWantsFullScreenLayout:NO];
+    self.notificationsArray = [[NSMutableArray alloc] init];
+         //    [self setWantsFullScreenLayout:NO];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -43,6 +46,14 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    NSMutableArray * notificationsArrayStore = [[NSUserDefaults standardUserDefaults] objectForKey:@"IPNotifications"];
+    if(notificationsArrayStore !=nil){
+        for (NSDictionary * notificationDict in notificationsArrayStore) {
+            [self.notificationsArray removeObjectIdenticalTo:notificationDict];
+        }
+        [self.notificationsArray addObjectsFromArray:notificationsArrayStore];
+    }
+    [self.tableView reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -61,7 +72,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 5;
+    return [self.notificationsArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -74,7 +85,7 @@
     }
   
     // Configure the cell...
-    cell.textLabel.text = @"Test";
+    cell.textLabel.text = [[[self.notificationsArray objectAtIndex:indexPath.row] objectForKey:@"aps"] objectForKey:@"alert"];
     return cell;
 }
 

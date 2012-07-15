@@ -201,24 +201,25 @@
 
 -(void)pushInviteToSelectedUsers{
     //Push a notification to the user
-    for (PFUser * user in self.selectedUsersArray) {
-        NSString * inviteText = [NSString stringWithFormat:@"%@ invited you to the page %@", [PFUser currentUser].username, [pageObject objectForKey:@"Title"]];
-        
-        NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
-                              @"Invite", @"Type",
-                              inviteText, @"alert",
-                              [NSNumber numberWithInt:1], @"badge",
-                              pageObject.objectId, @"pageObjectId",
-                              nil];
-        NSString * channelName = [NSString stringWithFormat:@"UserChannel_%@", user.objectId];
-        
-        PFPush *push = [[PFPush alloc] init];
-        [push setChannel:channelName];
-        [push setPushToAndroid:NO];
-        [push setPushToIOS:YES];
-        [push setData:data];
-        [push sendPushInBackground];
-    }
+    [[[IPParseObjectManager sharedInstance] pageManagerForObject:self.pageObject] inviteUsers:self.selectedUsersArray];
+//    for (PFUser * user in self.selectedUsersArray) {
+//        NSString * inviteText = [NSString stringWithFormat:@"%@ invited you to the page %@", [PFUser currentUser].username, [pageObject objectForKey:@"Title"]];
+//        
+//        NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
+//                              @"Invite", @"Type",
+//                              inviteText, @"alert",
+//                              [NSNumber numberWithInt:1], @"badge",
+//                              pageObject.objectId, @"pageObjectId",
+//                              nil];
+//        NSString * channelName = [NSString stringWithFormat:@"UserChannel_%@", user.objectId];
+//        
+//        PFPush *push = [[PFPush alloc] init];
+//        [push setChannel:channelName];
+//        [push setPushToAndroid:NO];
+//        [push setPushToIOS:YES];
+//        [push setData:data];
+//        [push sendPushInBackground];
+//    }
     
     [[self presentingViewController] dismissModalViewControllerAnimated:YES];
 }

@@ -8,6 +8,7 @@
 
 #import "IPListViewController.h"
 #import "SVPullToRefresh.h"
+#import "SVProgressHud.h"
 
 @interface IPListViewController ()
 
@@ -23,6 +24,7 @@
 @synthesize isRankLoaded;
 @synthesize queue;
 @synthesize rankingDictionary = _rankingDictionary;
+@synthesize pageManager;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -51,14 +53,11 @@
 
 - (void)viewDidLoad
 {
-//    self.className = @"Item";
-//    self.pullToRefreshEnabled = YES;
-//    self.paginationEnabled = YES;
-//    self.objectsPerPage = 25;
+    [super viewDidLoad];
+
     self.isRankLoaded = [NSNumber numberWithBool:NO];
     self.queue = [[NSOperationQueue alloc] init];
     [self.queue setMaxConcurrentOperationCount:1];
-    [super viewDidLoad];
   
     [self.tableView setTableHeaderView:self.createHeaderTableViewCell];
 
@@ -70,12 +69,12 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
     if ([listTypeIndex intValue] == 1) {
         [[self tableView] setAllowsSelectionDuringEditing:YES];
-        [self.tableView setEditing:YES animated:YES];
         [[NSOperationQueue mainQueue] addOperationWithBlock:^(){
             [[self tableView] beginUpdates];
-        [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
             [[self tableView] endUpdates];
         }];
     }
@@ -83,8 +82,12 @@
     [[self tableView] addPullToRefreshWithActionHandler:^{
         // refresh data
         // call [tableView.pullToRefreshView stopAnimating] when done
-        [self.delegate didRequestRefresh];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^(){
+            [self.tableView setEditing:NO animated:YES];
+            [self.delegate didRequestRefresh];
+         }];
     }];
+    self.pageManager = [[IPParseObjectManager sharedInstance] pageManagerForObject:pageObject];
 }
 
 - (void)viewDidUnload
@@ -115,20 +118,36 @@
 
 -(void)updatedResultObjects:(NSMutableArray*)newObjects{
   self.objects = newObjects;
-    IPRetrieveRankOperation * op = [[IPRetrieveRankOperation alloc] initWithItems:self.objects pageObject:self.pageObject];
-  op.delegate = self;
-  [self.queue addOperation:op];
-//  [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-  [self.tableView.pullToRefreshView stopAnimating];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^(){
+        [[self tableView] beginUpdates];
+        [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [[self tableView] endUpdates];
+        [[self tableView] beginUpdates];
+        [self.tableView.pullToRefreshView stopAnimating];
+        [self.tableView setEditing:NO animated:YES];
+        [[self tableView] endUpdates];
+    }];
+}
+
+-(void)didSubmitRankingSuccessfully{
+    [SVProgressHUD showSuccessWithStatus:@"Ranking Submitted"];
+    [SVProgressHUD showWithStatus:@"Computing Global Ranking"];
+}
+
+-(void)didComputeGlobalRanking{
+    [SVProgressHUD showSuccessWithStatus:@"Average Rank Calculated"];
 }
 
 -(void)retrievedRanks:(NSMutableDictionary *)ranks{
     self.rankingDictionary = ranks;
     self.isRankLoaded = [NSNumber numberWithBool:YES];
-//    [[self tableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
     [[NSOperationQueue mainQueue] addOperationWithBlock:^(){
         [[self tableView] beginUpdates];
-        [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
+        [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [[self tableView] endUpdates];
+        [[self tableView] beginUpdates];
+        [self.tableView.pullToRefreshView stopAnimating];
+        [self.tableView setEditing:YES animated:YES];
         [[self tableView] endUpdates];
     }];
 }
@@ -167,6 +186,9 @@
                 NSNumber * position = [[self.rankingDictionary objectForKey:object.objectId] objectForKey:@"position"];
                 cell.detailTextLabel.text = [NSString stringWithFormat:@"You ranked: %d", [position intValue]];
             }
+            else{
+                cell.detailTextLabel.text = @"";
+            }
         }else{
             cell.textLabel.text = [object objectForKey:@"Title"];
             cell.detailTextLabel.text = @"";
@@ -184,10 +206,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    if ([self.isRankLoaded boolValue]) {
-        return YES;
-    }
-    return NO;
+    return YES;
 }
 
 
@@ -232,22 +251,41 @@
         PFObject * ranking = nil;
         if ([self.rankingDictionary objectForKey:object.objectId]) {
             ranking = [self.rankingDictionary objectForKey:object.objectId];
-        }else {
-            ranking = [PFObject objectWithClassName:@"Ranking"];
-            NSLog(@"Creating new rank object for itemID:%@", object.objectId);
-            [ranking setObject:object forKey:@"Parent_Item"];
-            [ranking setObject:self.pageObject forKey:@"Parent_Page"];
-            [ranking setObject:[PFUser currentUser] forKey:@"Parent_User"];
-            [self.pageObject addObject:ranking forKey:@"Rankings"];
+        }
+        else {
+            PFQuery * rankQuery = [PFQuery queryWithClassName:@"Ranking"];
+            [rankQuery whereKey:@"Parent_Item" equalTo:object];
+            [rankQuery whereKey:@"Parent_Page" equalTo:self.pageObject];
+            [rankQuery whereKey:@"Parent_User" equalTo:[PFUser currentUser]];
+            NSError * error = nil;
+            PFObject * rankObject = [rankQuery getFirstObject:&error];
+            if (error) {
+                NSLog(@"Error finding rank item %@", error);
+            }
+            if (rankObject) {
+                ranking = rankObject;
+            }else{
+                ranking = [PFObject objectWithClassName:@"Ranking"];
+                NSLog(@"Creating new rank object for itemID:%@", object.objectId);
+                [ranking setObject:object forKey:@"Parent_Item"];
+                [ranking setObject:self.pageObject forKey:@"Parent_Page"];
+                [ranking setObject:[PFUser currentUser] forKey:@"Parent_User"];
+            }
         }   
         [ranking setValue:[NSNumber numberWithInt:count+1] forKey:@"position"];
         [rankingsArray addObject:ranking];
         count++;
     }
+    [self.pageManager submitRankings:rankingsArray];
     
-    IPAveragePageRankOperation * avOP = [[IPAveragePageRankOperation alloc] initWithPage:self.pageObject];
-    avOP.delegate = (id<IPAveragePageRankDelegate>)self.delegate;
-    [self.queue addOperation:avOP];
+    [SVProgressHUD showWithStatus:@"Submitting Ranking" maskType:SVProgressHUDMaskTypeClear];
+    
+    //if we submit a ranking, disable editing
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^(){
+        [[self tableView] beginUpdates];
+        [self.tableView setEditing:NO animated:YES];
+        [[self tableView] endUpdates];
+    }];
     
     NSString * rankText = [NSString stringWithFormat:@"%@ submitted a ranking to the page %@", [PFUser currentUser].username, [pageObject objectForKey:@"Title"]];
     

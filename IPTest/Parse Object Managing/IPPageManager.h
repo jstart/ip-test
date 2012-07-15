@@ -22,9 +22,9 @@
 
 @interface IPPageManager : NSObject
 
-@property (nonatomic, weak) PFObject * pageObject;
-@property (nonatomic, strong) NSOperationQueue * queue;
-@property (nonatomic, strong) id<IPPageManagerDelegate> delegate;
+@property (atomic, strong) PFObject * pageObject;
+@property (atomic, strong) NSOperationQueue * queue;
+@property (atomic, strong) id<IPPageManagerDelegate> delegate;
 
 +(IPPageManager*)pageManagerForPageObject:(PFObject*)pageObject;
 

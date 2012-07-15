@@ -34,7 +34,7 @@
         pageManager =  [self.pageManagerDictionary objectForKey:pageObject.objectId];
     }else{
         pageManager = [IPPageManager pageManagerForPageObject:pageObject];
-        [self.pageManagerDictionary setObject:pageObject forKey:pageObject.objectId];
+        [self.pageManagerDictionary setObject:pageManager forKey:pageObject.objectId];
     }
     return pageManager;
 }

@@ -1,22 +1,19 @@
 //
-//  IPAddListItemViewController.m
+//  IPBookmarkSearchViewController.m
 //  IPTest
 //
-//  Created by Truman, Christopher on 7/6/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Truman, Christopher on 7/14/12.
+//
 //
 
-#import "IPAddListItemViewController.h"
-#import "IPSegmentContainerViewController.h"
-#import <CityGrid/CityGrid.h>
+#import "IPBookmarkSearchViewController.h"
 
-@interface IPAddListItemViewController ()
+@interface IPBookmarkSearchViewController ()
 
 @end
 
-@implementation IPAddListItemViewController
-
-@synthesize queue, placesArray, pageObject;
+@implementation IPBookmarkSearchViewController
+@synthesize searchBar;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,11 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.queue = [[NSOperationQueue alloc] init];
-    self.placesArray = [[NSMutableArray alloc] init];
-    UIBarButtonItem * closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelPressed)];
-    self.navigationItem.leftBarButtonItem = closeButton;
-    self.title = @"Add Item";
+    [self.searchBar setScopeButtonTitles:[NSArray arrayWithObjects:@"Pages", @"Places", @"People", nil]];
+    [self.searchBar setShowsScopeBar:YES];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -42,24 +36,21 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
--(void)viewDidAppear:(BOOL)animated{
-	
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+
+    [self.tableView reloadData];
 }
 
-- (void)viewDidUnload
+- (void)didReceiveMemoryWarning
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
--(void)cancelPressed{
-    [self.presentingViewController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
@@ -73,7 +64,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [placesArray count];
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,42 +73,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    // Configure the cell...
-    if ([placesArray count] >= indexPath.row) {
-        cell.textLabel.text = ((CGPlacesSearchLocation *)[placesArray objectAtIndex:indexPath.row]).name;
-    }else {
-        cell.textLabel.text = @"No Results";
-    }
-    return cell;
-}
-
--(void)citygridSearchRequestForString:(NSString*)searchQuery{
-  [self.queue addOperationWithBlock:^{
-		CGPlacesSearch* search = [CityGrid placesSearch];
-		search.type = CGPlacesSearchTypeRestaurant;
-		search.radius = 20.0;
-		search.resultsPerPage = 20;
-		search.what = searchQuery;
-    search.where = @"Los Angeles, CA";
     
-		NSArray* errors = nil;
-		NSArray* tmpPlaces = [search search:&errors].locations;
-		if ([errors count] > 0) {
-			NSError* first = [errors objectAtIndex:0];
-			[[NSOperationQueue mainQueue] addOperationWithBlock:^{
-				UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Error" message:first.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-				[alert show];
-			}];
-		} else {
-			self.placesArray = [tmpPlaces mutableCopy];
-			[[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        [[self.searchDisplayController searchResultsTableView] performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-			}];
-		}
-  }];
-
+    // Configure the cell...
+    
+    return cell;
 }
 
 /*
@@ -135,7 +96,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -170,31 +131,6 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
-  
-    PFObject * object = [PFObject objectWithClassName:@"Item"];
-    CGPlacesSearchLocation * location = [placesArray objectAtIndex:indexPath.row];
-    [object setValue:location.name forKey:@"Title"];
-    NSNumber * locationIDNumber = [NSNumber numberWithInt:location.locationId];
-    [object setValue:locationIDNumber forKey:@"cg_id"];
-    [[[IPParseObjectManager sharedInstance] pageManagerForObject:self.pageObject] addItem:object];
-    
-    NSString * rankText = [NSString stringWithFormat:@"%@ added a business name %@ to the page %@", [PFUser currentUser].username, [object objectForKey:@"Title"], [pageObject objectForKey:@"Title"]];
-    
-    NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
-                          @"AddItem", @"Type",
-                          rankText, @"alert",
-                          [NSNumber numberWithInt:1], @"badge",
-                          pageObject.objectId, @"pageObjectId",
-                          nil];
-    NSString * channelName = [NSString stringWithFormat:@"PageChannel_%@", pageObject.objectId];
-    
-    PFPush *push = [[PFPush alloc] init];
-    [push setChannel:channelName];
-    [push setPushToAndroid:NO];
-    [push setPushToIOS:YES];
-    [push setData:data];
-    [push sendPushInBackground];
-    [[self presentingViewController] dismissModalViewControllerAnimated:YES];
 }
 
 // when we start/end showing the search UI
@@ -218,26 +154,30 @@
 
 // called when table is shown/hidden
 - (void)searchDisplayController:(UISearchDisplayController *)controller willShowSearchResultsTableView:(UITableView *)tableView{
-
+    
 }
 - (void)searchDisplayController:(UISearchDisplayController *)controller didShowSearchResultsTableView:(UITableView *)tableView{
-  
+    
 }
 - (void)searchDisplayController:(UISearchDisplayController *)controller willHideSearchResultsTableView:(UITableView *)tableView{
-  
+    
 }
 - (void)searchDisplayController:(UISearchDisplayController *)controller didHideSearchResultsTableView:(UITableView *)tableView{
-  
+    
 }
 
 // return YES to reload table. called when search string/option changes. convenience methods on top UISearchBar delegate methods
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
-  [self citygridSearchRequestForString:controller.searchBar.text];
-  return YES;
+    return YES;
 }
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption{
-  return YES;
+    return YES;
 }
 
+
+- (void)viewDidUnload {
+    [self setSearchBar:nil];
+    [super viewDidUnload];
+}
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPParseObjectManager.h"
 
 @interface IPInviteFriendToPageViewController : UITableViewController <UISearchBarDelegate, UISearchDisplayDelegate>
 

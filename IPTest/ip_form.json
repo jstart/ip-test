@@ -22,7 +22,7 @@
           "type": "QPickerElement",
           "title": "List Type",
           "key": "listType",
-          "value": "Collection",
+          "value": "Rank",
           "bind": "selectedIndexes:listType",
           "items": [
             [

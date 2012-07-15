@@ -9,6 +9,7 @@
 #import "IPBookmarkViewController.h"
 #import "IPViewController.h"
 #import "IPBookmarkContainerViewController.h"
+#import "IPBookmarkSearchViewController.h"
 #import <Parse/Parse.h>
 
 @interface IPBookmarkViewController ()
@@ -17,10 +18,10 @@
 
 @implementation IPBookmarkViewController
 
+@synthesize searchBar;
 @synthesize bookmarkTableView;
 @synthesize headerViewController;
 @synthesize notificationViewController;
-@synthesize searchBar = _searchBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,11 +42,12 @@
     // Do any additional setup after loading the view from its nib.
     self.notificationViewController = [[IPNotificationListViewController alloc] initWithNibName:@"IPNotificationListViewController" bundle:[NSBundle mainBundle]];
     [self.notificationViewController.navigationController setNavigationBarHidden:NO];
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    _searchBar.delegate = self;
-    _searchBar.barStyle = UIBarStyleDefault;
-    _searchBar.contentMode = UIViewContentModeScaleToFill;
-
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    self.searchBar.delegate = self;
+    self.searchBar.barStyle = UIBarStyleDefault;
+    self.searchBar.contentMode = UIViewContentModeScaleToFill;
+    self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"One", @"Two", nil];
+    self.searchBar.showsScopeBar = YES;
     
     self.headerViewController = [[IPBookmarkHeaderViewController alloc] initWithNibName:@"IPBookmarkHeaderViewController" bundle:[NSBundle mainBundle]];
 
@@ -67,6 +69,7 @@
 - (void)viewDidUnload
 {
   [self setBookmarkTableView:nil];
+    [self setSearchBar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -103,7 +106,7 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     switch (indexPath.row) {
       case 0:{
-        [cell addSubview:_searchBar];
+        [cell addSubview:self.searchBar];
         cell.backgroundColor = UIColor.grayColor;
         break;
       }
@@ -190,22 +193,6 @@
         //Notifications
       case 5:{
           [self.navigationController pushViewController:notificationViewController animated:YES];
-//          CATransition *animationOut = [CATransition animation];
-//          [animationOut setDelegate:self];
-//          [animationOut setType:kCATransitionPush];
-//          [animationOut setSubtype:kCATransitionFromRight];
-//          [animationOut setDuration:0.4f];
-//          [animationOut setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-//          [self.view.layer addAnimation:animationOut forKey:nil];
-//          
-//          CATransition *animationIn = [CATransition animation];
-//          [animationIn setDelegate:self];
-//          [animationIn setType:kCATransitionPush];
-//          [animationIn setSubtype:kCATransitionFromRight];
-//          [animationIn setDuration:0.4f];
-//          [animationIn setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
-//          [self.navigationController.view.layer addAnimation:animationIn forKey:nil];
-//          [[self view] addSubview:notificationViewController.navigationController.view];
         break;
       }
       default:
@@ -217,23 +204,25 @@
 #pragma mark
 #pragma mark UISearchBar Delegate
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-  [_searchBar setShowsCancelButton:NO animated:YES];
-  [searchBar resignFirstResponder];
+  [self.searchBar setShowsCancelButton:NO animated:YES];
+  [self.searchBar resignFirstResponder];
 }
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
-  [_searchBar setShowsCancelButton:YES animated:YES];
-  return YES;
+//  [self.searchBar setShowsCancelButton:YES animated:YES];
+    IPBookmarkSearchViewController * bookmarkSearchViewController = [[IPBookmarkSearchViewController alloc] initWithNibName:@"IPBookmarkSearchViewController" bundle:[NSBundle mainBundle]];
+    [self.navigationController pushViewController:bookmarkSearchViewController animated:YES];
+  return NO;
 }
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar{
-  [_searchBar setShowsCancelButton:NO animated:YES];
-  [searchBar resignFirstResponder];
+  [self.searchBar setShowsCancelButton:NO animated:YES];
+  [self.searchBar resignFirstResponder];
   return YES;
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
-  [_searchBar setShowsCancelButton:NO animated:YES];
-  [searchBar resignFirstResponder];
+  [self.searchBar setShowsCancelButton:NO animated:YES];
+  [self.searchBar resignFirstResponder];
 }
 @end

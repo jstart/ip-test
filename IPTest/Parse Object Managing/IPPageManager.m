@@ -125,13 +125,14 @@
 }
 
 -(void)submitRankings:(NSArray*)rankingsArray{
+    NSArray * blockRankingsArray = [rankingsArray copy];
     [self.queue addOperationWithBlock:^(){
         NSError * error = nil;
-
-        [PFObject saveAll:rankingsArray error:&error];
+        [PFObject saveAll:blockRankingsArray error:&error];
         if (error) {
             NSLog(@"Submit ranking to page error for page %@ and error description %@", self.pageObject.objectId, error);
         }else{
+            [self.pageObject addUniqueObjectsFromArray:blockRankingsArray forKey:@"Rankings"];
             [self.pageObject save:&error];
             if (error) {
                 NSLog(@"Submit ranking to page error for page %@ and error description %@", self.pageObject.objectId, error);
@@ -145,13 +146,19 @@
 }
 
 -(void)computeGlobalRanking{
+    NSArray * objects = [self.pageObject objectForKey:@"Rankings"];
+
     [self.queue addOperationWithBlock:^(){
         NSError * error = nil;
         
+        [self.pageObject refresh:&error];
+        if (error) {
+            NSLog(@"Page refresh error for page %@ and error: %@", self.pageObject.objectId, error);
+        }
+
         NSMutableDictionary * itemsDictionary = [[NSMutableDictionary alloc] init];
         NSMutableDictionary * itemsAverageRankingDictionary = [[NSMutableDictionary alloc] init];
         
-        NSArray * objects = [self.pageObject objectForKey:@"Rankings"];
         NSMutableDictionary * itemIDDictionary = [NSMutableDictionary dictionary];
         
         for (PFObject * object in objects) {
@@ -165,7 +172,6 @@
             [array addObject:object];
             [itemsDictionary setObject:array forKey:parentItem.objectId];
         }
-        [self.pageObject fetchIfNeeded:&error];
         if (error) {
             NSLog(@"Computing global ranking for page %@ and error: %@", self.pageObject.objectId, error);
         }
@@ -193,12 +199,16 @@
                     }
                 }
                 
+                
                 if (globalRankingObject == nil) {
                     PFObject * newGlobalRanking = [PFObject objectWithClassName:@"GlobalRanking"];
                     [newGlobalRanking setObject:[itemIDDictionary objectForKey:key] forKey:@"Parent_Item"];
                     [newGlobalRanking setObject:self.pageObject forKey:@"Parent_Page"];
                     [newGlobalRanking setValue:[NSNumber numberWithInt:average] forKey:@"position"];
-                    [globalRankingArray addObject:newGlobalRanking];
+                    [newGlobalRanking save:&error];
+                    if (error) {
+                        NSLog(@"Error create new global ranking object %@", error);
+                    }
                     [self.pageObject addObject:newGlobalRanking forKey:@"Global_Rankings"];
                 }
                 else{
@@ -248,7 +258,7 @@
 
 -(void)retrieveRanksForItems:(NSArray*)itemsArray{
     [self.queue addOperationWithBlock:^(){
-    NSMutableDictionary * rankingDictionary = [NSMutableDictionary dictionary];
+        NSMutableDictionary * rankingDictionary = [NSMutableDictionary dictionary];
         for (PFObject * itemObject in itemsArray) {        
             PFQuery * query = [PFQuery queryWithClassName:@"Ranking"];
             [query whereKey:@"Parent_Item" equalTo:itemObject];

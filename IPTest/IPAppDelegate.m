@@ -11,8 +11,6 @@
 #import "DCIntrospect.h"
 #import <CityGrid/CityGrid.h>
 
-#define NSLog(__FORMAT__, ...) TFLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
-
 @implementation IPAppDelegate
 
 @synthesize window = _window, iv;
@@ -20,6 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    NSLog(@"Launch Options: %@", launchOptions);
 #define TESTING 1
 #ifdef TESTING
     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
@@ -83,6 +82,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
 
 //    [PFPush handlePush:userInfo];
     if ([[userInfo objectForKey:@"Type"] isEqualToString:@"Invite"]) {
+        [PFPush handlePush:userInfo];
         PFObject * object = [PFQuery getObjectOfClass:@"Page"
                                            objectId:[userInfo objectForKey:@"pageObjectId"]];
         [[PFUser currentUser] addObject:object forKey:@"following"];
@@ -97,7 +97,19 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     if ([[userInfo objectForKey:@"Type"] isEqualToString:@"AddItem"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RankingPush" object:nil];
     }
+    NSMutableArray * notificationsArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"IPNotifications"];
+    if (notificationsArray !=nil) {
+        [notificationsArray addObject:userInfo];
+    }else{
+        notificationsArray = [[NSMutableArray alloc] init];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:notificationsArray forKey:@"IPNotifications"];
 }
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

@@ -57,7 +57,7 @@
                                  action:@selector(customBackAction:)];
   self.navigationItem.leftBarButtonItem = backButton;
     
-    self.pageManager = [[IPParseObjectManager sharedInstance]  pageManagerForObject:pageObject];
+    self.pageManager = [[IPParseObjectManager sharedInstance] pageManagerForObject:pageObject];
     self.pageManager.delegate = self;
 
   // Do any additional setup after loading the view from its nib.
@@ -65,6 +65,7 @@
 
 -(void)didFinishRefreshing{
     NSLog(@"didFinishRefreshing");
+    [self sortObjects:[self.pageManager.pageObject objectForKey:@"Items"]];
 }
 
 -(void)didInviteUser{
@@ -77,10 +78,14 @@
 
 -(void)didSubmitRankings{
     NSLog(@"didSubmitRankings");
+    [self.listVC didSubmitRankingSuccessfully];
+    [self.pageManager computeGlobalRanking];
 }
 
 -(void)didComputeGlobalRanking{
     NSLog(@"didComputeGlobalRanking");
+    [self.listVC didComputeGlobalRanking];
+    [self sortObjects:[self.pageManager.pageObject objectForKey:@"Items"]];
 }
 
 -(void)didAddItem{
@@ -88,7 +93,12 @@
 }
 
 -(void)didRetrieveRankingForItems:(NSDictionary*)rankingDictionary{
-    NSLog(@"didRetrieveRankingForItems: %@", rankingDictionary);
+    NSLog(@"didRetrieveRankingForItems");
+
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^(){
+//        [self.gridVC updatedResultObjects:[sortedArray mutableCopy]];
+        [self.listVC retrievedRanks:[rankingDictionary mutableCopy]];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -96,22 +106,11 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self reloadItems];
-}
-
--(void)reloadItems{
-    NSError * error = nil;
-    [pageObject refresh:&error];
-    if (error) {
-        NSLog(@"Error refreshing page %@", error);
-    }else{
-        NSArray * items = [pageObject objectForKey:@"Items"];
-        [self sortObjects:items];
-    }
+    [self.pageManager refresh];
 }
 
 -(void)didRequestRefresh{
-    [self reloadItems];
+    [self.pageManager refresh];
 }
 
 -(void)sortObjects:(NSArray *)objects{
@@ -154,12 +153,15 @@
         [[NSOperationQueue mainQueue] addOperationWithBlock:^(){
             [self.gridVC updatedResultObjects:[sortedArray mutableCopy]];
             [self.listVC updatedResultObjects:[sortedArray mutableCopy]];
+            [self.pageManager retrieveRanksForItems:sortedArray];
         }];
     });
 }
 
 - (void)viewDidUnload
 {
+    self.pageManager.delegate = nil;
+    self.pageManager = nil;
   [self setSegmentControl:nil];
   [self setScrollView:nil];
   [super viewDidUnload];
@@ -182,11 +184,6 @@
   if (selection)
     [self.listVC.tableView deselectRowAtIndexPath:selection animated:YES];
   [self.segmentControl setSelectedSegmentIndex:currentPageIndex];
-}
-
-#pragma AverageRankOperation delegate
--(void)didGenerateAverageRanking:(NSMutableDictionary*)averageRankingDictionary{
-    [self performSelectorOnMainThread:@selector(reloadItems) withObject:nil waitUntilDone:NO];
 }
 
 #pragma GridDelegate

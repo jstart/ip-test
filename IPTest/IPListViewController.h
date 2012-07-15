@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "IPAddListItemViewController.h"
-#import "IPRetrieveRankOperation.h"
-#import "IPAveragePageRankOperation.h"
+#import "IPParseObjectManager.h"
 @protocol IPListViewDelegate <NSObject>
 
 -(void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -20,7 +19,7 @@
 
 @end
 
-@interface IPListViewController : UITableViewController <IPRetrieveRankDelegate>
+@interface IPListViewController : UITableViewController
 
 @property (nonatomic, strong) PFObject * pageObject;
 @property (strong, nonatomic) IBOutlet UITableViewCell *createHeaderTableViewCell;
@@ -31,7 +30,13 @@
 @property (strong, nonatomic) NSOperationQueue * queue;
 @property (strong, nonatomic) NSMutableDictionary * rankingDictionary;
 
+@property (weak, nonatomic) IPPageManager * pageManager;
+
 - (IBAction)addItemButton:(id)sender;
 - (IBAction)inviteFriendButtonPressed:(id)sender;
 - (void)updatedResultObjects:(NSMutableArray*)newObjects;
+-(void)retrievedRanks:(NSMutableDictionary *)ranks;
+-(void)didSubmitRankingSuccessfully;
+-(void)didComputeGlobalRanking;
+
 @end
