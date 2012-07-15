@@ -28,6 +28,7 @@
 {
     [super viewDidLoad];
     [self.searchBar setScopeButtonTitles:[NSArray arrayWithObjects:@"Pages", @"Places", @"People", nil]];
+    [self.searchBar setSelectedScopeButtonIndex:0];
     [self.searchBar setShowsScopeBar:YES];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -38,7 +39,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:NO animated:YES];
-
     [self.tableView reloadData];
 }
 

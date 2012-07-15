@@ -97,13 +97,14 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     if ([[userInfo objectForKey:@"Type"] isEqualToString:@"AddItem"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"RankingPush" object:nil];
     }
-    NSMutableArray * notificationsArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"IPNotifications"];
+    NSArray * notificationsArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"IPNotifications"];
+    NSMutableArray * notificationsArrayMutable = [notificationsArray mutableCopy];
     if (notificationsArray !=nil) {
-        [notificationsArray addObject:userInfo];
+        [notificationsArrayMutable addObject:userInfo];
     }else{
-        notificationsArray = [[NSMutableArray alloc] init];
+        notificationsArrayMutable = [[NSMutableArray alloc] init];
     }
-    [[NSUserDefaults standardUserDefaults] setObject:notificationsArray forKey:@"IPNotifications"];
+    [[NSUserDefaults standardUserDefaults] setObject:notificationsArrayMutable forKey:@"IPNotifications"];
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
