@@ -49,7 +49,7 @@
         NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                               @"Invite", @"Type",
                               inviteText, @"alert",
-                              [NSNumber numberWithInt:1], @"badge",
+                              @"Increment", @"badge",
                               self.pageObject.objectId, @"pageObjectId",
                               nil];
         NSString * channelName = [NSString stringWithFormat:@"UserChannel_%@", user.objectId];
@@ -79,7 +79,7 @@
             NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                                   @"Invite", @"Type",
                                   inviteText, @"alert",
-                                  [NSNumber numberWithInt:1], @"badge",
+                                  @"Increment", @"badge",
                                   self.pageObject.objectId, @"pageObjectId",
                                   nil];
             NSString * channelName = [NSString stringWithFormat:@"UserChannel_%@", user.objectId];

@@ -292,7 +292,7 @@
     NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:
                           @"Ranking", @"Type",
                           rankText, @"alert",
-                          [NSNumber numberWithInt:1], @"badge",
+                          @"Increment", @"badge",
                           pageObject.objectId, @"pageObjectId",
                           nil];
     NSString * channelName = [NSString stringWithFormat:@"PageChannel_%@", pageObject.objectId];
